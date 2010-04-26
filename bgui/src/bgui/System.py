@@ -35,7 +35,7 @@ class System:
 			raise TypeError("Expected a Widget object")
 
 		if widget in self._widgets:
-			raise ValueError("%s is attached to the system" %s (widget.name))
+			raise ValueError("%s is already attached to the system" %s (widget.name))
 
 		self._widgets[widget.name] = widget
 
@@ -57,8 +57,8 @@ class System:
 		# If the mouse was clicked, and handle any on_click events
 		if was_clicked:
 			for widget in [self._widgets[i] for i in self._widgets]:
-				if (widget.position[0][0] <= pos[0] <= widget.position[1][0]) and \
-					(widget.position[0][1] <= pos[1] <= widget.position[2][1]):
+				if (widget.gl_position[0][0] <= pos[0] <= widget.gl_position[1][0]) and \
+					(widget.gl_position[0][1] <= pos[1] <= widget.gl_position[2][1]):
 						widget._on_click()
 
 	def render(self):

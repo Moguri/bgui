@@ -39,7 +39,7 @@ class Widget:
 
 		if options & BGUI_NORMALIZED:
 			pos[0] *= parent.size[0]
-			pos[1] =  parent.size[1] - (parent.size[1] * pos[1])
+			pos[1] =  parent.size[1] - (parent.size[1] * (pos[1] if pos[1] else 1))
 
 			size[0] *= parent.size[0]
 			size[1] *= parent.size[1]
@@ -79,8 +79,8 @@ class Widget:
 		if not isinstance(widget, Widget):
 			raise TypeError("Expected a Widget object")
 
-		if widget in self._widgets:
-			raise ValueError("%s is attached to the system" %s (widget.name))
+		if widget in self.children:
+			raise ValueError("%s is already attached to this widget" %s (widget.name))
 
 		self.children[widget.name] = widget
 
