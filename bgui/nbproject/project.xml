@@ -5,6 +5,7 @@
         <data xmlns="http://nbpython.dev.java.net/ns/php-project/1">
             <name>bgui</name>
             <sources>
+                <root id="src.tests.dir" name="Tests"/>
                 <root id="src.dir"/>
             </sources>
             <tests/>
