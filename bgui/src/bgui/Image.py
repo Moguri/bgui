@@ -22,18 +22,30 @@ class Image(Widget):
 
 		Widget.__init__(self, parent, name, size, pos, options)
 
-		# Load the texture data
-		image = vt.ImageFFmpeg(img)
-		image.scale = False
-		im_buf = image.image
-
 		# Generate a texture
 		id_buf = Buffer(GL_INT, 1)
 		glGenTextures(1, id_buf)
 
 		self.tex_id = id_buf.list[0]
 
+
+		self.update_image(img)
+
+
+	def update_image(self, img):
+		"""Change's the image texture
+
+		Arguments
+		img -- the path to the new image
+
+		"""
+
 		glBindTexture(GL_TEXTURE_2D, self.tex_id)
+		
+		# Load the texture data
+		image = vt.ImageFFmpeg(img)
+		image.scale = False
+		im_buf = image.image
 
 		# Setup some parameters
 		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR)

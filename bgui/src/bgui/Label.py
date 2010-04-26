@@ -6,7 +6,7 @@ from bgui.Widget import *
 class Label(Widget):
 	"""Widget for displaying text"""
 
-	def __init__(self, parent, name, text="", font=None,pt_size = 30, size=[0, 0], pos=[0, 0], options=BGUI_DEFUALT):
+	def __init__(self, parent, name, text="", font=None, pt_size=30, pos=[0, 0], options=BGUI_DEFUALT):
 		"""The ImageWidget constructor
 
 		Arguments:
@@ -22,17 +22,43 @@ class Label(Widget):
 
 		"""
 
-		Widget.__init__(self, parent, name, size, pos, options)
+		size = [None] * 2
 
 		self.fontid = blf.load(font) if font else 0
+		blf.size(self.fontid, pt_size, 72)
+		size[0], size[1] = blf.dimensions(self.fontid, text)
+
+		if options & BGUI_NORMALIZED:
+			size[0] /= parent.size[0]
+			size[1] /= parent.size[1]
+
+		Widget.__init__(self, parent, name, size, pos, options)
 
 		self.pt_size = pt_size
 
-		self.text = text
+		self._text = text
+
+	def get_text(self):
+		return self._text
+	def set_text(self, value):
+		size = [None] * 2
+		size[0], size[1] = blf.dimensions(self.fontid, value)
+
+		if self.options & BGUI_NORMALIZED:
+			size[0] /= self.parent.size[0]
+			size[1] /= self.parent.size[1]
+
+		self._update_position(size, self._base_pos)
+
+		self._text = value
+	def del_text(self):
+		del self._x
 
 	def _draw(self):
 		"""Display the text"""
 
 		blf.size(self.fontid, self.pt_size, 72)
-		blf.position(self.fontid, self.position[0], self.position[1] -self.pt_size, 0)
-		blf.draw(self.fontid, self.text)
+		blf.position(self.fontid, self.position[0], self.position[1] - self.pt_size, 0)
+		blf.draw(self.fontid, self._text)
+
+	text = property(get_text, set_text, del_text, "The text to display")

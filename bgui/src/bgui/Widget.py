@@ -26,38 +26,46 @@ class Widget:
 		"""
 
 		self.name = name
+		self.options = options
 		self.on_click = None
 
 		# Setup the parent
 		parent._attach_widget(self)
+		self.parent = parent
 
 		# A dictionary to store children widgets
 		self.children = {}
 
 		# Setup the widget's position
 		self.position = [None]*4
+		self._update_position(size, pos)
 
-		if options & BGUI_NORMALIZED:
-			pos[0] *= parent.size[0]
-			pos[1] =  parent.size[1] - (parent.size[1] * (pos[1] if pos[1] else 1))
 
-			size[0] *= parent.size[0]
-			size[1] *= parent.size[1]
+	def _update_position(self, size, pos):
+		self._base_size = size[:]
+		self._base_pos = pos[:]
 
-		if options & BGUI_CENTERX:
-			pos[0] = parent.size[0]/2 - size[0]/2
+		if self.options & BGUI_NORMALIZED:
+			pos[0] *= self.parent.size[0]
+			pos[1] =  self.parent.size[1] - (self.parent.size[1] * (pos[1] if pos[1] else 1))
 
-		if options & BGUI_CENTERY:
-			pos[1] = parent.size[1]/2 + size[1]/2
+			size[0] *= self.parent.size[0]
+			size[1] *= self.parent.size[1]
 
-		x = pos[0] + parent.position[0]
-		y = parent.position[1] + pos[1]
+		if self.options & BGUI_CENTERX:
+			pos[0] = self.parent.size[0]/2 - size[0]/2
+
+		if self.options & BGUI_CENTERY:
+			pos[1] = self.parent.size[1]/2 + size[1]/2
+
+		x = pos[0] + self.parent.position[0]
+		y = self.parent.position[1] + pos[1]
 		width = size[0]
 		height = size[1]
-		self.size = (width, height)
+		self.size = [width, height]
 
 		# The "friendly" position
-		self.position = (x, y)
+		self.position = [x, y]
 
 		# OpenGL starts at the bottom left and goes counter clockwise
 		self.gl_position = [

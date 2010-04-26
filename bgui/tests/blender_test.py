@@ -15,14 +15,20 @@ class MySys(bgui.System):
 
 		self.img.on_click = self.on_img_click
 
-		self.lbl = bgui.Label(self.img, 'label', "I haz label!", 'myfont.otf', 70, size=[.5, 0],
+		self.lbl = bgui.Label(self, 'label', "I haz label!", None, 70, pos=[0, .01],
 			options = bgui.BGUI_DEFUALT | bgui.BGUI_CENTERX)
 
 		self.counter = 0
 
 	def on_img_click(self, widget):
 		self.counter += 1
+		print(self.counter)
 		self.lbl.text = "You've clicked me %d times" % self.counter
+
+		if self.counter % 2 == 1:
+			self.img.update_image('logo.png')
+		else:
+			self.img.update_image('retards.jpg')
 
 def main(cont):
 	own = cont.owner
