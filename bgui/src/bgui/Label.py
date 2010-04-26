@@ -58,7 +58,9 @@ class Label(Widget):
 		"""Display the text"""
 
 		blf.size(self.fontid, self.pt_size, 72)
-		blf.position(self.fontid, self.position[0], self.position[1] - self.pt_size, 0)
-		blf.draw(self.fontid, self._text)
+
+		for i, txt in enumerate([i for i in self._text.split('\n')]):
+			blf.position(self.fontid, self.position[0], self.position[1] - (self.size[1]*(i+1)), 0)
+			blf.draw(self.fontid, txt)
 
 	text = property(get_text, set_text, del_text, "The text to display")

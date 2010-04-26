@@ -11,7 +11,7 @@ class MySys(bgui.System):
 		bgui.System.__init__(self)
 
 		self.img = bgui.Image(self, 'widget', 'retards.jpg', size=[.75, .75],
-			options =  bgui.BGUI_CENTERX | bgui.BGUI_CENTERY | bgui.BGUI_DEFUALT)
+			options =  bgui.BGUI_CENTERED | bgui.BGUI_DEFUALT)
 
 		self.img.on_click = self.on_img_click
 
@@ -22,7 +22,6 @@ class MySys(bgui.System):
 
 	def on_img_click(self, widget):
 		self.counter += 1
-		print(self.counter)
 		self.lbl.text = "You've clicked me %d times" % self.counter
 
 		if self.counter % 2 == 1:
