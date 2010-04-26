@@ -17,6 +17,7 @@ class Widget:
 
 		Arguments:
 
+		parent -- the widget's parent
 		name -- the name of the widget
 		size -- a tuple containing the wdith and height
 		pos -- a tuple containing the x and y position
@@ -36,16 +37,6 @@ class Widget:
 		# Setup the widget's position
 		self.position = [None]*4
 
-		view_buf = Buffer(GL_INT, 4)
-		glGetIntegerv(GL_VIEWPORT, view_buf)
-		view = view_buf.list
-
-		if options & BGUI_CENTERX:
-			pos[0] = parent.size[0]/2 - size[0]/2
-
-		if options & BGUI_CENTERY:
-			pos[1] = parent.size[1]/2 + size[1]/2
-		
 		if options & BGUI_NORMALIZED:
 			pos[0] *= parent.size[0]
 			pos[1] =  parent.size[1] - (parent.size[1] * pos[1])
@@ -53,10 +44,14 @@ class Widget:
 			size[0] *= parent.size[0]
 			size[1] *= parent.size[1]
 
+		if options & BGUI_CENTERX:
+			pos[0] = parent.size[0]/2 - size[0]/2
 
+		if options & BGUI_CENTERY:
+			pos[1] = parent.size[1]/2 + size[1]/2
 
 		x = pos[0] + parent.position[0]
-		y = parent.position[1] - pos[1]
+		y = parent.position[1] + pos[1]
 		width = size[0]
 		height = size[1]
 		self.size = (width, height)

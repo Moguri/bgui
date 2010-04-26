@@ -23,7 +23,7 @@ class System:
 		view = view_buf.list
 
 		self.size = (view[2], view[3])
-		self.position = (0, view[3])
+		self.position = (0, 0)
 
 	def _attach_widget(self, widget):
 		"""Attaches a widget to the system. The widget then becomes a \"root\"
