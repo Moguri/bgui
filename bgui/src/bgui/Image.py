@@ -3,7 +3,7 @@ import VideoTexture as vt
 
 from bgui.Widget import *
 
-class ImageWidget(Widget):
+class Image(Widget):
 	"""Widget for displaying images"""
 
 	def __init__(self, parent, name, img, size=[0, 0], pos=[0, 0], options=BGUI_DEFUALT):

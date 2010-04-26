@@ -3,7 +3,7 @@ import blf
 
 from bgui.Widget import *
 
-class LabelWidget(Widget):
+class Label(Widget):
 	"""Widget for displaying text"""
 
 	def __init__(self, parent, name, text="", font=None,pt_size = 30, size=[0, 0], pos=[0, 0], options=BGUI_DEFUALT):

@@ -10,12 +10,12 @@ class MySys(bgui.System):
 	def __init__(self):
 		bgui.System.__init__(self)
 
-		self.img = bgui.ImageWidget(self, 'widget', 'retards.jpg', size=[.75, .75],
+		self.img = bgui.Image(self, 'widget', 'retards.jpg', size=[.75, .75],
 			options =  bgui.BGUI_CENTERX | bgui.BGUI_CENTERY | bgui.BGUI_DEFUALT)
 
 		self.img.on_click = self.on_img_click
 
-		self.lbl = bgui.LabelWidget(self.img, 'label', "I haz label!", 'myfont.otf', 70, size=[.5, 0],
+		self.lbl = bgui.Label(self.img, 'label', "I haz label!", 'myfont.otf', 70, size=[.5, 0],
 			options = bgui.BGUI_DEFUALT | bgui.BGUI_CENTERX)
 
 		self.counter = 0
