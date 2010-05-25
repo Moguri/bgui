@@ -80,9 +80,6 @@ class System:
 		glMatrixMode(GL_MODELVIEW)
 		glLoadIdentity()
 
-		# Enable textures
-		glEnable(GL_TEXTURE_2D)
-
 		# Render the windows
 		for widget in self._widgets:
 			self._widgets[widget]._draw()

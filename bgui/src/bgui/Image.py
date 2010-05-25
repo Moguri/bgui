@@ -59,6 +59,9 @@ class Image(Widget):
 
 	def _draw(self):
 		"""Draws the image"""
+		
+		# Enable textures
+		glEnable(GL_TEXTURE_2D)
 
 		# Bind the texture
 		glBindTexture(GL_TEXTURE_2D, self.tex_id)
