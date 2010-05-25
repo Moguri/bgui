@@ -48,7 +48,7 @@ class Widget:
 
 		if self.options & BGUI_NORMALIZED:
 			pos[0] *= self.parent.size[0]
-			pos[1] =  self.parent.size[1] - (self.parent.size[1] * (pos[1] if pos[1] else 1))
+			pos[1] *= self.parent.size[1] #- (self.parent.size[1]*pos[1])  #self.parent.size[1] - (self.parent.size[1] *  pos[1])#(pos[1] if pos[1] else 1))
 
 			size[0] *= self.parent.size[0]
 			size[1] *= self.parent.size[1]
@@ -57,25 +57,36 @@ class Widget:
 			pos[0] = self.parent.size[0]/2 - size[0]/2
 
 		if self.options & BGUI_CENTERY:
-			pos[1] = self.parent.size[1]/2 + size[1]/2
+			pos[1] = self.parent.size[1]/2 - size[1]/2
 
 		x = pos[0] + self.parent.position[0]
-		y = self.parent.position[1] + pos[1]
+		y = pos[1] + self.parent.position[1]
 		width = size[0]
 		height = size[1]
 		self.size = [width, height]
-
 		# The "friendly" position
 		self.position = [x, y]
 
+		# Convert the y for OpenGL
+		# view_buf = Buffer(GL_INT, 4)
+		# glGetIntegerv(GL_VIEWPORT, view_buf)
+		
+		# y = view_buf.list[3] - y
+		
 		# OpenGL starts at the bottom left and goes counter clockwise
+		# self.gl_position = [
+					# [x, y-height],
+					# [x+width, y-height],
+					# [x+width, y],
+					# [x, y]
+					# ]
 		self.gl_position = [
-					[x, y-height],
-					[x+width, y-height],
+					[x, y],
 					[x+width, y],
-					[x, y]
-					]
-
+					[x+width, y+height],
+					[x, y+height]
+				]
+				
 	def _on_click(self):
 		"""Runs the on_click callback"""
 
