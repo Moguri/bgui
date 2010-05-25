@@ -4,7 +4,7 @@ from bgui.Widget import *
 class Frame(Widget):
 	"""Frame for storing other widgets"""
 	
-	def __init__(self, parent, name, size=[1, 1], pos=[0, 0], options=BGUI_DEFUALT):
+	def __init__(self, parent, name, size=[1, 1], pos=[0, 0], options=BGUI_DEFAULT):
 		"""
 		"""
 		

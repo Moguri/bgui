@@ -6,14 +6,14 @@ BGUI_CENTERX = 1
 BGUI_CENTERY = 2
 BGUI_NORMALIZED = 4
 
-BGUI_DEFUALT = BGUI_NORMALIZED
+BGUI_DEFAULT = BGUI_NORMALIZED
 BGUI_CENTERED = BGUI_CENTERX | BGUI_CENTERY
 
 class Widget:
 	"""The base widget class"""
 
 	def __init__(self, parent, name, size=[0, 0], pos=[0, 0],
-			options=BGUI_DEFUALT):
+			options=BGUI_DEFAULT):
 		"""The Widget constructor
 
 		Arguments:

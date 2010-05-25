@@ -6,7 +6,7 @@ from bgui.Widget import *
 class Label(Widget):
 	"""Widget for displaying text"""
 
-	def __init__(self, parent, name, text="", font=None, pt_size=30, color=(1, 1, 1, 1), pos=[0, 0], options=BGUI_DEFUALT):
+	def __init__(self, parent, name, text="", font=None, pt_size=30, color=(1, 1, 1, 1), pos=[0, 0], options=BGUI_DEFAULT):
 		"""The ImageWidget constructor
 
 		Arguments:

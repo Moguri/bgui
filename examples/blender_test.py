@@ -16,18 +16,18 @@ class MySys(bgui.System):
 		bgui.System.__init__(self)
 		
 		# Use a frame to store all of our widgets
-		self.frame = bgui.Frame(self, 'window')#options=bgui.BGUI_DEFUALT | bgui.BGUI_CENTERED)
+		self.frame = bgui.Frame(self, 'window')#options=bgui.BGUI_DEFAULT | bgui.BGUI_CENTERED)
 
 		# Create an image to display
 		self.img = bgui.Image(self.frame, 'widget', 'img.jpg', size=[.75, .75],
-			options =  bgui.BGUI_CENTERED | bgui.BGUI_DEFUALT)
+			options =  bgui.BGUI_CENTERED | bgui.BGUI_DEFAULT)
 
 		# Setup an on_click callback for the image
 		self.img.on_click = self.on_img_click
 
 		# Add a label
 		self.lbl = bgui.Label(self.img, 'label', "I'm a label!", 'myfont.otf', 70, pos=[0, 1.1],
-			options = bgui.BGUI_DEFUALT | bgui.BGUI_CENTERX)
+			options = bgui.BGUI_DEFAULT | bgui.BGUI_CENTERX)
 
 		# A counter property used for the on_img_click() method
 		self.counter = 0
