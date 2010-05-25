@@ -75,11 +75,17 @@ class Widget:
 					[x, y+height]
 				]
 				
-	def _on_click(self):
+	def _on_click(self, pos):
 		"""Runs the on_click callback"""
 
 		if self.on_click:
 			self.on_click(self)
+			
+		# Run any children on_click methods
+		for widget in [self.children[i] for i in self.children]:
+			if (widget.gl_position[0][0] <= pos[0] <= widget.gl_position[1][0]) and \
+				(widget.gl_position[0][1] <= pos[1] <= widget.gl_position[2][1]):
+					widget._on_click(pos)			
 
 	def _attach_widget(self, widget):
 		"""Attaches a widget to this widget"""

@@ -59,7 +59,7 @@ class System:
 			for widget in [self._widgets[i] for i in self._widgets]:
 				if (widget.gl_position[0][0] <= pos[0] <= widget.gl_position[1][0]) and \
 					(widget.gl_position[0][1] <= pos[1] <= widget.gl_position[2][1]):
-						widget._on_click()
+						widget._on_click(pos)
 
 	def render(self):
 		"""Renders the GUI system"""
