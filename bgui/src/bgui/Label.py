@@ -6,7 +6,7 @@ from bgui.Widget import *
 class Label(Widget):
 	"""Widget for displaying text"""
 
-	def __init__(self, parent, name, text="", font=None, pt_size=30, pos=[0, 0], options=BGUI_DEFUALT):
+	def __init__(self, parent, name, text="", font=None, pt_size=30, color=(1, 1, 1, 1), pos=[0, 0], options=BGUI_DEFUALT):
 		"""The ImageWidget constructor
 
 		Arguments:
@@ -35,6 +35,8 @@ class Label(Widget):
 		Widget.__init__(self, parent, name, size, pos, options)
 
 		self.pt_size = pt_size
+		
+		self.color = color
 
 		self._text = text
 
@@ -58,9 +60,13 @@ class Label(Widget):
 		"""Display the text"""
 
 		blf.size(self.fontid, self.pt_size, 72)
+		
+		glColor4f(self.color[0], self.color[1], self.color[2], self.color[3])
 
 		for i, txt in enumerate([i for i in self._text.split('\n')]):
 			blf.position(self.fontid, self.position[0], self.position[1] - (self.size[1]*(i+1)), 0)
 			blf.draw(self.fontid, txt)
+			
+		Widget._draw(self)
 
 	text = property(get_text, set_text, del_text, "The text to display")
