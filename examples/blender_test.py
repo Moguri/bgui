@@ -4,6 +4,7 @@ import sys
 sys.path.append('..')
 
 import bgui
+import bge
 import GameLogic
 import Rasterizer
 
@@ -40,6 +41,28 @@ class MySys(bgui.System):
 			self.img.update_image('img_flipped.png')
 		else:
 			self.img.update_image('img.jpg')
+	
+	def main(self):
+		"""A high-level method to be run every frame"""
+		
+		mouse = bge.logic.mouse
+		
+		pos = [i for i in mouse.position]
+		pos[0] *= bge.render.getWindowWidth()
+		pos[1] = bge.render.getWindowHeight() - (bge.render.getWindowHeight() * pos[1])
+		
+		mouse_state = bgui.BGUI_MOUSE_NONE
+				
+		if (189, bge.logic.KX_INPUT_JUST_ACTIVATED) in mouse.events:
+			mouse_state = bgui.BGUI_MOUSE_CLICK
+		elif (189, bge.logic.KX_INPUT_JUST_RELEASED) in mouse.events:
+			mouse_state = bgui.BGUI_MOUSE_RELEASE
+		
+		self.update_mouse(pos, mouse_state)
+		
+		#scene = bge.logic.getCurrentScene()
+		bge.logic.getCurrentScene().post_draw = [self.render]
+		# print(bge.logic.getCurrentScene().post_draw)
 
 def main(cont):
 	own = cont.owner
@@ -52,8 +75,9 @@ def main(cont):
 
 	else:
 		# Send mouse data to the system and draw it using the scene's post_draw callback
-		pos = [i for i in mouse.position]
-		pos[0] *= Rasterizer.getWindowWidth()
-		pos[1] = Rasterizer.getWindowHeight() - (Rasterizer.getWindowHeight() * pos[1])
-		own['sys'].update_mouse(pos, (189, 1) in mouse.events)
-		GameLogic.getCurrentScene().post_draw = [own['sys'].render]
+		# pos = [i for i in mouse.position]
+		# pos[0] *= Rasterizer.getWindowWidth()
+		# pos[1] = Rasterizer.getWindowHeight() - (Rasterizer.getWindowHeight() * pos[1])
+		# own['sys'].update_mouse(pos, (189, 1) in mouse.events)
+		# GameLogic.getCurrentScene().post_draw = [own['sys'].render]
+		own['sys'].main()

@@ -9,6 +9,11 @@ BGUI_NORMALIZED = 4
 BGUI_DEFAULT = BGUI_NORMALIZED
 BGUI_CENTERED = BGUI_CENTERX | BGUI_CENTERY
 
+# Mouse event states
+BGUI_MOUSE_NONE = 0
+BGUI_MOUSE_CLICK = 1
+BGUI_MOUSE_RELEASE = 2
+
 class Widget:
 	"""The base widget class"""
 
@@ -28,7 +33,11 @@ class Widget:
 
 		self.name = name
 		self.options = options
+		
+		# Event callbacks
 		self.on_click = None
+		self.on_release = None
+		self.on_hover = None
 
 		# Setup the parent
 		parent._attach_widget(self)
@@ -85,7 +94,26 @@ class Widget:
 		for widget in [self.children[i] for i in self.children]:
 			if (widget.gl_position[0][0] <= pos[0] <= widget.gl_position[1][0]) and \
 				(widget.gl_position[0][1] <= pos[1] <= widget.gl_position[2][1]):
-					widget._on_click(pos)			
+					widget._on_click(pos)
+
+	def _handle_event(self, pos, event):
+		"""Run any event callbacks"""
+		
+		if event == BGUI_MOUSE_CLICK and self.on_click:
+			self.on_click(self)
+		elif event == BGUI_MOUSE_RELEASE and self.on_release:
+			self.on_release(self)
+		elif event == BGUI_MOUSE_NONE and self.on_hover:
+			self.on_hover(self)
+			
+			
+		# Run any children callback methods
+		for widget in [self.children[i] for i in self.children]:
+			if (widget.gl_position[0][0] <= pos[0] <= widget.gl_position[1][0]) and \
+				(widget.gl_position[0][1] <= pos[1] <= widget.gl_position[2][1]):
+					widget._handle_event(pos, event)
+			
+		
 
 	def _attach_widget(self, widget):
 		"""Attaches a widget to this widget"""

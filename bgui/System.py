@@ -1,5 +1,6 @@
 from bgl import *
-from bgui.Widget import Widget
+from bgui.Widget import *
+
 
 class System:
 	"""The main gui system. Add widgets to this and then call the render() method
@@ -44,7 +45,7 @@ class System:
 
 		del self._widgets[widget.name]
 
-	def update_mouse(self, pos, was_clicked=False):
+	def update_mouse(self, pos, click_state=BGUI_MOUSE_NONE):
 		"""Updates the system's mouse data
 
 		pos -- the mouse position
@@ -54,12 +55,11 @@ class System:
 
 		self.cursor_pos = pos
 
-		# If the mouse was clicked, and handle any on_click events
-		if was_clicked:
-			for widget in [self._widgets[i] for i in self._widgets]:
-				if (widget.gl_position[0][0] <= pos[0] <= widget.gl_position[1][0]) and \
-					(widget.gl_position[0][1] <= pos[1] <= widget.gl_position[2][1]):
-						widget._on_click(pos)
+		# If the mouse was clicked, and handle any on_click events			
+		for widget in [self._widgets[i] for i in self._widgets]:
+			if (widget.gl_position[0][0] <= pos[0] <= widget.gl_position[1][0]) and \
+				(widget.gl_position[0][1] <= pos[1] <= widget.gl_position[2][1]):
+					widget._handle_event(pos, click_state)
 
 	def render(self):
 		"""Renders the GUI system"""
