@@ -1,0 +1,16 @@
+Current
+ New Features
+  * Frame widget to place widgets on (can also be used as a "window")
+  * BGUI can now handle mouse states (NONE, CLICKED, RELEASE)
+  * Widgets now support on_hover and on_release callbacks
+  * Color support added for labels
+
+ Bugs Fixed
+  * Drawing labels would disable textures for images
+  * BGUI_DEFAULT was misspelled (was BGUI_DEFUALT)
+ 
+ Other Stuff
+  * BGUI now uses the bottom left as (0, 0) to match OpenGL
+
+0.01
+Initial release
