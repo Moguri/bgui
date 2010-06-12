@@ -1,4 +1,5 @@
 from bgl import *
+from KeyDefs import *
 
 # Widget options
 BGUI_NONE = 0
@@ -33,6 +34,8 @@ class Widget:
 
 		self.name = name
 		self.options = options
+		
+		self._active = False
 		
 		# Event callbacks
 		self.on_click = None
@@ -106,14 +109,24 @@ class Widget:
 		elif event == BGUI_MOUSE_NONE and self.on_hover:
 			self.on_hover(self)
 			
+		self._active = True
 			
 		# Run any children callback methods
 		for widget in [self.children[i] for i in self.children]:
 			if (widget.gl_position[0][0] <= pos[0] <= widget.gl_position[1][0]) and \
 				(widget.gl_position[0][1] <= pos[1] <= widget.gl_position[2][1]):
 					widget._handle_event(pos, event)
+			else:
+				widget._active = False
 			
+	def _handle_key(self, key, is_shifted):
+		"""Handle any keyboard input"""
 		
+		# We don't actually do anything in this base class, just handle the children
+
+		for widget in [self.children[i] for i in self.children]:
+			if widget._active:
+				widget._handle_key(key, is_shifted)
 
 	def _attach_widget(self, widget):
 		"""Attaches a widget to this widget"""

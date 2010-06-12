@@ -60,7 +60,23 @@ class System:
 			if (widget.gl_position[0][0] <= pos[0] <= widget.gl_position[1][0]) and \
 				(widget.gl_position[0][1] <= pos[1] <= widget.gl_position[2][1]):
 					widget._handle_event(pos, click_state)
+			else:
+				widget._active = False
 
+	def update_keyboard(self, key, is_shifted):
+		"""Updates the system's keyboard data
+		
+		key -- the key being input
+		keymap -- a dict to map the keys to bgui's system
+		state -- the state of the key
+		
+		"""
+
+		for widget in [self._widgets[i] for i in self._widgets]:
+			if widget._active:
+				widget._handle_key(key, is_shifted)
+		
+		
 	def render(self):
 		"""Renders the GUI system"""
 

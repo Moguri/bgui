@@ -18,27 +18,33 @@ class MySys(bgui.System):
 		self.frame = bgui.Frame(self, 'window')#options=bgui.BGUI_DEFAULT | bgui.BGUI_CENTERED)
 
 		# Create an image to display
-		self.img = bgui.Image(self.frame, 'widget', 'img.jpg', size=[.75, .75],
+		self.img = bgui.Image(self.frame, 'image', 'img.jpg', size=[.75, .75],
 			options =  bgui.BGUI_CENTERED | bgui.BGUI_DEFAULT)
 
 		# Setup an on_click callback for the image
-		self.img.on_click = self.on_img_click
+		# self.img.on_click = self.on_img_click
 
 		# Add a label
-		self.lbl = bgui.Label(self.img, 'label', "I'm a label!", 'myfont.otf', 70, pos=[0, 1.1],
+		# self.lbl = bgui.Label(self.img, 'label', "I'm a label!", 'myfont.otf', 70, pos=[0, 1.1],
+			# options = bgui.BGUI_DEFAULT | bgui.BGUI_CENTERX)
+			
+		self.lbl = bgui.TextInput(self.img, 'label', "I'm a label!", 'myfont.otf', 70, pos=[0, 0.8],
 			options = bgui.BGUI_DEFAULT | bgui.BGUI_CENTERX)
-
+		self.lbl.on_click = self.on_img_click
 		# A counter property used for the on_img_click() method
 		self.counter = 0
+		
+		# Create a keymap for keyboard input
+		self.keymap = {getattr(bge.events, val): getattr(bgui, val) for val in dir(bge.events) if val.endswith('KEY') or val.startswith('PAD')}
 
 	def on_img_click(self, widget):
 		self.counter += 1
 		self.lbl.text = "You've clicked me %d times" % self.counter
 
-		if self.counter % 2 == 1:
-			self.img.update_image('img_flipped.png')
-		else:
-			self.img.update_image('img.jpg')
+		# if self.counter % 2 == 1:
+			# self.img.update_image('img_flipped.png')
+		# else:
+			# self.img.update_image('img.jpg')
 	
 	def main(self):
 		"""A high-level method to be run every frame"""
@@ -57,6 +63,15 @@ class MySys(bgui.System):
 			mouse_state = bgui.BGUI_MOUSE_RELEASE
 		
 		self.update_mouse(pos, mouse_state)
+		
+		keyboard = bge.logic.keyboard
+		
+		event_keys = [i for i,val in keyboard.events]
+		is_shifted = bge.events.LEFTSHIFTKEY in event_keys or bge.events.RIGHTSHIFTKEY in event_keys
+
+		for key, state in keyboard.events:
+			if state == bge.logic.KX_INPUT_JUST_ACTIVATED:
+				self.update_keyboard(self.keymap[key], is_shifted)
 		
 		#scene = bge.logic.getCurrentScene()
 		bge.logic.getCurrentScene().post_draw = [self.render]

@@ -7,7 +7,7 @@ class Label(Widget):
 	"""Widget for displaying text"""
 
 	def __init__(self, parent, name, text="", font=None, pt_size=30, color=(1, 1, 1, 1), pos=[0, 0], options=BGUI_DEFAULT):
-		"""The ImageWidget constructor
+		"""The Label constructor
 
 		Arguments:
 
@@ -64,7 +64,7 @@ class Label(Widget):
 		glColor4f(self.color[0], self.color[1], self.color[2], self.color[3])
 
 		for i, txt in enumerate([i for i in self._text.split('\n')]):
-			blf.position(self.fontid, self.position[0], self.position[1] - (self.size[1]*(i+1)), 0)
+			blf.position(self.fontid, self.position[0], self.position[1] - (self.size[1]*i), 0)
 			blf.draw(self.fontid, txt)
 			
 		Widget._draw(self)
