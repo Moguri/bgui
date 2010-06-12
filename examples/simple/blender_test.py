@@ -1,12 +1,10 @@
 import sys
 
 # So we can find the bgui module
-sys.path.append('..')
+sys.path.append('../..')
 
 import bgui
 import bge
-import GameLogic
-import Rasterizer
 
 class MySys(bgui.System):
 	"""
@@ -66,7 +64,7 @@ class MySys(bgui.System):
 
 def main(cont):
 	own = cont.owner
-	mouse = GameLogic.mouse
+	mouse = bge.logic.mouse
 
 	if 'sys' not in own:
 		# Create our system and show the mouse
