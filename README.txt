@@ -8,6 +8,3 @@ Requirements:
 
 There currently isn't much in terms of documentation. I've tried to keep the
 source well commented, and I've provided a simple demo in the examples folder.
-
-Change Log:
-	0.01: Initial "beta" release
