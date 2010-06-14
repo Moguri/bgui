@@ -22,15 +22,16 @@ class MySys(bgui.System):
 			options =  bgui.BGUI_CENTERED | bgui.BGUI_DEFAULT)
 
 		# Setup an on_click callback for the image
-		# self.img.on_click = self.on_img_click
+		self.img.on_click = self.on_img_click
 
 		# Add a label
-		# self.lbl = bgui.Label(self.img, 'label', "I'm a label!", 'myfont.otf', 70, pos=[0, 1.1],
-			# options = bgui.BGUI_DEFAULT | bgui.BGUI_CENTERX)
-			
-		self.lbl = bgui.TextInput(self.img, 'label', "I'm a label!", 'myfont.otf', 70, pos=[0, 0.8],
+		self.lbl = bgui.Label(self.img, 'label', "I'm a label!", 'myfont.otf', 70, pos=[0, 1.0],
 			options = bgui.BGUI_DEFAULT | bgui.BGUI_CENTERX)
-		self.lbl.on_click = self.on_img_click
+			
+		# A TextInput widget
+		# self.lbl = bgui.TextInput(self.img, 'label', "I'm a label!", 'myfont.otf', 70, pos=[0, 0.8],
+			# options = bgui.BGUI_DEFAULT | bgui.BGUI_CENTERX)
+		
 		# A counter property used for the on_img_click() method
 		self.counter = 0
 		
@@ -41,43 +42,45 @@ class MySys(bgui.System):
 		self.counter += 1
 		self.lbl.text = "You've clicked me %d times" % self.counter
 
-		# if self.counter % 2 == 1:
-			# self.img.update_image('img_flipped.png')
-		# else:
-			# self.img.update_image('img.jpg')
+		if self.counter % 2 == 1:
+			self.img.update_image('img_flipped.png')
+		else:
+			self.img.update_image('img.jpg')
 	
 	def main(self):
 		"""A high-level method to be run every frame"""
 		
+		# Handle the mouse
 		mouse = bge.logic.mouse
 		
-		pos = [i for i in mouse.position]
+		pos = list(mouse.position)
 		pos[0] *= bge.render.getWindowWidth()
 		pos[1] = bge.render.getWindowHeight() - (bge.render.getWindowHeight() * pos[1])
 		
 		mouse_state = bgui.BGUI_MOUSE_NONE
 				
-		if (189, bge.logic.KX_INPUT_JUST_ACTIVATED) in mouse.events:
+		if (bge.events.LEFTMOUSE, bge.logic.KX_INPUT_JUST_ACTIVATED) in mouse.events:
 			mouse_state = bgui.BGUI_MOUSE_CLICK
-		elif (189, bge.logic.KX_INPUT_JUST_RELEASED) in mouse.events:
+		elif (bge.events.LEFTMOUSE, bge.logic.KX_INPUT_JUST_RELEASED) in mouse.events:
 			mouse_state = bgui.BGUI_MOUSE_RELEASE
-		elif (189, bge.logic.KX_INPUT_ACTIVE) in mouse.events:
+		elif (bge.events.LEFTMOUSE, bge.logic.KX_INPUT_ACTIVE) in mouse.events:
 			mouse_state = bgui.BGUI_MOUSE_ACTIVE
 		
 		self.update_mouse(pos, mouse_state)
 		
+		# Handle the keyboard
 		keyboard = bge.logic.keyboard
 		
 		event_keys = [i for i,val in keyboard.events]
-		is_shifted = bge.events.LEFTSHIFTKEY in event_keys or bge.events.RIGHTSHIFTKEY in event_keys
-
+		is_shifted = (bge.events.LEFTSHIFTKEY, bge.logic.KX_INPUT_ACTIVE) in keyboard.events or \
+					(bge.events.RIGHTSHIFTKEY, bge.logic.KX_INPUT_ACTIVE) in keyboard.events
+					
 		for key, state in keyboard.events:
 			if state == bge.logic.KX_INPUT_JUST_ACTIVATED:
 				self.update_keyboard(self.keymap[key], is_shifted)
 		
-		#scene = bge.logic.getCurrentScene()
+		# Now setup the scene callback so we can draw
 		bge.logic.getCurrentScene().post_draw = [self.render]
-		# print(bge.logic.getCurrentScene().post_draw)
 
 def main(cont):
 	own = cont.owner
@@ -89,10 +92,4 @@ def main(cont):
 		mouse.visible = True
 
 	else:
-		# Send mouse data to the system and draw it using the scene's post_draw callback
-		# pos = [i for i in mouse.position]
-		# pos[0] *= Rasterizer.getWindowWidth()
-		# pos[1] = Rasterizer.getWindowHeight() - (Rasterizer.getWindowHeight() * pos[1])
-		# own['sys'].update_mouse(pos, (189, 1) in mouse.events)
-		# GameLogic.getCurrentScene().post_draw = [own['sys'].render]
 		own['sys'].main()
