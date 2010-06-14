@@ -62,6 +62,10 @@ class Image(Widget):
 		
 		# Enable textures
 		glEnable(GL_TEXTURE_2D)
+		
+		# Enable alpha blending
+		glEnable(GL_BLEND);
+		glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 
 		# Bind the texture
 		glBindTexture(GL_TEXTURE_2D, self.tex_id)
