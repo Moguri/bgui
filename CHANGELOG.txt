@@ -1,9 +1,12 @@
 Current
  New Features
+  * TextInput widget to get text input from the user
   * Frame widget to place widgets on (can also be used as a "window")
-  * BGUI can now handle mouse states (NONE, CLICKED, RELEASE)
+  * BGUI can now handle keyboard input
+  * BGUI can now handle mouse states (NONE, CLICKED, RELEASE, ACTIVE)
   * Widgets now support on_hover and on_release callbacks
-  * Color support added for labels
+  * Color support added for Labels
+  * Alpha blending enabled for Images
 
  Bugs Fixed
   * Drawing labels would disable textures for images
