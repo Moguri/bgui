@@ -14,6 +14,7 @@ BGUI_CENTERED = BGUI_CENTERX | BGUI_CENTERY
 BGUI_MOUSE_NONE = 0
 BGUI_MOUSE_CLICK = 1
 BGUI_MOUSE_RELEASE = 2
+BGUI_MOUSE_ACTIVE = 4
 
 class Widget:
 	"""The base widget class"""
@@ -41,6 +42,7 @@ class Widget:
 		self.on_click = None
 		self.on_release = None
 		self.on_hover = None
+		self.on_active = None
 
 		# Setup the parent
 		parent._attach_widget(self)
@@ -106,6 +108,8 @@ class Widget:
 			self.on_click(self)
 		elif event == BGUI_MOUSE_RELEASE and self.on_release:
 			self.on_release(self)
+		elif event == BGUI_MOUSE_ACTIVE and self.on_hold:
+			self.on_active(self)
 		elif event == BGUI_MOUSE_NONE and self.on_hover:
 			self.on_hover(self)
 			

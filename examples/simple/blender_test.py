@@ -61,6 +61,8 @@ class MySys(bgui.System):
 			mouse_state = bgui.BGUI_MOUSE_CLICK
 		elif (189, bge.logic.KX_INPUT_JUST_RELEASED) in mouse.events:
 			mouse_state = bgui.BGUI_MOUSE_RELEASE
+		elif (189, bge.logic.KX_INPUT_ACTIVE) in mouse.events:
+			mouse_state = bgui.BGUI_MOUSE_ACTIVE
 		
 		self.update_mouse(pos, mouse_state)
 		
