@@ -108,7 +108,7 @@ class Widget:
 			self.on_click(self)
 		elif event == BGUI_MOUSE_RELEASE and self.on_release:
 			self.on_release(self)
-		elif event == BGUI_MOUSE_ACTIVE and self.on_hold:
+		elif event == BGUI_MOUSE_ACTIVE and self.on_active:
 			self.on_active(self)
 		elif event == BGUI_MOUSE_NONE and self.on_hover:
 			self.on_hover(self)
