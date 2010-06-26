@@ -142,6 +142,11 @@ class Widget:
 			raise ValueError("%s is already attached to this widget" %s (widget.name))
 
 		self.children[widget.name] = widget
+		
+	def _remove_widget(self, widget):
+		"""Removes the widget from this widget's children"""
+		
+		del self.children[widget.name]
 
 	def _draw(self):
 		"""Draws the widget and the widget's children"""
