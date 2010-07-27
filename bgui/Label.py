@@ -65,7 +65,7 @@ class Label(Widget):
 
 		for i, txt in enumerate([i for i in self._text.split('\n')]):
 			blf.position(self.fontid, self.position[0], self.position[1] - (self.size[1]*i), 0)
-			blf.draw(self.fontid, txt)
+			blf.draw(self.fontid, txt.replace('\t', '    '))
 			
 		Widget._draw(self)
 
