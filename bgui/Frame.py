@@ -19,6 +19,10 @@ class Frame(Widget):
 		
 	def _draw(self):
 		"""Draw the window"""
+		
+		# Enable alpha blending
+		glEnable(GL_BLEND)
+		glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA)
 			
 		glBegin(GL_QUADS)
 		for i in range(4):
