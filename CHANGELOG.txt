@@ -1,5 +1,6 @@
 Current
  New Features
+  * Video widget to display videos using VideoTexture (no sound support at the moment)
   * TextInput widget to get text input from the user
   * Frame widget to place widgets on (can also be used as a "window")
   * BGUI can now handle keyboard input
