@@ -10,19 +10,19 @@ class Frame(Widget):
 		
 		Widget.__init__(self, parent, name, size, pos, options)
 		
-	def _draw(self):
-		"""Draw the window"""
-		
-		colors = (
+		self.colors = (
 			(1, 1, 1, 1),
 			(0, 0, 1, 1),
 			(0, 0, 1, 1),
 			(0, 0, 1, 1),
 			)
+		
+	def _draw(self):
+		"""Draw the window"""
 			
 		glBegin(GL_QUADS)
 		for i in range(4):
-			glColor4f(colors[i][0], colors[i][1], colors[i][2], colors[i][3])
+			glColor4f(self.colors[i][0], self.colors[i][1], self.colors[i][2], self.colors[i][3])
 			glVertex2f(self.gl_position[i][0], self.gl_position[i][1])
 		glEnd()
 		
