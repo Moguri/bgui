@@ -104,7 +104,7 @@ class Widget:
 				(widget.gl_position[0][1] <= pos[1] <= widget.gl_position[2][1]):
 					widget._on_click(pos)
 
-	def _handle_event(self, pos, event):
+	def _handle_mouse(self, pos, event):
 		"""Run any event callbacks"""
 		
 		if event == BGUI_MOUSE_CLICK and self.on_click:
@@ -122,7 +122,7 @@ class Widget:
 		for widget in [self.children[i] for i in self.children]:
 			if (widget.gl_position[0][0] <= pos[0] <= widget.gl_position[1][0]) and \
 				(widget.gl_position[0][1] <= pos[1] <= widget.gl_position[2][1]):
-					widget._handle_event(pos, event)
+					widget._handle_mouse(pos, event)
 			else:
 				widget._active = False
 			
