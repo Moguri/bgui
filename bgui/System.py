@@ -98,7 +98,8 @@ class System:
 
 		# Render the windows
 		for widget in self._widgets:
-			self._widgets[widget]._draw()
+			if self._widgets[widget].visible:
+				self._widgets[widget]._draw()
 
 		# Reset the state
 		glPopAttrib()

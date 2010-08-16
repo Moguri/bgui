@@ -38,6 +38,9 @@ class Widget:
 		
 		self._active = False
 		
+		# The widget is visible by default
+		self.visible = True
+		
 		# Event callbacks
 		self.on_click = None
 		self.on_release = None
@@ -154,4 +157,5 @@ class Widget:
 		# This base class has nothing to draw, so just draw the children
 
 		for child in self.children:
-			self.children[child]._draw()
+			if self.children[child].visible:
+				self.children[child]._draw()
