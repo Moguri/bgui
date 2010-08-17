@@ -46,6 +46,12 @@ class Image(Widget):
 		image = vt.ImageFFmpeg(img)
 		image.scale = False
 		im_buf = image.image
+		
+		# If the image failed to load the im_buf will be None
+		# If this happens stop before things get ugly.
+		if im_buf == None:
+			print("Unable to load the image %s" % img)
+			return
 
 		# Setup some parameters
 		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR)
