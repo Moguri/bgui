@@ -21,8 +21,11 @@ class MySys(bgui.System):
 		self.img = bgui.Image(self.frame, 'image', 'img.jpg', size=[.75, .75],
 			options =  bgui.BGUI_CENTERED | bgui.BGUI_DEFAULT)
 
+		# A button
+		self.button = bgui.FrameButton(self.frame, 'button', text='Click Me!', size=[.3, .1], pos=[0, .05],
+			options = bgui.BGUI_DEFAULT | bgui.BGUI_CENTERX)
 		# Setup an on_click callback for the image
-		self.img.on_click = self.on_img_click
+		self.button.on_click = self.on_img_click
 
 		# Add a label
 		self.lbl = bgui.Label(self.img, 'label', "I'm a label!", 'myfont.otf', 70, pos=[0, 1.0],

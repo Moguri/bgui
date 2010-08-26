@@ -5,3 +5,4 @@ from bgui.Image import *
 from bgui.Video import *
 from bgui.Label import *
 from bgui.TextInput import *
+from bgui.FrameButton import *
