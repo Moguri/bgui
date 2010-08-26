@@ -49,7 +49,7 @@ class System:
 		"""Updates the system's mouse data
 
 		pos -- the mouse position
-		was_clicked -- an optional boolean for determining if the mouse was 'clicked'
+		click_state -- the current state of the mouse
 
 		"""
 
@@ -67,8 +67,7 @@ class System:
 		"""Updates the system's keyboard data
 		
 		key -- the key being input
-		keymap -- a dict to map the keys to bgui's system
-		state -- the state of the key
+		is_shifted -- is the shift key held down?
 		
 		"""
 

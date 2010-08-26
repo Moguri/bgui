@@ -6,6 +6,7 @@ Current
   * BGUI can now handle keyboard input
   * BGUI can now handle mouse states (NONE, CLICKED, RELEASE, ACTIVE)
   * Widgets now support on_hover and on_release callbacks
+  * Widgets now have a visible attribute
   * Color support added for Labels
   * Alpha blending enabled for Images
 
