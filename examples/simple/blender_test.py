@@ -46,7 +46,7 @@ class MySys(bgui.System):
 		self.lbl.text = "You've clicked me %d times" % self.counter
 
 		if self.counter % 2 == 1:
-			self.img.update_image('img_flipped.png')
+			self.img.update_image('img_flipped.jpg')
 		else:
 			self.img.update_image('img.jpg')
 	
