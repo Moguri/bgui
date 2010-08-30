@@ -61,12 +61,13 @@ class MySys(bgui.System):
 		pos[1] = bge.render.getWindowHeight() - (bge.render.getWindowHeight() * pos[1])
 		
 		mouse_state = bgui.BGUI_MOUSE_NONE
+		mouse_events = mouse.events
 				
-		if (bge.events.LEFTMOUSE, bge.logic.KX_INPUT_JUST_ACTIVATED) in mouse.events:
+		if mouse_events[bge.events.LEFTMOUSE] == bge.logic.KX_INPUT_JUST_ACTIVATED:
 			mouse_state = bgui.BGUI_MOUSE_CLICK
-		elif (bge.events.LEFTMOUSE, bge.logic.KX_INPUT_JUST_RELEASED) in mouse.events:
+		elif mouse_events[bge.events.LEFTMOUSE] == bge.logic.KX_INPUT_JUST_RELEASED:
 			mouse_state = bgui.BGUI_MOUSE_RELEASE
-		elif (bge.events.LEFTMOUSE, bge.logic.KX_INPUT_ACTIVE) in mouse.events:
+		elif mouse_events[bge.events.LEFTMOUSE] == bge.logic.KX_INPUT_ACTIVE:
 			mouse_state = bgui.BGUI_MOUSE_ACTIVE
 		
 		self.update_mouse(pos, mouse_state)
@@ -74,11 +75,11 @@ class MySys(bgui.System):
 		# Handle the keyboard
 		keyboard = bge.logic.keyboard
 		
-		event_keys = [i for i,val in keyboard.events]
-		is_shifted = (bge.events.LEFTSHIFTKEY, bge.logic.KX_INPUT_ACTIVE) in keyboard.events or \
-					(bge.events.RIGHTSHIFTKEY, bge.logic.KX_INPUT_ACTIVE) in keyboard.events
+		key_events = keyboard.events
+		is_shifted = key_events[bge.events.LEFTSHIFTKEY] == bge.logic.KX_INPUT_ACTIVE or \
+					key_events[bge.events.RIGHTSHIFTKEY] == bge.logic.KX_INPUT_ACTIVE
 					
-		for key, state in keyboard.events:
+		for key, state in keyboard.events.items():
 			if state == bge.logic.KX_INPUT_JUST_ACTIVATED:
 				self.update_keyboard(self.keymap[key], is_shifted)
 		
