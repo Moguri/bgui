@@ -1,7 +1,7 @@
 from bgl import *
 import VideoTexture as vt
 
-from bgui.Widget import *
+from .Widget import *
 
 class Video(Widget):
 	"""Widget for displaying video"""

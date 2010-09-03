@@ -1,5 +1,5 @@
 from bgl import *
-from bgui.KeyDefs import *
+from .KeyDefs import *
 
 # Widget options
 BGUI_NONE = 0

@@ -1,8 +1,8 @@
 from bgl import *
 
-from bgui.Widget import *
-from bgui.Frame import *
-from bgui.Label import *
+from .Widget import *
+from .Frame import *
+from .Label import *
 
 class FrameButton(Widget):
 	

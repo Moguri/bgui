@@ -1,5 +1,5 @@
-from bgui.Widget import *
-from bgui.Label import *
+from .Widget import *
+from .Label import *
 
 class TextInput(Label):
 	"""Widget for getting text input"""

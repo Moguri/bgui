@@ -1,5 +1,5 @@
 from bgl import *
-from bgui.Widget import *
+from .Widget import *
 
 class Frame(Widget):
 	"""Frame for storing other widgets"""
