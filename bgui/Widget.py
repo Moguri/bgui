@@ -1,4 +1,3 @@
-from bgl import *
 from .KeyDefs import *
 
 # Widget options
