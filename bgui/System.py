@@ -1,5 +1,6 @@
 from bgl import *
 from .Widget import *
+from collections import OrderedDict
 
 
 class System:
@@ -12,7 +13,7 @@ class System:
 		"""System constructor, no arguments"""
 
 		# A dictionary to store 'root' widgets
-		self._widgets = {}
+		self._widgets = OrderedDict()
 
 		# Size and positions for children to use.
 		# The size will the the view port size and

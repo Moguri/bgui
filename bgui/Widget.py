@@ -1,4 +1,5 @@
 from .KeyDefs import *
+from collections import OrderedDict
 
 # Widget options
 BGUI_NONE = 0
@@ -51,7 +52,7 @@ class Widget:
 		self.parent = parent
 
 		# A dictionary to store children widgets
-		self.children = {}
+		self.children = OrderedDict()
 
 		# Setup the widget's position
 		self.position = [None]*4
