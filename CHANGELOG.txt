@@ -1,3 +1,7 @@
+Current
+ Other Stuff
+  * Widgets are now stored in OrderedDicts to allow for control over z sorting
+
 0.02
  New Features
   * Video widget to display videos using VideoTexture (no sound support at the moment)
