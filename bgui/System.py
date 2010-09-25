@@ -32,7 +32,7 @@ class System:
 		
 		# Theming
 		self.system = self
-		self.theme = Theme(theme)
+		self.theme = Theme(theme) if theme else None
 
 	def _attach_widget(self, widget):
 		"""Attaches a widget to the system. The widget then becomes a \"root\"

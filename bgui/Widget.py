@@ -43,7 +43,7 @@ class Widget:
 		# Store the system so children can access theming data
 		self.system = parent.system
 		
-		if options & BGUI_THEMED and self.theme_section != Widget.theme_section:
+		if self.system.theme and options & BGUI_THEMED and self.theme_section != Widget.theme_section:
 			if self.system.theme.supports(self):
 				self.theme = self.system.theme
 			else:
