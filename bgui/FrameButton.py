@@ -27,8 +27,8 @@ class FrameButton(Widget):
 		
 		Widget.__init__(self, parent, name, size, pos, options)
 		
-		self.frame = Frame(self, name + '_frame', size=[1,1], pos=[0,0])
-		self.label = Label(self, name + '_label', text, font, pt_size, pos=[0,0], options=BGUI_NORMALIZED | BGUI_CENTERED)
+		self.frame = Frame(self, name + '_frame', size=[1,1], pos=[0,0], options=BGUI_DEFAULT^BGUI_THEMED)
+		self.label = Label(self, name + '_label', text, font, pt_size, pos=[0,0], options=BGUI_DEFAULT | BGUI_CENTERED)
 		
 		self.base_color = base_color
 		self.light = self.color = [

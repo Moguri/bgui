@@ -1,7 +1,7 @@
 from bgl import *
 from .Widget import *
+from .Theme import *
 from collections import OrderedDict
-
 
 class System:
 	"""The main gui system. Add widgets to this and then call the render() method
@@ -9,8 +9,11 @@ class System:
 
 	"""
 
-	def __init__(self):
-		"""System constructor, no arguments"""
+	def __init__(self, theme=None):
+		"""System constructor
+		theme -- the path to a theme directory
+		
+		"""
 
 		# A dictionary to store 'root' widgets
 		self._widgets = OrderedDict()
@@ -26,6 +29,10 @@ class System:
 
 		self.size = (view[2], view[3])
 		self.position = (0, 0)
+		
+		# Theming
+		self.system = self
+		self.theme = Theme(theme)
 
 	def _attach_widget(self, widget):
 		"""Attaches a widget to the system. The widget then becomes a \"root\"
@@ -88,6 +95,9 @@ class System:
 		# Save the state
 		glPushMatrix();
 		glPushAttrib(GL_ALL_ATTRIB_BITS)
+		
+		# Diable depth test so we always draw over things
+		glDisable(GL_DEPTH_TEST)
 
 		# Setup the matrices
 		glMatrixMode(GL_PROJECTION)

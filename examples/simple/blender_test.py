@@ -12,10 +12,11 @@ class MySys(bgui.System):
 	"""
 	def __init__(self):
 		# Initiate the system
-		bgui.System.__init__(self)
+		bgui.System.__init__(self, '../../themes/default')
 		
 		# Use a frame to store all of our widgets
-		self.frame = bgui.Frame(self, 'window')#options=bgui.BGUI_DEFAULT | bgui.BGUI_CENTERED)
+		self.frame = bgui.Frame(self, 'window', border=0)
+		self.frame.colors = [(0, 0, 0, 0) for i in range(4)]
 
 		# Create an image to display
 		self.img = bgui.Image(self.frame, 'image', 'img.jpg', size=[.75, .75],
@@ -28,8 +29,12 @@ class MySys(bgui.System):
 		self.button.on_click = self.on_img_click
 
 		# Add a label
-		self.lbl = bgui.Label(self.img, 'label', "I'm a label!", 'myfont.otf', 70, pos=[0, 1.0],
+		self.lbl = bgui.Label(self.img, 'label', text="I'm a label!", pt_size=70, pos=[0, 1.0],
 			options = bgui.BGUI_DEFAULT | bgui.BGUI_CENTERX)
+
+		# A themed frame
+		self.win = bgui.Frame(self, 'win', size=[0.5, 0.5],
+			options=bgui.BGUI_DEFAULT|bgui.BGUI_CENTERED)
 			
 		# A TextInput widget
 		# self.lbl = bgui.TextInput(self.img, 'label', "I'm a label!", 'myfont.otf', 70, pos=[0, 0.8],

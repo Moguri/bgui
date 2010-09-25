@@ -6,8 +6,9 @@ BGUI_NONE = 0
 BGUI_CENTERX = 1
 BGUI_CENTERY = 2
 BGUI_NORMALIZED = 4
+BGUI_THEMED = 8
 
-BGUI_DEFAULT = BGUI_NORMALIZED
+BGUI_DEFAULT = BGUI_NORMALIZED | BGUI_THEMED
 BGUI_CENTERED = BGUI_CENTERX | BGUI_CENTERY
 
 # Mouse event states
@@ -18,6 +19,9 @@ BGUI_MOUSE_ACTIVE = 4
 
 class Widget:
 	"""The base widget class"""
+	
+	theme_section = 'Widget'
+	theme_options = {}
 
 	def __init__(self, parent, name, size=[0, 0], pos=[0, 0],
 			options=BGUI_DEFAULT):
@@ -32,9 +36,21 @@ class Widget:
 		options -- various other options
 
 		"""
-
+		
 		self.name = name
 		self.options = options
+		
+		# Store the system so children can access theming data
+		self.system = parent.system
+		
+		if options & BGUI_THEMED and self.theme_section != Widget.theme_section:
+			if self.system.theme.supports(self):
+				self.theme = self.system.theme
+			else:
+				print("Theming is enabled, but the current theme does not support", self.__class__.__name__)
+				self.theme = None
+		else:
+			self.theme = None
 		
 		self._active = False
 		
