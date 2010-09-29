@@ -1,5 +1,5 @@
 from bgl import *
-import VideoTexture as vt
+import bge
 
 from .Widget import *
 
@@ -43,7 +43,7 @@ class Image(Widget):
 		glBindTexture(GL_TEXTURE_2D, self.tex_id)
 		
 		# Load the texture data
-		image = vt.ImageFFmpeg(img)
+		image = bge.texture.ImageFFmpeg(img)
 		image.scale = False
 		im_buf = image.image
 		

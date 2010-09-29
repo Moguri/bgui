@@ -1,5 +1,5 @@
 from bgl import *
-import VideoTexture as vt
+import bge
 
 from .Widget import *
 
@@ -31,7 +31,7 @@ class Video(Widget):
 		
 		# Bind and load the texture data
 		glBindTexture(GL_TEXTURE_2D, self.tex_id)
-		video = vt.VideoFFmpeg(vid)
+		video = bge.texture.VideoFFmpeg(vid)
 		video.repeat = -1
 		video.play()
 		im_buf = video.image
