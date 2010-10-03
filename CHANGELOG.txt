@@ -1,6 +1,6 @@
 0.03
  New Features
-  * BGUI new has themeing support (for mow info go here: http://stokes.dyndns.org/redmine/projects/bgui/wiki/Theming)
+  * BGUI now has themeing support (for mow info go here: http://stokes.dyndns.org/redmine/projects/bgui/wiki/Theming)
  Bugs Fixed
   * BGUI widgets could sometimes clip with scene elements
  Other Stuff
