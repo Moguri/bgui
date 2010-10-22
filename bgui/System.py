@@ -30,6 +30,8 @@ class System:
 		self.size = (view[2], view[3])
 		self.position = (0, 0)
 		
+		self.name = "<System>"
+		
 		# Theming
 		self.system = self
 		self.theme = Theme(theme) if theme else None
@@ -51,6 +53,9 @@ class System:
 	def _remove_widget(self, widget):
 		"""Removes the widget from the system"""
 
+		for child in widget.children:
+			widget.children[child]._cleanup()
+		
 		del self._widgets[widget.name]
 
 	def update_mouse(self, pos, click_state=BGUI_MOUSE_NONE):

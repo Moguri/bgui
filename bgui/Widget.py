@@ -73,7 +73,14 @@ class Widget:
 		# Setup the widget's position
 		self.position = [None]*4
 		self._update_position(size, pos)
-
+	
+	def __del__(self):
+		self._cleanup()
+		
+	def _cleanup(self):
+		"""Override this if needed"""
+		for child in self.children:
+			self.children[child]._cleanup()
 
 	def _update_position(self, size, pos):
 		self._base_size = size[:]
@@ -164,6 +171,9 @@ class Widget:
 		
 	def _remove_widget(self, widget):
 		"""Removes the widget from this widget's children"""
+		
+		for child in widget.children:
+			widget.children[child]._cleanup()
 		
 		del self.children[widget.name]
 

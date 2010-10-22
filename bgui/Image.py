@@ -6,7 +6,7 @@ from .Widget import *
 class Image(Widget):
 	"""Widget for displaying images"""
 
-	def __init__(self, parent, name, img, size=[0, 0], pos=[0, 0], options=BGUI_DEFAULT):
+	def __init__(self, parent, name, img, aspect=None, size=[0, 0], pos=[0, 0], options=BGUI_DEFAULT):
 		"""The ImageWidget constructor
 
 		Arguments:
@@ -21,6 +21,15 @@ class Image(Widget):
 		"""
 
 		Widget.__init__(self, parent, name, size, pos, options)
+		
+		if aspect:
+			# print(self._base_size[1], (aspect))
+			# size = [self._base_size[0], self._base_size[0]/aspect]
+			size = [self.size[1]*aspect, self.size[1]]
+			if self.options & BGUI_NORMALIZED:
+				size = [size[0]/self.parent.size[0], size[1]/self.parent.size[1]]
+			self._update_position(size, self._base_pos)
+			# print(self.size)
 
 		# Generate a texture
 		id_buf = Buffer(GL_INT, 1)
@@ -31,6 +40,12 @@ class Image(Widget):
 
 		self.update_image(img)
 
+	def _cleanup(self):
+		id_buf = Buffer(GL_INT, 1)
+		id_buf.list[0] = self.tex_id
+		glDeleteTextures(1, id_buf)
+		
+		Widget._cleanup(self)
 
 	def update_image(self, img):
 		"""Change's the image texture
