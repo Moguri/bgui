@@ -18,7 +18,6 @@ class Label(Widget):
 		text -- the text to display (this can be changed later via the text property)
 		font -- the font to use
 		pt_size -- the point size of the text to draw
-		size -- a tuple containing the wdith and height
 		pos -- a tuple containing the x and y position
 		options -- various other options
 

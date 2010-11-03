@@ -5,4 +5,5 @@ from .Image import *
 from .Video import *
 from .Label import *
 from .TextInput import *
+from .TextBlock import *
 from .FrameButton import *
