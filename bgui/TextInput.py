@@ -1,7 +1,8 @@
 from .Widget import *
 from .Label import *
+from .Frame import *
 
-class TextInput(Label):
+class TextInput(Widget):
 	"""Widget for getting text input"""
 
 	def __init__(self, parent, name, text="", font=None, pt_size=30, color=(1, 1, 1, 1), size=[0, 0], pos=[0, 0], options=BGUI_DEFAULT):
@@ -19,7 +20,11 @@ class TextInput(Label):
 		options -- various other options
 
 		"""
-		Label.__init__(self, parent, name, text, font, pt_size, color, pos, options)
+		Widget.__init__(self, parent, name, size, pos, options)
+		self.frame = Frame(self, name+"_frame")
+		self.frame.colors = [(0, 0, 0, 0)] *4
+		
+		self.label = Label(self.frame, name+"_label", text, font, pt_size, color)
 		
 		self.pos = len(text)
 		
@@ -35,30 +40,31 @@ class TextInput(Label):
 		if ord(AKEY) <= key <= ord(ZKEY):
 			if is_shifted:
 				key -= 32
-			self.text = self.text[:self.pos] + chr(key) + self.text[self.pos:]
+			self.label.text = self.label.text[:self.pos] + chr(key) + self.label.text[self.pos:]
 			self.pos += 1
 		if ord(ZEROKEY) <= key <= ord(NINEKEY):
-			self.text = self.text[:self.pos] + chr(key) + self.text[self.pos:]
+			self.label.text = self.label.text[:self.pos] + chr(key) + self.label.text[self.pos:]
 			self.pos += 1
 		elif key == SPACEKEY:
-			self.text = self.text[:self.pos] + " " + self.text[self.pos:]
+			self.label.text = self.label.text[:self.pos] + " " + self.label.text[self.pos:]
 			self.pos += 1
-		elif key == BACKSPACEKEY:
-			self.text = self.text[:self.pos-1] + self.text[self.pos:]
+		elif key == BACKSPACEKEY and self.pos > 0:
+			self.label.text = self.label.text[:self.pos-1] + self.label.text[self.pos:]
 			self.pos -= 1
-		elif key == LEFTARROWKEY:
+		elif key == LEFTARROWKEY and self.pos > 0:
 			self.pos -= 1
-		elif key == RIGHTARROWKEY:
+		elif key == RIGHTARROWKEY and self.pos > 0:
 			self.pos += 1
 		
 		Widget._handle_key(self, key, is_shifted)
 		
 	def _draw(self):
-		temp = self.text
+		temp = self.label.text
 		
 		if self._active:
-			self.text = self.text[:self.pos] +"|"+ self.text[self.pos:]
+			self.label.text = self.label.text[:self.pos] +"|"+ self.label.text[self.pos:]
 		
-		Label._draw(self)
+		# Now draw the children
+		Widget._draw(self)
 		
-		self.text = temp
+		self.label.text = temp
