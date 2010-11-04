@@ -27,7 +27,15 @@ class TextInput(Widget):
 		self.label = Label(self.frame, name+"_label", text, font, pt_size, color)
 		
 		self.pos = len(text)
-		
+				
+	@property
+	def text(self):
+		return self.label.text
+	
+	@text.setter
+	def text(self, value):
+		self.label.text = value
+
 	def _handle_key(self, key, is_shifted):
 		"""Handle any keyboard input"""
 		
@@ -40,16 +48,16 @@ class TextInput(Widget):
 		if ord(AKEY) <= key <= ord(ZKEY):
 			if is_shifted:
 				key -= 32
-			self.label.text = self.label.text[:self.pos] + chr(key) + self.label.text[self.pos:]
+			self.text = self.text[:self.pos] + chr(key) + self.text[self.pos:]
 			self.pos += 1
 		if ord(ZEROKEY) <= key <= ord(NINEKEY):
-			self.label.text = self.label.text[:self.pos] + chr(key) + self.label.text[self.pos:]
+			self.text = self.text[:self.pos] + chr(key) + self.text[self.pos:]
 			self.pos += 1
 		elif key == SPACEKEY:
-			self.label.text = self.label.text[:self.pos] + " " + self.label.text[self.pos:]
+			self.text = self.text[:self.pos] + " " + self.text[self.pos:]
 			self.pos += 1
 		elif key == BACKSPACEKEY and self.pos > 0:
-			self.label.text = self.label.text[:self.pos-1] + self.label.text[self.pos:]
+			self.text = self.text[:self.pos-1] + self.text[self.pos:]
 			self.pos -= 1
 		elif key == LEFTARROWKEY and self.pos > 0:
 			self.pos -= 1
@@ -59,10 +67,10 @@ class TextInput(Widget):
 		Widget._handle_key(self, key, is_shifted)
 		
 	def _draw(self):
-		temp = self.label.text
+		temp = self.text
 		
 		if self._active:
-			self.label.text = self.label.text[:self.pos] +"|"+ self.label.text[self.pos:]
+			self.text = self.text[:self.pos] +"|"+ self.text[self.pos:]
 		
 		# Now draw the children
 		Widget._draw(self)
