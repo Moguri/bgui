@@ -49,12 +49,12 @@ class TextBlock(Widget):
 	
 		words = value.split()
 		cur_line = 0
-		line = Label(self, "tmp", "A", self._font, self._pt_size, self._color)
+		line = Label(self, "tmp", "Ay", self._font, self._pt_size, self._color)
 		self._remove_widget(line)
-		char_height = line.size[1] + (.5)*line.size[1]
+		char_height = line.size[1]
 	
 		if self.options & BGUI_NORMALIZED:
-			char_height /= self.parent.size[1]
+			char_height /= self.size[1]
 		
 		line = Label(self, "lines_0", "", self._font, self._pt_size, self._color, pos=[0, 1-char_height])
 		

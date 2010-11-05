@@ -21,7 +21,7 @@ class TextInput(Widget):
 
 		"""
 		Widget.__init__(self, parent, name, size, pos, options)
-		self.frame = Frame(self, name+"_frame")
+		self.frame = Frame(self, name+"_frame", size=[1,1])
 		self.frame.colors = [(0, 0, 0, 0)] *4
 		
 		self.label = Label(self.frame, name+"_label", text, font, pt_size, color)
