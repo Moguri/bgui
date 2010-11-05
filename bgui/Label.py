@@ -31,7 +31,11 @@ class Label(Widget):
 		else:
 			self.fontid = 0
 		
-		self.pt_size = pt_size
+		# Normalize the pt size (1000px height = 1)
+		if self.system.normalize_text:
+			self.pt_size = int(pt_size * (self.system.size[1]/1000))
+		else:
+			self.pt_size = pt_size
 		
 		if color:
 			self.color = color

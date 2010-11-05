@@ -9,6 +9,8 @@ class System:
 
 	"""
 
+	normalize_text = True
+	
 	def __init__(self, theme=None):
 		"""System constructor
 		theme -- the path to a theme directory
