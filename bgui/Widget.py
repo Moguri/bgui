@@ -114,21 +114,11 @@ class Widget:
 					[x+width, y+height],
 					[x, y+height]
 				]
-				
-	def _on_click(self, pos):
-		"""Runs the on_click callback"""
-
-		if self.on_click:
-			self.on_click(self)
-			
-		# Run any children on_click methods
-		for widget in [self.children[i] for i in self.children]:
-			if (widget.gl_position[0][0] <= pos[0] <= widget.gl_position[1][0]) and \
-				(widget.gl_position[0][1] <= pos[1] <= widget.gl_position[2][1]):
-					widget._on_click(pos)
 
 	def _handle_mouse(self, pos, event):
 		"""Run any event callbacks"""
+		# Don't run if we're not visible
+		if not self.visible: return
 		
 		if event == BGUI_MOUSE_CLICK and self.on_click:
 			self.on_click(self)
@@ -151,6 +141,8 @@ class Widget:
 			
 	def _handle_key(self, key, is_shifted):
 		"""Handle any keyboard input"""
+		# Don't run if we're not visible
+		if not self.visible: return
 		
 		# We don't actually do anything in this base class, just handle the children
 
