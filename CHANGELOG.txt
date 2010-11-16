@@ -1,3 +1,12 @@
+0.04
+ New Features
+  * Font point sizes for Labels now scale with the screen height (1000px is the baseline). This isn't "correct" but it makes things a lot easier. This can be disabled by setting System.normalize_text = False
+  * TextBlock widget added for displaying multi-line text
+  * Image widgets now have an aspect option
+ Bugs Fixed
+  * ENTERKEY added to keydefs to better match Blender
+  * TextInput now works a little better (no negative cursor and you can input text when you have an empty string)
+
 0.03
  New Features
   * BGUI now has themeing support (for mow info go here: http://stokes.dyndns.org/redmine/projects/bgui/wiki/Theming)
