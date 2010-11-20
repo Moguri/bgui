@@ -100,7 +100,6 @@ class System:
 		view = view_buf.list
 
 		# Save the state
-		glPushMatrix();
 		glPushAttrib(GL_ALL_ATTRIB_BITS)
 		
 		# Diable depth test so we always draw over things
@@ -108,9 +107,11 @@ class System:
 
 		# Setup the matrices
 		glMatrixMode(GL_PROJECTION)
+		glPushMatrix()
 		glLoadIdentity()
 		gluOrtho2D(0, view[2], 0, view[3])
 		glMatrixMode(GL_MODELVIEW)
+		glPushMatrix()
 		glLoadIdentity()
 
 		# Render the windows
@@ -119,5 +120,7 @@ class System:
 				self._widgets[widget]._draw()
 
 		# Reset the state
-		glPopAttrib()
 		glPopMatrix()
+		glMatrixMode(GL_PROJECTION)
+		glPopMatrix()
+		glPopAttrib()
