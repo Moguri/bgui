@@ -28,7 +28,7 @@ class Label(Widget):
 		if font:
 			self.fontid = blf.load(font)
 		elif self.theme:
-			self.fontid = blf.load(self.theme.get(Label.theme_section, 'Font'))
+			self.fontid = blf.load(self.theme.get(self.theme_section, 'Font'))
 		else:
 			self.fontid = 0
 		
@@ -43,7 +43,7 @@ class Label(Widget):
 		elif self.theme:
 			# self.color = (1, 1, 1, 1)
 			# self.color = list(self.theme.get(Label.theme_section, 'Color'))
-			self.color = [float(i) for i in self.theme.get(Label.theme_section, 'Color').split(',')]
+			self.color = [float(i) for i in self.theme.get(self.theme_section, 'Color').split(',')]
 		else:
 			# default to white
 			self.color = (1, 1, 1, 1)

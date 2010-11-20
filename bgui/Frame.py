@@ -25,13 +25,13 @@ class Frame(Widget):
 		
 		if self.theme:
 			self.colors = [
-					[float(i) for i in self.theme.get(Frame.theme_section, 'Color1').split(',')],
-					[float(i) for i in self.theme.get(Frame.theme_section, 'Color2').split(',')],
-					[float(i) for i in self.theme.get(Frame.theme_section, 'Color3').split(',')],
-					[float(i) for i in self.theme.get(Frame.theme_section, 'Color4').split(',')],
+					[float(i) for i in self.theme.get(self.theme_section, 'Color1').split(',')],
+					[float(i) for i in self.theme.get(self.theme_section, 'Color2').split(',')],
+					[float(i) for i in self.theme.get(self.theme_section, 'Color3').split(',')],
+					[float(i) for i in self.theme.get(self.theme_section, 'Color4').split(',')],
 					]
 					
-			self.border_color = [float(i) for i in self.theme.get(Frame.theme_section, 'BorderColor').split(',')]
+			self.border_color = [float(i) for i in self.theme.get(self.theme_section, 'BorderColor').split(',')]
 		else:
 			self.colors = (
 				(1, 1, 1, 1),
@@ -45,7 +45,7 @@ class Frame(Widget):
 		if border:
 			self.border = border
 		elif self.theme:
-			self.border = float(self.theme.get(Frame.theme_section, 'BorderSize'))
+			self.border = float(self.theme.get(self.theme_section, 'BorderSize'))
 		else:
 			# Default to 0
 			self.border = 0
