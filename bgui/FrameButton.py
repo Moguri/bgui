@@ -8,7 +8,8 @@ class FrameButton(Widget):
 	
 	"""A clickable frame-based button."""
 	
-	def __init__(self, parent, name, base_color=(.4,.4,.4,1), text="", font=None, pt_size=30, size=[1,1], pos=[0,0], options=BGUI_DEFAULT):
+	def __init__(self, parent, name, base_color=(.4,.4,.4,1), text="", font=None,
+					pt_size=30, size=[1,1], pos=[0,0], sub_theme='', options=BGUI_DEFAULT):
 		"""The Button constructor.
 		
 		Arguments:
@@ -25,7 +26,7 @@ class FrameButton(Widget):
 		
 		"""
 		
-		Widget.__init__(self, parent, name, size, pos, options)
+		Widget.__init__(self, parent, name, size, pos, sub_theme, options)
 		
 		self.frame = Frame(self, name + '_frame', size=[1,1], pos=[0,0], options=BGUI_DEFAULT^BGUI_THEMED)
 		self.label = Label(self, name + '_label', text, font, pt_size, pos=[0,0], options=BGUI_DEFAULT | BGUI_CENTERED)

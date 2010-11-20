@@ -36,6 +36,13 @@ class MySys(bgui.System):
 		self.win = bgui.Frame(self, 'win', size=[0.5, 0.5],
 			options=bgui.BGUI_DEFAULT|bgui.BGUI_CENTERED)
 			
+		# A couple of progress bars to demonstrate sub themes
+		self.progress = bgui.ProgressBar(self.win, "progess", percent=0.75, size=[0.9, 0.01], pos=[0, 0.5],
+											sub_theme="Progress", options=bgui.BGUI_DEFAULT|bgui.BGUI_CENTERX)
+											
+		self.health = bgui.ProgressBar(self.win, "health", percent=0.5, size=[0.9, 0.01], pos=[0, 0.2],
+											sub_theme="Health",	options=bgui.BGUI_DEFAULT|bgui.BGUI_CENTERX)
+			
 		# A TextInput widget
 		# self.lbl = bgui.TextInput(self.img, 'label', "I'm a label!", 'myfont.otf', 70, pos=[0, 0.8],
 			# options = bgui.BGUI_DEFAULT | bgui.BGUI_CENTERX)

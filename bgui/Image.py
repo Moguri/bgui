@@ -6,7 +6,8 @@ from .Widget import *
 class Image(Widget):
 	"""Widget for displaying images"""
 
-	def __init__(self, parent, name, img, aspect=None, size=[0, 0], pos=[0, 0], options=BGUI_DEFAULT):
+	def __init__(self, parent, name, img, aspect=None, size=[0, 0], pos=[0, 0],
+				sub_theme='', options=BGUI_DEFAULT):
 		"""The ImageWidget constructor
 
 		Arguments:
@@ -20,7 +21,7 @@ class Image(Widget):
 
 		"""
 
-		Widget.__init__(self, parent, name, size, pos, options)
+		Widget.__init__(self, parent, name, size, pos, sub_theme, options)
 		
 		if aspect:
 			# print(self._base_size[1], (aspect))

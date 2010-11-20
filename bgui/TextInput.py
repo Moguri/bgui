@@ -5,7 +5,8 @@ from .Frame import *
 class TextInput(Widget):
 	"""Widget for getting text input"""
 
-	def __init__(self, parent, name, text="", font=None, pt_size=30, color=(1, 1, 1, 1), size=[0, 0], pos=[0, 0], options=BGUI_DEFAULT):
+	def __init__(self, parent, name, text="", font=None, pt_size=30, color=(1, 1, 1, 1),
+					size=[0, 0], pos=[0, 0], sub_theme='', options=BGUI_DEFAULT):
 		"""The TextInput constructor
 
 		Arguments:

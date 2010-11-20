@@ -23,7 +23,7 @@ class Widget:
 	theme_section = 'Widget'
 	theme_options = {}
 
-	def __init__(self, parent, name, size=[0, 0], pos=[0, 0],
+	def __init__(self, parent, name, size=[0, 0], pos=[0, 0], sub_theme='',
 			options=BGUI_DEFAULT):
 		"""The Widget constructor
 
@@ -44,10 +44,13 @@ class Widget:
 		self.system = parent.system
 		
 		if self.system.theme and options & BGUI_THEMED and self.theme_section != Widget.theme_section:
+			if sub_theme:
+				self.theme_section += ':'+sub_theme
+		
 			if self.system.theme.supports(self):
 				self.theme = self.system.theme
 			else:
-				print("Theming is enabled, but the current theme does not support", self.__class__.__name__)
+				print("Theming is enabled, but the current theme does not support", self.theme_section)
 				self.theme = None
 		else:
 			self.theme = None

@@ -8,7 +8,8 @@ class Label(Widget):
 	theme_section = 'Label'
 	theme_options = {'Font', 'Color'}
 
-	def __init__(self, parent, name, text="", font=None, pt_size=30, color=None, pos=[0, 0], options=BGUI_DEFAULT):
+	def __init__(self, parent, name, text="", font=None, pt_size=30, color=None,
+				pos=[0, 0], sub_theme='', options=BGUI_DEFAULT):
 		"""The Label constructor
 
 		Arguments:
@@ -22,7 +23,7 @@ class Label(Widget):
 		options -- various other options
 
 		"""
-		Widget.__init__(self, parent, name, [0,0], pos, options)
+		Widget.__init__(self, parent, name, [0,0], pos, sub_theme, options)
 
 		if font:
 			self.fontid = blf.load(font)

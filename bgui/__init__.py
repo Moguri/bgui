@@ -7,3 +7,4 @@ from .Label import *
 from .TextInput import *
 from .TextBlock import *
 from .FrameButton import *
+from .ProgressBar import *

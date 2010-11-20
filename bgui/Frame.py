@@ -6,7 +6,8 @@ class Frame(Widget):
 	theme_section = 'Frame'
 	theme_options = {'Color1', 'Color2', 'Color3', 'Color4', 'BorderSize', 'BorderColor'}
 	
-	def __init__(self, parent, name, border=None, size=[1, 1], pos=[0, 0], options=BGUI_DEFAULT):
+	def __init__(self, parent, name, border=None, size=[1, 1], pos=[0, 0],
+				sub_theme='', options=BGUI_DEFAULT):
 		"""The Frame constructor
 
 		Arguments:
@@ -20,7 +21,7 @@ class Frame(Widget):
 
 		"""
 		
-		Widget.__init__(self, parent, name, size, pos, options)
+		Widget.__init__(self, parent, name, size, pos, sub_theme, options)
 		
 		if self.theme:
 			self.colors = [
