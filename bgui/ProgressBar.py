@@ -7,7 +7,7 @@ class ProgressBar(Widget):
 	theme_section = 'ProgressBar'
 	theme_options = {'FillColor1', 'FillColor2', 'FillColor3', 'FillColor4',
 		'BGColor1', 'BGColor2', 'BGColor3', 'BGColor4', 'BorderSize', 'BorderColor'}
-	def __init__(self, parent, name, percent=1.0, sub_theme='Progress', size=[1,1], pos=[0,0], options=BGUI_DEFAULT):
+	def __init__(self, parent, name, percent=1.0, sub_theme='Progress', aspect=None, size=[1,1], pos=[0,0], options=BGUI_DEFAULT):
 		"""Progress Bar constructor
 		
 		Arguments:
@@ -16,11 +16,12 @@ class ProgressBar(Widget):
 		name -- the name of the widget
 		percent -- the initial percent 
 		sub_theme -- sub type of theme to use
+		aspect -- constrain the widget size to a specified aspect ratio
 		size -- a tuple containing the wdith and height
 		pos -- a tuple containing the x and y position
 		options -- various other options"""
 		
-		Widget.__init__(self, parent, name, size, pos, sub_theme, options)
+		Widget.__init__(self, parent, name, aspect, size, pos, sub_theme, options)
 		
 		if self.theme:
 			self.fill_colors = [

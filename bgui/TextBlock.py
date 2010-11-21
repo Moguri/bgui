@@ -4,7 +4,7 @@ from .Label import *
 class TextBlock(Widget):
 	"""Widget for displaying blocks of text"""
 	
-	def __init__(self, parent, name, text="", font=None, pt_size=30, color=None,
+	def __init__(self, parent, name, text="", font=None, pt_size=30, color=None, aspect=None,
 					size=[1, 1], pos=[0, 0], sub_theme='', options=BGUI_DEFAULT):
 		"""The Label constructor
 
@@ -15,13 +15,14 @@ class TextBlock(Widget):
 		text -- the text to display (this can be changed later via the text property)
 		font -- the font to use
 		pt_size -- the point size of the text to draw
+		aspect -- constrain the widget size to a specified aspect ratio
 		size -- a tuple containing the width and height
 		pos -- a tuple containing the x and y position
 		options -- various other options
 
 		"""
 		
-		Widget.__init__(self, parent, name, size, pos, sub_theme, options)
+		Widget.__init__(self, parent, name, aspect, size, pos, sub_theme, options)
 		
 		self._font = font
 		self._pt_size = pt_size

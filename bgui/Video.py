@@ -6,7 +6,7 @@ from .Widget import *
 class Video(Widget):
 	"""Widget for displaying video"""
 	
-	def __init__(self, parent, name, vid, size=[0, 0], pos=[0, 0],
+	def __init__(self, parent, name, vid, aspect=None, size=[0, 0], pos=[0, 0],
 				sub_theme='', options=BGUI_DEFAULT):
 		"""The Video constructor
 		
@@ -15,13 +15,14 @@ class Video(Widget):
 		parent -- the widget's parent
 		name -- the name of the widget
 		vid -- the video to use for the widget
+		aspect -- constrain the widget size to a specified aspect ratio
 		size -- a tuple containing the wdith and height
 		pos -- a tuple containing the x and y position
 		options -- various other options
 
 		"""
 		
-		Widget.__init__(self, parent, name, size, pos, sub_theme, options)
+		Widget.__init__(self, parent, name, aspect, size, pos, sub_theme, options)
 		
 		# Generate a texture
 		

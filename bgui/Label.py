@@ -23,7 +23,7 @@ class Label(Widget):
 		options -- various other options
 
 		"""
-		Widget.__init__(self, parent, name, [0,0], pos, sub_theme, options)
+		Widget.__init__(self, parent, name, None, [0,0], pos, sub_theme, options)
 
 		if font:
 			self.fontid = blf.load(font)

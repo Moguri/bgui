@@ -21,16 +21,7 @@ class Image(Widget):
 
 		"""
 
-		Widget.__init__(self, parent, name, size, pos, sub_theme, options)
-		
-		if aspect:
-			# print(self._base_size[1], (aspect))
-			# size = [self._base_size[0], self._base_size[0]/aspect]
-			size = [self.size[1]*aspect, self.size[1]]
-			if self.options & BGUI_NORMALIZED:
-				size = [size[0]/self.parent.size[0], size[1]/self.parent.size[1]]
-			self._update_position(size, self._base_pos)
-			# print(self.size)
+		Widget.__init__(self, parent, name, aspect, size, pos, sub_theme, options)
 
 		# Generate a texture
 		id_buf = Buffer(GL_INT, 1)

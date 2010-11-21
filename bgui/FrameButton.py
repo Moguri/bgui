@@ -9,7 +9,7 @@ class FrameButton(Widget):
 	"""A clickable frame-based button."""
 	
 	def __init__(self, parent, name, base_color=(.4,.4,.4,1), text="", font=None,
-					pt_size=30, size=[1,1], pos=[0,0], sub_theme='', options=BGUI_DEFAULT):
+					pt_size=30, aspect=None, size=[1,1], pos=[0,0], sub_theme='', options=BGUI_DEFAULT):
 		"""The Button constructor.
 		
 		Arguments:
@@ -20,13 +20,14 @@ class FrameButton(Widget):
 		text -- the text to display (this can be changed later via the text property)
 		font -- the font to use
 		pt_size -- the point size of the text to draw
+		aspect -- constrain the widget size to a specified aspect ratio
 		size -- a tuple containing the wdith and height
 		pos -- a tuple containing the x and y position
 		options -- various other options
 		
 		"""
 		
-		Widget.__init__(self, parent, name, size, pos, sub_theme, options)
+		Widget.__init__(self, parent, name, aspect, size, pos, sub_theme, options)
 		
 		self.frame = Frame(self, name + '_frame', size=[1,1], pos=[0,0], options=BGUI_DEFAULT^BGUI_THEMED)
 		self.label = Label(self, name + '_label', text, font, pt_size, pos=[0,0], options=BGUI_DEFAULT | BGUI_CENTERED)

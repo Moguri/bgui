@@ -23,7 +23,7 @@ class Widget:
 	theme_section = 'Widget'
 	theme_options = {}
 
-	def __init__(self, parent, name, size=[0, 0], pos=[0, 0], sub_theme='',
+	def __init__(self, parent, name, aspect=None, size=[0, 0], pos=[0, 0], sub_theme='',
 			options=BGUI_DEFAULT):
 		"""The Widget constructor
 
@@ -31,6 +31,7 @@ class Widget:
 
 		parent -- the widget's parent
 		name -- the name of the widget
+		aspect -- constrain the widget size to a specified aspect ratio
 		size -- a tuple containing the wdith and height
 		pos -- a tuple containing the x and y position
 		options -- various other options
@@ -75,7 +76,13 @@ class Widget:
 
 		# Setup the widget's position
 		self.position = [None]*4
-		self._update_position(size, pos)
+		self._update_position(size, pos)	
+		
+		if aspect:
+			size = [self.size[1]*aspect, self.size[1]]
+			if self.options & BGUI_NORMALIZED:
+				size = [size[0]/self.parent.size[0], size[1]/self.parent.size[1]]
+			self._update_position(size, self._base_pos)
 	
 	def __del__(self):
 		self._cleanup()

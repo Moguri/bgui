@@ -6,7 +6,7 @@ class Frame(Widget):
 	theme_section = 'Frame'
 	theme_options = {'Color1', 'Color2', 'Color3', 'Color4', 'BorderSize', 'BorderColor'}
 	
-	def __init__(self, parent, name, border=None, size=[1, 1], pos=[0, 0],
+	def __init__(self, parent, name, border=None, aspect=None, size=[1, 1], pos=[0, 0],
 				sub_theme='', options=BGUI_DEFAULT):
 		"""The Frame constructor
 
@@ -15,13 +15,14 @@ class Frame(Widget):
 		parent -- the widget's parent
 		name -- the name of the widget
 		border -- the size of the border around the frame (0 for no border)
+		aspect -- constrain the widget size to a specified aspect ratio
 		size -- a tuple containing the wdith and height
 		pos -- a tuple containing the x and y position
 		options -- various other options
 
 		"""
 		
-		Widget.__init__(self, parent, name, size, pos, sub_theme, options)
+		Widget.__init__(self, parent, name, aspect, size, pos, sub_theme, options)
 		
 		if self.theme:
 			self.colors = [
