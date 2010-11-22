@@ -57,6 +57,7 @@ class Widget:
 			self.theme = None
 		
 		self._active = False
+		self.frozen = False
 		
 		# The widget is visible by default
 		self.visible = True
@@ -127,8 +128,8 @@ class Widget:
 
 	def _handle_mouse(self, pos, event):
 		"""Run any event callbacks"""
-		# Don't run if we're not visible
-		if not self.visible: return
+		# Don't run if we're not visible or frozen
+		if not self.visible or self.frozen: return
 		
 		if event == BGUI_MOUSE_CLICK and self.on_click:
 			self.on_click(self)
@@ -151,8 +152,8 @@ class Widget:
 			
 	def _handle_key(self, key, is_shifted):
 		"""Handle any keyboard input"""
-		# Don't run if we're not visible
-		if not self.visible: return
+		# Don't run if we're not visible or frozen
+		if not self.visible or self.frozen: return
 		
 		# We don't actually do anything in this base class, just handle the children
 
@@ -187,3 +188,4 @@ class Widget:
 		for child in self.children:
 			if self.children[child].visible:
 				self.children[child]._draw()
+			
