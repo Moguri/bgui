@@ -5,8 +5,9 @@ from .Frame import *
 from .Label import *
 
 class FrameButton(Widget):
-	
 	"""A clickable frame-based button."""
+	theme_section = 'FrameButton'
+	theme_options = {'Color', 'BorderSize', 'BorderColor'}
 	
 	def __init__(self, parent, name, base_color=(.4,.4,.4,1), text="", font=None,
 					pt_size=30, aspect=None, size=[1,1], pos=[0,0], sub_theme='', options=BGUI_DEFAULT):
@@ -29,10 +30,18 @@ class FrameButton(Widget):
 		
 		Widget.__init__(self, parent, name, aspect, size, pos, sub_theme, options)
 		
-		self.frame = Frame(self, name + '_frame', size=[1,1], pos=[0,0], options=BGUI_DEFAULT^BGUI_THEMED)
+		self.frame = Frame(self, name + '_frame', size=[1,1], pos=[0,0], options=BGUI_DEFAULT & ~BGUI_THEMED)
 		self.label = Label(self, name + '_label', text, font, pt_size, pos=[0,0], options=BGUI_DEFAULT | BGUI_CENTERED)
 		
-		self.base_color = base_color
+		if self.theme:
+			self.base_color = [float(i) for i in self.theme.get(self.theme_section, 'Color').split(',')]
+			self.frame.border = float(self.theme.get(self.theme_section, 'BorderSize'))
+			self.frame.border_color = [float(i) for i in self.theme.get(self.theme_section, 'BorderColor').split(',')]
+		else:
+			self.base_color = base_color
+			self.frame.border = 1
+			self.frame.border_color = (0,0,0,1)
+			
 		self.light = self.color = [
 			self.base_color[0] + 0.15,
 			self.base_color[1] + 0.15,
@@ -82,13 +91,6 @@ class FrameButton(Widget):
 		
 		# Draw the children before drawing an additional outline
 		Widget._draw(self)
-		
-		# Draw a black outline
-		glBegin(GL_LINE_LOOP)
-		glColor4f(0,0,0,1)
-		for i in range(4):
-			glVertex2f(self.gl_position[i][0], self.gl_position[i][1])
-		glEnd()
 		
 		# Reset the button's color
 		self.frame.colors = [self.dark, self.dark, self.light, self.light]
