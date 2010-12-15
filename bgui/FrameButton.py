@@ -42,12 +42,12 @@ class FrameButton(Widget):
 			self.frame.border = 1
 			self.frame.border_color = (0,0,0,1)
 			
-		self.light = self.color = [
+		self.light = [
 			self.base_color[0] + 0.15,
 			self.base_color[1] + 0.15,
 			self.base_color[2] + 0.15,
 			self.base_color[3]]
-		self.dark = self.color = [
+		self.dark = [
 			self.base_color[0] - 0.15,
 			self.base_color[1] - 0.15,
 			self.base_color[2] - 0.15,
@@ -62,10 +62,32 @@ class FrameButton(Widget):
 	def text(self, value):
 		self.label.text = value
 		
+	@property
+	def color(self):
+		return self.base_color
+		
+	@color.setter
+	def color(self, value):
+		self.base_color = value
+		self.light = [
+			self.base_color[0] + 0.15,
+			self.base_color[1] + 0.15,
+			self.base_color[2] + 0.15,
+			self.base_color[3]]
+		self.dark = [
+			self.base_color[0] - 0.15,
+			self.base_color[1] - 0.15,
+			self.base_color[2] - 0.15,
+			self.base_color[3]]
+		self.frame.colors = [self.dark, self.dark, self.light, self.light]
+		
+		
 	def _handle_mouse(self, pos, event):
 		"""Extend function's behaviour by altering the frame's color based
 		on the event
 		"""
+		if self.frozen:
+			return
 		
 		light = self.light[:]
 		dark = self.dark[:]
