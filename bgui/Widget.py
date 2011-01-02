@@ -7,6 +7,7 @@ BGUI_CENTERX = 1
 BGUI_CENTERY = 2
 BGUI_NORMALIZED = 4
 BGUI_THEMED = 8
+BGUI_NO_FOCUS = 16
 
 BGUI_DEFAULT = BGUI_NORMALIZED | BGUI_THEMED
 BGUI_CENTERED = BGUI_CENTERX | BGUI_CENTERY
@@ -56,7 +57,7 @@ class Widget:
 		else:
 			self.theme = None
 		
-		self._active = False
+		self._hover = False
 		self.frozen = False
 		
 		# The widget is visible by default
@@ -140,7 +141,12 @@ class Widget:
 		elif event == BGUI_MOUSE_NONE and self.on_hover:
 			self.on_hover(self)
 			
-		self._active = True
+			
+		# Update focus
+		if event == BGUI_MOUSE_CLICK and not self.system.lock_focus and not self.options & BGUI_NO_FOCUS:
+			self.system.focused_widget = self
+				
+		self._hover = True
 			
 		# Run any children callback methods
 		for widget in [self.children[i] for i in self.children]:
@@ -148,18 +154,11 @@ class Widget:
 				(widget.gl_position[0][1] <= pos[1] <= widget.gl_position[2][1]):
 					widget._handle_mouse(pos, event)
 			else:
-				widget._active = False
-			
+				widget._hover = False
+				
 	def _handle_key(self, key, is_shifted):
 		"""Handle any keyboard input"""
-		# Don't run if we're not visible or frozen
-		if not self.visible or self.frozen: return
-		
-		# We don't actually do anything in this base class, just handle the children
-
-		for widget in [self.children[i] for i in self.children]:
-			if widget._active:
-				widget._handle_key(key, is_shifted)
+		pass
 
 	def _attach_widget(self, widget):
 		"""Attaches a widget to this widget"""

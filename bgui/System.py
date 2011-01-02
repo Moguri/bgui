@@ -37,6 +37,8 @@ class System:
 		# Theming
 		self.system = self
 		self.theme = Theme(theme) if theme else None
+		self.focused_widget = None
+		self.lock_focus = False
 
 	def _attach_widget(self, widget):
 		"""Attaches a widget to the system. The widget then becomes a \"root\"
@@ -76,7 +78,7 @@ class System:
 				(widget.gl_position[0][1] <= pos[1] <= widget.gl_position[2][1]):
 					widget._handle_mouse(pos, click_state)
 			else:
-				widget._active = False
+				widget._hover = False
 
 	def update_keyboard(self, key, is_shifted):
 		"""Updates the system's keyboard data
@@ -85,10 +87,9 @@ class System:
 		is_shifted -- is the shift key held down?
 		
 		"""
-
-		for widget in [self._widgets[i] for i in self._widgets]:
-			if widget._active:
-				widget._handle_key(key, is_shifted)
+		
+		if self.focused_widget:
+			self.focused_widget._handle_key(key, is_shifted)
 		
 		
 	def render(self):

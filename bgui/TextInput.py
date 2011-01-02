@@ -23,10 +23,10 @@ class TextInput(Widget):
 
 		"""
 		Widget.__init__(self, parent, name, aspect, size, pos, options)
-		self.frame = Frame(self, name+"_frame", size=[1,1])
+		self.frame = Frame(self, name+"_frame", size=[1,1], options = BGUI_NO_FOCUS)
 		self.frame.colors = [(0, 0, 0, 0)] *4
 		
-		self.label = Label(self.frame, name+"_label", text, font, pt_size, color)
+		self.label = Label(self.frame, name+"_label", text, font, pt_size, color, options = BGUI_NO_FOCUS)
 		
 		self.pos = len(text)
 				
@@ -40,6 +40,9 @@ class TextInput(Widget):
 
 	def _handle_key(self, key, is_shifted):
 		"""Handle any keyboard input"""
+		# Check that pos is within text bounds.
+		if 0 > self.pos or self.pos > len(self.text):
+			self.pos = len(self.text)
 		
 		# Try char to int conversion for alphanumeric keys... kinda hacky though
 		try:
@@ -47,31 +50,76 @@ class TextInput(Widget):
 		except:
 			pass
 			
-		if ord(AKEY) <= key <= ord(ZKEY):
-			if is_shifted:
-				key -= 32
-			self.text = self.text[:self.pos] + chr(key) + self.text[self.pos:]
-			self.pos += 1
-		if ord(ZEROKEY) <= key <= ord(NINEKEY):
-			self.text = self.text[:self.pos] + chr(key) + self.text[self.pos:]
-			self.pos += 1
-		elif key == SPACEKEY:
-			self.text = self.text[:self.pos] + " " + self.text[self.pos:]
-			self.pos += 1
-		elif key == BACKSPACEKEY and self.pos > 0:
+		if key == BACKSPACEKEY and self.pos > 0:
 			self.text = self.text[:self.pos-1] + self.text[self.pos:]
 			self.pos -= 1
 		elif key == LEFTARROWKEY and self.pos > 0:
 			self.pos -= 1
-		elif key == RIGHTARROWKEY and self.pos > 0:
+		elif key == RIGHTARROWKEY and self.pos >= 0:
 			self.pos += 1
-		
-		Widget._handle_key(self, key, is_shifted)
+		else:
+			char = None
+			if ord(AKEY) <= key <= ord(ZKEY):
+				if is_shifted: char = chr(key - 32)
+				else: char = chr(key)
+				
+			elif ord(ZEROKEY) <= key <= ord(NINEKEY):
+				if not is_shifted: char = chr(key)
+				else:
+					key = chr(key)
+					if key == ZEROKEY: char = ")"
+					elif key == ONEKEY: char = "!"
+					elif key == TWOKEY: char = "@"
+					elif key == THREEKEY: char = "#"
+					elif key == FOURKEY: char = "$"
+					elif key == FIVEKEY: char = "%"
+					elif key == SIXKEY: char = "^"
+					elif key == SEVENKEY: char = "&"
+					elif key == EIGHTKEY: char = "*"
+					elif key == NINEKEY: char = "("
+					
+			elif PAD0 <= key <= PAD9:
+				char = str(key-PAD0)
+			elif key == PADPERIOD: char = "."
+			elif key == PADSLASHKEY: char = "/"
+			elif key == PADASTERKEY: char = "*"
+			elif key == PADMINUS: char = "-"
+			elif key == PADPLUSKEY: char = "+"
+			elif key == SPACEKEY: char = " "
+			elif key == TABKEY: char = "\t"
+			elif not is_shifted:
+				if key == ACCENTGRAVEKEY: char = "`"
+				elif key == MINUSKEY: char = "-"
+				elif key == EQUALKEY: char = "="
+				elif key == LEFTBRACKETKEY: char = "["
+				elif key == RIGHTBRACKETKEY: char = "]"
+				elif key == BACKSLASHKEY: char = "\\"
+				elif key == SEMICOLONKEY: char = ";"
+				elif key == QUOTEKEY: char = "'"
+				elif key == COMMAKEY: char = ","
+				elif key == PERIODKEY: char = "."
+				elif key == SLASHKEY: char = "/"
+			else:
+				if key == ACCENTGRAVEKEY: char = "~"
+				elif key == MINUSKEY: char = "_"
+				elif key == EQUALKEY: char = "+"
+				elif key == LEFTBRACKETKEY: char = "{"
+				elif key == RIGHTBRACKETKEY: char = "}"
+				elif key == BACKSLASHKEY: char = "|"
+				elif key == SEMICOLONKEY: char = ":"
+				elif key == QUOTEKEY: char = '"'
+				elif key == COMMAKEY: char = "<"
+				elif key == PERIODKEY: char = ">"
+				elif key == SLASHKEY: char = "?"
+				
+			if char:
+				self.text = self.text[:self.pos] + char + self.text[self.pos:]
+				self.pos += 1
 		
 	def _draw(self):
 		temp = self.text
 		
-		if self._active:
+		if self == self.system.focused_widget:
 			self.text = self.text[:self.pos] +"|"+ self.text[self.pos:]
 		
 		# Now draw the children
