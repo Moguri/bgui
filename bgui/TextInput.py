@@ -5,7 +5,7 @@ from .Frame import *
 class TextInput(Widget):
 	"""Widget for getting text input"""
 
-	def __init__(self, parent, name, text="", font=None, pt_size=30, color=(1, 1, 1, 1),
+	def __init__(self, parent, name, text="", prefix="", font=None, pt_size=30, color=(1, 1, 1, 1),
 					aspect=None, size=[0, 0], pos=[0, 0], sub_theme='', options=BGUI_DEFAULT):
 		"""The TextInput constructor
 
@@ -14,11 +14,14 @@ class TextInput(Widget):
 		parent -- the widget's parent
 		name -- the name of the widget
 		text -- the text to display (this can be changed later via the text property)
+		prefix -- prefix text displayed before user input, cannot be edited by user (this can be changed later via the prefix property)
 		font -- the font to use
 		pt_size -- the point size of the text to draw
+		color -- color of the font for this widget
 		aspect -- constrain the widget size to a specified aspect ratio
 		size -- a tuple containing the wdith and height
 		pos -- a tuple containing the x and y position
+		sub_theme -- sub theme to be applied to this widget
 		options -- various other options
 
 		"""
@@ -28,6 +31,7 @@ class TextInput(Widget):
 		
 		self.label = Label(self.frame, name+"_label", text, font, pt_size, color, options = BGUI_NO_FOCUS)
 		
+		self.text_prefix = prefix
 		self.pos = len(text)
 				
 	@property
@@ -121,6 +125,8 @@ class TextInput(Widget):
 		
 		if self == self.system.focused_widget:
 			self.text = self.text[:self.pos] +"|"+ self.text[self.pos:]
+		
+		self.text = self.text_prefix + self.text
 		
 		# Now draw the children
 		Widget._draw(self)
