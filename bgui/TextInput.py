@@ -33,6 +33,9 @@ class TextInput(Widget):
 		
 		self.text_prefix = prefix
 		self.pos = len(text)
+		
+		# On Enter callback
+		self.on_enter = None
 				
 	@property
 	def text(self):
@@ -91,6 +94,10 @@ class TextInput(Widget):
 			elif key == PADPLUSKEY: char = "+"
 			elif key == SPACEKEY: char = " "
 			elif key == TABKEY: char = "\t"
+			elif key in (ENTERKEY, PADENTER):
+				if self.on_enter:
+					self.on_enter(self)
+				self.system.focused_widget = None
 			elif not is_shifted:
 				if key == ACCENTGRAVEKEY: char = "`"
 				elif key == MINUSKEY: char = "-"
