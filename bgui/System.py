@@ -103,8 +103,15 @@ class System:
 		# Save the state
 		glPushAttrib(GL_ALL_ATTRIB_BITS)
 		
-		# Diable depth test so we always draw over things
+		# Disable depth test so we always draw over things
 		glDisable(GL_DEPTH_TEST)
+		
+		# Disable lighting so everything is shadless
+		glDisable(GL_LIGHTING)
+		
+		# Unbinding the texture prevents BGUI frames from somehow picking up on
+		# color of the last used texture
+		glBindTexture(GL_TEXTURE_2D, 0)
 
 		# Setup the matrices
 		glMatrixMode(GL_PROJECTION)
