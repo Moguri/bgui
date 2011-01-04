@@ -112,6 +112,9 @@ class System:
 		# Unbinding the texture prevents BGUI frames from somehow picking up on
 		# color of the last used texture
 		glBindTexture(GL_TEXTURE_2D, 0)
+		
+		# Make sure we're using smooth shading instead of flat
+		glShadeModel(GL_SMOOTH)
 
 		# Setup the matrices
 		glMatrixMode(GL_PROJECTION)
