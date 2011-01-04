@@ -97,7 +97,6 @@ class TextInput(Widget):
 			elif key in (ENTERKEY, PADENTER):
 				if self.on_enter:
 					self.on_enter(self)
-				self.system.focused_widget = None
 			elif not is_shifted:
 				if key == ACCENTGRAVEKEY: char = "`"
 				elif key == MINUSKEY: char = "-"
