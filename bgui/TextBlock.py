@@ -5,7 +5,7 @@ class TextBlock(Widget):
 	"""Widget for displaying blocks of text"""
 	
 	def __init__(self, parent, name, text="", font=None, pt_size=30, color=None, aspect=None,
-					size=[1, 1], pos=[0, 0], sub_theme='', options=BGUI_DEFAULT):
+					size=[1, 1], pos=[0, 0], sub_theme='', overflow=BGUI_OVERFLOW_HIDDEN, options=BGUI_DEFAULT):
 		"""The Label constructor
 
 		Arguments:
@@ -24,6 +24,7 @@ class TextBlock(Widget):
 		
 		Widget.__init__(self, parent, name, aspect, size, pos, sub_theme, options)
 		
+		self.overflow = overflow
 		self._font = font
 		self._pt_size = pt_size
 		self._color = color
@@ -84,4 +85,26 @@ class TextBlock(Widget):
 			# Add what's left
 			self._lines.append(line)
 			cur_line += 1
+			
+		if self.overflow:
+			line_height = char_height* (self.size[1] if self.options & BGUI_NORMALIZED else 1)
+		
+			while self.size[1] < len(self._lines)*line_height:
+				if self.overflow == BGUI_OVERFLOW_HIDDEN:
+					self._remove_widget(self._lines[-1])
+					self._lines = self._lines[:-1]
+					
+				elif self.overflow == BGUI_OVERFLOW_REPLACE:
+					self._remove_widget(self._lines[0])
+					self._lines = self._lines[1:]
+					for line in self._lines:
+						if line.options & BGUI_NORMALIZED:
+							line._update_position(line.size, [0, line._base_pos[1]+char_height])
+						else:
+							line._update_position(line.size, [0, line._base_pos[1]+(char_height*self.system.size[1])])
+				
+				elif self.overflow == BGUI_OVERFLOW_CALLBACK:
+					if self.on_overflow:
+						self.on_overflow(self)
+						
 		
