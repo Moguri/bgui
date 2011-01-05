@@ -34,7 +34,7 @@ class Image(Widget):
 
 	def _cleanup(self):
 		id_buf = Buffer(GL_INT, 1)
-		id_buf.list[0] = self.tex_id
+		id_buf[0] = self.tex_id
 		glDeleteTextures(1, id_buf)
 		
 		Widget._cleanup(self)

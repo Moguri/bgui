@@ -51,6 +51,13 @@ class Video(Widget):
 		# Store the video for later
 		self.video = video
 		
+	def _cleanup(self):
+		id_buf = Buffer(GL_INT, 1)
+		id_buf[0] = self.tex_id
+		glDeleteTextures(1, id_buf)
+		
+		Widget._cleanup(self)
+		
 	def _draw(self):
 		"""Draws the video frame"""
 		
