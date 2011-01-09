@@ -35,7 +35,7 @@ class TextInput(Widget):
 		self.pos = len(text)
 		
 		# On Enter callback
-		self.on_enter = None
+		self.on_enter_key = None
 				
 	@property
 	def text(self):
@@ -95,8 +95,8 @@ class TextInput(Widget):
 			elif key == SPACEKEY: char = " "
 			elif key == TABKEY: char = "\t"
 			elif key in (ENTERKEY, PADENTER):
-				if self.on_enter:
-					self.on_enter(self)
+				if self.on_enter_key:
+					self.on_enter_key(self)
 			elif not is_shifted:
 				if key == ACCENTGRAVEKEY: char = "`"
 				elif key == MINUSKEY: char = "-"
