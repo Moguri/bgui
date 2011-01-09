@@ -1,3 +1,24 @@
+0.05
+  New Features
+   * ProgressBar widget (thanks to andrew-101)
+   * Widgets now support sub-themes (similar to CSS classes)
+   * Widgets now have an aspect option to lock the aspect ratio of the widget
+   * Widgets can now be "frozen" with the frozen property (thanks to Kupoman)
+   * Themeing supoprt and color property added to FrameButton (thanks to Kupoman)
+   * Newline (\n) support added to TextBlock widgets
+   * Overflow options added to TextBlock widgets (thanks to Gomer)
+   * Support for a "prefix" added to TextInput widgets via a prefix property (thanks to Gomer)  
+   * on_enter callback added to TextInput widgets 
+
+  Bugs Fixed
+   * BGUI now plays nice with "Show Physics Visualizations"
+   * Various OpenGL state bug fixes
+   * VRAM leaks from Image and Video widgets
+
+  Other Stuff
+   * Mouse focus is now more "intuitive" (thanks to Gomer)
+   * Available usable keys for TextInput expanded (thanks to Gomer)
+
 0.04
  New Features
   * Font point sizes for Labels now scale with the screen height (1000px is the baseline). This isn't "correct" but it makes things a lot easier. This can be disabled by setting System.normalize_text = False
