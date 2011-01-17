@@ -5,6 +5,12 @@ from .Frame import *
 import blf
 import time
 
+# InputText options
+BGUI_INPUT_NONE = 0
+BGUI_INPUT_SELECT_ALL = 1
+
+BGUI_INPUT_DEFAULT = BGUI_INPUT_NONE
+
 class TextInput(Widget):
 	"""Widget for getting text input"""
 	theme_section = 'TextInput'
@@ -110,27 +116,33 @@ class TextInput(Widget):
 		self._active = 0
 	
 	def swapcolors(self, state = 0): #0 inactive 1 active
+		if state == 0:
+			z = "Inactive"
+		else:
+			z = ""
+			
 		if self.theme:
-			if state == 0:
-				z = "Inactive"
-			else:
-				z = ""
 			self.text_color = [float(i) for i in self.theme.get(self.theme_section, z+'TextColor').split(',')]
 			self.frame_color = [float(i) for i in self.theme.get(self.theme_section, z+'FrameColor').split(',')]
 			self.border_color = [float(i) for i in self.theme.get(self.theme_section, z+'BorderColor').split(',')]
 			self.border_size = float(self.theme.get(self.theme_section, z+'BorderSize'))
 			self.highlight_color = [float(i) for i in self.theme.get(self.theme_section, z+'HighlightColor').split(',')]
-			self.font = str(self.theme.get(self.theme_section, 'Font'))
-			#now adjust the widgets
-			self.frame.colors = [self.frame_color] *4
-			self.frame.border = self.border_size
-			self.frame.border_color = self.border_color
-			self.highlight.colors = [self.highlight_color] *4
-			self.label.color = self.text_color	
-			if state == 0:
-				self.cursor.colors = [[0.0,0.0,0.0,0.0]] *4
-			else:
-				self.cursor.colors = [self.text_color] *4
+		else:
+			self.text_color = [1, 1, 1, 1]
+			self.frame_color = [0, 0, 0, 0]
+			self.border_color = [0, 0, 0, 0]
+			self.border_size = 0
+			self.highlight_color = [0.6, 0.6, 0.6, 0.5]
+		#now adjust the widgets
+		self.frame.colors = [self.frame_color] *4
+		self.frame.border = self.border_size
+		self.frame.border_color = self.border_color
+		self.highlight.colors = [self.highlight_color] *4
+		self.label.color = self.text_color	
+		if state == 0:
+			self.cursor.colors = [[0.0,0.0,0.0,0.0]] *4
+		else:
+			self.cursor.colors = [self.text_color] *4
 			
 	def update_selection(self):
 		left = self.fd + blf.dimensions(self.label.fontid, self.text[:self.slice[0]] )[0]
@@ -206,7 +218,7 @@ class TextInput(Widget):
 				if time.time() - self.single_click_time < .2:
 					self.click_counter = 2
 					self.double_click_time = time.time()
-					print("double_click")
+					# print("double_click")
 					words = self.text.split(" ")
 					i = 0
 					for entry in words:
@@ -218,10 +230,9 @@ class TextInput(Widget):
 					self.click_counter = 1
 					self.single_click_time = time.time()
 			elif self.click_counter == 2:
-				print("reached 2")
 				if time.time() - self.double_click_time < .2:
 					self.click_counter = 3
-					print("triple_click")
+					# print("triple_click")
 					self.slice = [0, len(self.text)]
 					self.slice_direction = -1
 				else:

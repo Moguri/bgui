@@ -24,12 +24,6 @@ BGUI_MOUSE_CLICK = 1
 BGUI_MOUSE_RELEASE = 2
 BGUI_MOUSE_ACTIVE = 4
 
-# InputText options
-BGUI_INPUT_NONE = 0
-BGUI_INPUT_SELECT_ALL = 2
-
-BGUI_INPUT_DEFAULT = BGUI_INPUT_SELECT_ALL
-
 class Widget:
 	"""The base widget class"""
 	
