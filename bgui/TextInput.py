@@ -46,8 +46,8 @@ class TextInput(Widget):
 		
 		#create widgets
 		self.frame = Frame(self, name+"_frame", size=[1,1], options = BGUI_NO_FOCUS | BGUI_DEFAULT | BGUI_CENTERY)
-		self.highlight = Frame(self, name+"_highlight", size=self.frame.size, options = BGUI_NO_FOCUS | BGUI_NONE | BGUI_CENTERY)
-		self.cursor = Frame(self, name+"_cursor", size=[1,1], border=0, options = BGUI_NO_FOCUS | BGUI_NONE | BGUI_CENTERY)
+		self.highlight = Frame(self, name+"_highlight", size=self.frame.size, options = BGUI_NO_FOCUS | BGUI_CENTERY)
+		self.cursor = Frame(self, name+"_cursor", size=[1,1], border=0, options = BGUI_NO_FOCUS | BGUI_CENTERY)
 		self.label = Label(self, name+"_label", text, font, pt_size, options = BGUI_NO_FOCUS | BGUI_NORMALIZED )
 		
 		self.colormode = 0
@@ -55,12 +55,6 @@ class TextInput(Widget):
 			
 		#gauge height of the drawn font
 		fd = blf.dimensions(self.label.fontid, "Egj/}|^,") 
-	
-		#stretch self to account for font size
-		if options & BGUI_NORMALIZED:
-			self.size = [self._base_size[0], self._base_size[1] + fd[1]/self.parent.size[1] ]
-		else:
-			self.size = [self.size[0], self._base_size[1] + fd[1]]
 		
 		py = .5- (fd[1]/self.size[1]/2)
 		px = fd[1]/self.size[0] - fd[1]/1.5/self.size[0]
@@ -153,7 +147,7 @@ class TextInput(Widget):
 			self.cursor.position = [ left, 1]
 		else:
 			self.cursor.position = [ right, 1]
-		self.cursor.size = [1, self.frame.size[1]*.8 ]
+		self.cursor.size = [2, self.frame.size[1]*.8 ]
 				
 	@property
 	def text(self):
@@ -431,7 +425,7 @@ class TextInput(Widget):
 			self.selection_refresh = 0
 			
 		#handle blinking cursor
-		if time.time() - self.time > 0.3:
+		if time.time() - self.time > 0.5:
 			self.time = time.time()
 			if self.colormode == 1:
 				if self.cursor_state == 1:
