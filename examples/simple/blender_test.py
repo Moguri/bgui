@@ -50,7 +50,7 @@ class MySys(bgui.System):
 		self.input.on_enter_key = self.on_input_enter
 		
 		self.input2 = bgui.TextInput(self.win, 'input2', "I select all when activated.", pt_size=24, size=[.4, .02], pos=[.04, 0.08],
-			input_options = bgui.BGUI_INPUT_DEFAULT, options = bgui.BGUI_DEFAULT)
+			input_options = bgui.BGUI_INPUT_SELECT_ALL, options = bgui.BGUI_DEFAULT)
 		
 		# A counter property used for the on_img_click() method
 		self.counter = 0
