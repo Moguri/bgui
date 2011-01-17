@@ -18,34 +18,39 @@ class MySys(bgui.System):
 		self.frame = bgui.Frame(self, 'window', border=0)
 		self.frame.colors = [(0, 0, 0, 0) for i in range(4)]
 
+		# A themed frame
+		self.win = bgui.Frame(self, 'win', size=[0.6, 0.8],
+			options=bgui.BGUI_DEFAULT|bgui.BGUI_CENTERED)
+			
 		# Create an image to display
-		self.img = bgui.Image(self.frame, 'image', 'img.jpg', size=[.75, .75],
-			options =  bgui.BGUI_CENTERED | bgui.BGUI_DEFAULT)
-
+		self.win.img = bgui.Image(self.win, 'image', 'img.jpg', size=[.92, .7], pos=[.01, .24],
+			options = bgui.BGUI_DEFAULT|bgui.BGUI_CENTERX)
+		
 		# A button
-		self.button = bgui.FrameButton(self.frame, 'button', text='Click Me!', size=[.3, .1], pos=[0, .05],
-			options = bgui.BGUI_DEFAULT | bgui.BGUI_CENTERX)
+		self.button = bgui.FrameButton(self.win, 'button', text='Click Me!', size=[.14, .09], pos=[.815, .03],
+			options = bgui.BGUI_DEFAULT)
 		# Setup an on_click callback for the image
 		self.button.on_click = self.on_img_click
 
 		# Add a label
-		self.lbl = bgui.Label(self.img, 'label', text="I'm a label!", pt_size=70, pos=[0, 1.0],
+		self.lbl = bgui.Label(self, 'label', text="I'm a label!", pt_size=70, pos=[0, 0.9],
 			options = bgui.BGUI_DEFAULT | bgui.BGUI_CENTERX)
-
-		# A themed frame
-		self.win = bgui.Frame(self, 'win', size=[0.5, 0.5],
-			options=bgui.BGUI_DEFAULT|bgui.BGUI_CENTERED)
-			
+		
 		# A couple of progress bars to demonstrate sub themes
-		self.progress = bgui.ProgressBar(self.win, "progess", percent=0.75, size=[0.9, 0.01], pos=[0, 0.5],
-											sub_theme="Progress", options=bgui.BGUI_DEFAULT|bgui.BGUI_CENTERX)
+		self.progress = bgui.ProgressBar(self.win, "progess", percent=0.0, size=[0.92, 0.06], pos=[.2, 0.17],
+											sub_theme="Progress", options=bgui.BGUI_DEFAULT | bgui.BGUI_CENTERX)
 											
-		self.health = bgui.ProgressBar(self.win, "health", percent=0.5, size=[0.9, 0.01], pos=[0, 0.2],
+		self.health = bgui.ProgressBar(self.win, "health", percent=0.5, size=[0.92, 0.02], pos=[0, 0.14],
 											sub_theme="Health",	options=bgui.BGUI_DEFAULT|bgui.BGUI_CENTERX)
 			
-		# A TextInput widget
-		# self.lbl = bgui.TextInput(self.img, 'label', "I'm a label!", 'myfont.otf', 70, pos=[0, 0.8],
-			# options = bgui.BGUI_DEFAULT | bgui.BGUI_CENTERX)
+		# A few TextInput widgets
+		self.input = bgui.TextInput(self.win, 'input', "I'm active.", font="myfont.otf", pt_size=24, size=[.4, .02], pos=[.04, 0.02],
+			input_options = bgui.BGUI_INPUT_NONE, options = bgui.BGUI_DEFAULT)
+		self.input.activate()
+		self.input.on_enter_key = self.on_input_enter
+		
+		self.input2 = bgui.TextInput(self.win, 'input2', "I select all when activated.", pt_size=24, size=[.4, .02], pos=[.04, 0.08],
+			input_options = bgui.BGUI_INPUT_DEFAULT, options = bgui.BGUI_DEFAULT)
 		
 		# A counter property used for the on_img_click() method
 		self.counter = 0
@@ -53,14 +58,20 @@ class MySys(bgui.System):
 		# Create a keymap for keyboard input
 		self.keymap = {getattr(bge.events, val): getattr(bgui, val) for val in dir(bge.events) if val.endswith('KEY') or val.startswith('PAD')}
 
+	def on_input_enter(self, widget):
+		self.lbl.text = "You've entered: " + widget.text
+		widget.text = "You've locked this widget."
+		widget.deactivate()
+		widget.frozen = 1
+		
 	def on_img_click(self, widget):
 		self.counter += 1
 		self.lbl.text = "You've clicked me %d times" % self.counter
-
+		self.progress.percent += .1
 		if self.counter % 2 == 1:
-			self.img.update_image('img_flipped.jpg')
+			self.win.img.update_image('img_flipped.jpg')
 		else:
-			self.img.update_image('img.jpg')
+			self.win.img.update_image('img.jpg')
 	
 	def main(self):
 		"""A high-level method to be run every frame"""

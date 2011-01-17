@@ -24,6 +24,12 @@ BGUI_MOUSE_CLICK = 1
 BGUI_MOUSE_RELEASE = 2
 BGUI_MOUSE_ACTIVE = 4
 
+# InputText options
+BGUI_INPUT_NONE = 0
+BGUI_INPUT_SELECT_ALL = 2
+
+BGUI_INPUT_DEFAULT = BGUI_INPUT_SELECT_ALL
+
 class Widget:
 	"""The base widget class"""
 	
@@ -83,7 +89,7 @@ class Widget:
 		self.children = OrderedDict()
 
 		# Setup the widget's position
-		self.position = [None]*4
+		self._position = [None]*4
 		self._update_position(size, pos)	
 		
 		if aspect:
@@ -121,9 +127,9 @@ class Widget:
 		y = pos[1] + self.parent.position[1]
 		width = size[0]
 		height = size[1]
-		self.size = [width, height]
-		# The "friendly" position
-		self.position = [x, y]
+		self._size = [width, height]
+		# The "private" position returned by setter
+		self._position = [x, y]
 		
 		# OpenGL starts at the bottom left and goes counter clockwise
 		self.gl_position = [
@@ -132,6 +138,24 @@ class Widget:
 					[x+width, y+height],
 					[x, y+height]
 				]
+				
+	@property
+	def position(self):
+		"""The text to display"""
+		return self._position
+		
+	@position.setter
+	def position(self, value):
+		self._update_position(self._base_size, value)
+		
+	@property
+	def size(self):
+		"""The text to display"""
+		return self._size
+		
+	@size.setter
+	def size(self, value):
+		self._update_position(value, self._base_pos)
 
 	def _handle_mouse(self, pos, event):
 		"""Run any event callbacks"""
