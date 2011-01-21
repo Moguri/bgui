@@ -14,8 +14,8 @@ BGUI_INPUT_DEFAULT = BGUI_INPUT_NONE
 class TextInput(Widget):
 	"""Widget for getting text input"""
 	theme_section = 'TextInput'
-	theme_options = {'TextColor', 'FrameColor', 'BorderSize', 'BorderColor', 'Font', 'HighlightColor',
-						'InactiveTextColor', 'InactiveFrameColor', 'InactiveBorderSize', 'InactiveBorderColor', 'Font', 'InactiveHighlightColor'}
+	theme_options = {'TextColor', 'FrameColor', 'BorderSize', 'BorderColor', 'HighlightColor',
+						'InactiveTextColor', 'InactiveFrameColor', 'InactiveBorderSize', 'InactiveBorderColor', 'InactiveHighlightColor'}
 
 	def __init__(self, parent, name, text="", prefix="", font=None, pt_size=30, color=(1, 1, 1, 1),
 					aspect=None, size=[0, 0], pos=[0, 0], sub_theme='',input_options=BGUI_INPUT_DEFAULT, options=BGUI_DEFAULT):
