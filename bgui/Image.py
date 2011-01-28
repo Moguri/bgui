@@ -5,7 +5,9 @@ from .Widget import *
 
 class Image(Widget):
 	"""Widget for displaying images"""
-
+	
+	_cache = {}
+	
 	def __init__(self, parent, name, img, aspect=None, size=[0, 0], pos=[0, 0],
 				sub_theme='', options=BGUI_DEFAULT):
 		"""The ImageWidget constructor
@@ -49,9 +51,16 @@ class Image(Widget):
 
 		glBindTexture(GL_TEXTURE_2D, self.tex_id)
 		
-		# Load the texture data
-		image = bge.texture.ImageFFmpeg(img)
-		image.scale = False
+		if img in Image._cache:
+			# Image has already been loaded from disk, recall it from the cache
+			image = Image._cache[img]
+		else:
+			# Load the texture data from disk
+			image = bge.texture.ImageFFmpeg(img)
+			image.scale = False
+			if self.options & BGUI_CACHE:
+				Image._cache[img] = image
+		
 		im_buf = image.image
 		
 		# If the image failed to load the im_buf will be None
