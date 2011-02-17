@@ -24,7 +24,7 @@ class MySys(bgui.System):
 			
 		# Create an image to display
 		self.win.img = bgui.Image(self.win, 'image', 'img.jpg', size=[.92, .7], pos=[.01, .24],
-			options = bgui.BGUI_DEFAULT|bgui.BGUI_CENTERX)
+			options = bgui.BGUI_DEFAULT|bgui.BGUI_CENTERX|bgui.BGUI_CACHE)
 		
 		# A button
 		self.button = bgui.FrameButton(self.win, 'button', text='Click Me!', size=[.14, .09], pos=[.815, .03],
@@ -44,12 +44,12 @@ class MySys(bgui.System):
 											sub_theme="Health",	options=bgui.BGUI_DEFAULT|bgui.BGUI_CENTERX)
 			
 		# A few TextInput widgets
-		self.input = bgui.TextInput(self.win, 'input', "I'm active.", font="myfont.otf", pt_size=24, size=[.4, .02], pos=[.04, 0.02],
+		self.input = bgui.TextInput(self.win, 'input', "I'm active.", font="myfont.otf", pt_size=24, size=[.4, .04], pos=[.04, 0.02],
 			input_options = bgui.BGUI_INPUT_NONE, options = bgui.BGUI_DEFAULT)
 		self.input.activate()
 		self.input.on_enter_key = self.on_input_enter
 		
-		self.input2 = bgui.TextInput(self.win, 'input2', "I select all when activated.", pt_size=24, size=[.4, .02], pos=[.04, 0.08],
+		self.input2 = bgui.TextInput(self.win, 'input2', "I select all when activated.", pt_size=24, size=[.4, .04], pos=[.04, 0.08],
 			input_options = bgui.BGUI_INPUT_SELECT_ALL, options = bgui.BGUI_DEFAULT)
 		
 		# A counter property used for the on_img_click() method

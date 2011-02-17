@@ -43,6 +43,7 @@ class TextInput(Widget):
 		self.text_prefix = prefix
 		self.pos = len(text)
 		self.input_options = input_options
+		self.colors = {}
 		
 		#create widgets
 		self.frame = Frame(self, name+"_frame", size=[1,1], options = BGUI_NO_FOCUS | BGUI_DEFAULT | BGUI_CENTERY)
@@ -50,7 +51,45 @@ class TextInput(Widget):
 		self.cursor = Frame(self, name+"_cursor", size=[1,1], border=0, options = BGUI_NO_FOCUS | BGUI_CENTERY)
 		self.label = Label(self, name+"_label", text, font, pt_size, options = BGUI_NO_FOCUS | BGUI_NORMALIZED )
 		
+		#Color and setting initialization
 		self.colormode = 0
+		
+		if self.theme:
+			self.colors["text"] = [None, None]
+			self.colors["text"][0] = [float(i) for i in self.theme.get(self.theme_section, 'InactiveTextColor').split(',')]
+			self.colors["text"][1] = [float(i) for i in self.theme.get(self.theme_section, 'TextColor').split(',')]
+			
+			self.colors["frame"] = [None, None]
+			self.colors["frame"][0] = [float(i) for i in self.theme.get(self.theme_section, 'InactiveFrameColor').split(',')]
+			self.colors["frame"][1] = [float(i) for i in self.theme.get(self.theme_section, 'FrameColor').split(',')]
+			
+			self.colors["border"] = [None, None]
+			self.colors["border"][0] = [float(i) for i in self.theme.get(self.theme_section, 'InactiveBorderColor').split(',')]
+			self.colors["border"][1] = [float(i) for i in self.theme.get(self.theme_section, 'BorderColor').split(',')]
+			
+			self.colors["highlight"] = [None, None]
+			self.colors["highlight"][0] = [float(i) for i in self.theme.get(self.theme_section, 'HighlightColor').split(',')]
+			self.colors["highlight"][1] = [float(i) for i in self.theme.get(self.theme_section, 'HighlightColor').split(',')]
+			
+			self.border_size = [None, None]
+			self.border_size[0] = float(self.theme.get(self.theme_section, 'InactiveBorderSize'))
+			self.border_size[1] = float(self.theme.get(self.theme_section, 'BorderSize'))
+			
+		else:
+			self.colors["text"] = [None, None]
+			self.colors["text"][0] = self.colors["text"][1] = [1, 1, 1, 1]
+			
+			self.colors["frame"] = [None, None]
+			self.colors["frame"][0] = self.colors["frame"][1] = [0, 0, 0, 0]
+			
+			self.colors["border"] = [None, None]
+			self.colors["border"][0] = self.colors["border"][1] = [0, 0, 0, 0]
+			
+			self.colors["highlight"] = [None, None]
+			self.colors["highlight"][0] = self.colors["highlight"][1] = [0.6, 0.6, 0.6, 0.5]
+			
+			self.border_size = [0, 0]
+			
 		self.swapcolors(0)
 			
 		#gauge height of the drawn font
@@ -59,7 +98,7 @@ class TextInput(Widget):
 		py = .5- (fd[1]/self.size[1]/2)
 		px = fd[1]/self.size[0] - fd[1]/1.5/self.size[0]
 		self.label.position = [px, py]
-		self.fd = fd[1]/3.2 #save offset for future use
+		self.fd = blf.dimensions(self.label.fontid, self.text_prefix )[0] + fd[1]/3.2
 
 		self.frame.size = [1,1] 
 		self.frame.position = [0, 0]
@@ -80,7 +119,6 @@ class TextInput(Widget):
 		
 		#blinking cursor
 		self.time = time.time()
-		self.cursor_state = 1
 		
 		#double/triple click functionality
 		self.click_counter = 0
@@ -90,6 +128,29 @@ class TextInput(Widget):
 		# On Enter callback
 		self.on_enter_key = None
 		
+	@property
+	def text(self):
+		return self.label.text
+	
+	@text.setter
+	def text(self, value):
+		self.label.text = value
+	
+	@property
+	def prefix(self):
+		return self.text_prefix
+	
+	@prefix.setter
+	def prefix(self, value):
+		self.fd = blf.dimensions(self.label.fontid, value)[0] + fd[1]/3.2
+		self.text_prefix = value
+		
+	
+	
+	
+	
+	
+	#Activation Code
 	def activate(self):
 		if self.frozen:
 			return
@@ -110,34 +171,24 @@ class TextInput(Widget):
 		self._active = 0
 	
 	def swapcolors(self, state = 0): #0 inactive 1 active
-		if state == 0:
-			z = "Inactive"
-		else:
-			z = ""
+		
+		self.frame.colors = [self.colors["frame"][state]] *4
+		self.frame.border = self.border_size[state]
+		self.frame.border_color = self.colors["border"][state]
+		self.highlight.colors = [self.colors["highlight"][state]] *4
+		self.label.color = self.colors["text"][state]	
 			
-		if self.theme:
-			self.text_color = [float(i) for i in self.theme.get(self.theme_section, z+'TextColor').split(',')]
-			self.frame_color = [float(i) for i in self.theme.get(self.theme_section, z+'FrameColor').split(',')]
-			self.border_color = [float(i) for i in self.theme.get(self.theme_section, z+'BorderColor').split(',')]
-			self.border_size = float(self.theme.get(self.theme_section, z+'BorderSize'))
-			self.highlight_color = [float(i) for i in self.theme.get(self.theme_section, z+'HighlightColor').split(',')]
-		else:
-			self.text_color = [1, 1, 1, 1]
-			self.frame_color = [0, 0, 0, 0]
-			self.border_color = [0, 0, 0, 0]
-			self.border_size = 0
-			self.highlight_color = [0.6, 0.6, 0.6, 0.5]
-		#now adjust the widgets
-		self.frame.colors = [self.frame_color] *4
-		self.frame.border = self.border_size
-		self.frame.border_color = self.border_color
-		self.highlight.colors = [self.highlight_color] *4
-		self.label.color = self.text_color	
 		if state == 0:
 			self.cursor.colors = [[0.0,0.0,0.0,0.0]] *4
 		else:
-			self.cursor.colors = [self.text_color] *4
-			
+			self.cursor.colors = [self.colors["text"][state]] *4
+
+	
+	
+	
+	
+	
+	#Selection Code
 	def update_selection(self):
 		left = self.fd + blf.dimensions(self.label.fontid, self.text[:self.slice[0]] )[0]
 		right = self.fd + blf.dimensions(self.label.fontid, self.text[:self.slice[1]] )[0]
@@ -148,14 +199,6 @@ class TextInput(Widget):
 		else:
 			self.cursor.position = [ right, 1]
 		self.cursor.size = [2, self.frame.size[1]*.8 ]
-				
-	@property
-	def text(self):
-		return self.label.text
-	
-	@text.setter
-	def text(self, value):
-		self.label.text = value
 
 	def find_mouse_slice(self, pos):
 		cmc = self.calc_mouse_cursor(pos)
@@ -172,7 +215,28 @@ class TextInput(Widget):
 			self.slice_direction = 0
 			self.slice = [self.mouse_slice_start, self.mouse_slice_start]
 		self.selection_refresh = 1
-				
+	
+	def calc_mouse_cursor(self, pos):
+		adj_pos = pos[0] - ( self.position[0]+self.fd )
+		find_slice = 0
+		i = 0
+		for entry in self.char_widths:
+			if find_slice + entry > adj_pos:
+				if abs(( find_slice + entry ) - adj_pos) >= abs(adj_pos - find_slice):
+					return i
+				else:
+					return i+1
+			else:
+				find_slice += entry
+			i += 1
+		
+		self.time = time.time() - 0.501
+		
+		return i
+	
+	
+	
+	
 	def _handle_mouse(self, pos, event):
 		"""Extend function's behaviour by providing focus to unfrozen inactive TextInput,
 		swapping out colors.
@@ -191,6 +255,7 @@ class TextInput(Widget):
 			
 			if not self.input_options & BGUI_INPUT_SELECT_ALL:
 				self.find_mouse_slice(pos)
+				
 
 		elif event == BGUI_MOUSE_ACTIVE:
 			if not self.just_activated or self.just_activated and not self.input_options & BGUI_INPUT_SELECT_ALL:
@@ -212,7 +277,6 @@ class TextInput(Widget):
 				if time.time() - self.single_click_time < .2:
 					self.click_counter = 2
 					self.double_click_time = time.time()
-					# print("double_click")
 					words = self.text.split(" ")
 					i = 0
 					for entry in words:
@@ -226,7 +290,6 @@ class TextInput(Widget):
 			elif self.click_counter == 2:
 				if time.time() - self.double_click_time < .2:
 					self.click_counter = 3
-					# print("triple_click")
 					self.slice = [0, len(self.text)]
 					self.slice_direction = -1
 				else:
@@ -235,26 +298,17 @@ class TextInput(Widget):
 			elif self.click_counter == 3:
 				self.single_click_time = time.time()
 				self.click_counter = 1
+			
+			self.time = time.time()
 
 		Widget._handle_mouse(self, pos, event)
-		
-	def calc_mouse_cursor(self, pos):
-		adj_pos = pos[0] - ( self.position[0]+self.fd )
-		find_slice = 0
-		i = 0
-		for entry in self.char_widths:
-			if find_slice + entry > adj_pos:
-				if abs(( find_slice + entry ) - adj_pos) >= abs(adj_pos - find_slice):
-					return i
-				else:
-					return i+1
-			else:
-				find_slice += entry
-			i += 1
-		
-		return i
+
 	
-		
+	
+	
+	
+	
+	
 	def _handle_key(self, key, is_shifted):
 		"""Handle any keyboard input"""
 		
@@ -284,6 +338,7 @@ class TextInput(Widget):
 				self.text = self.text[:self.slice[0]-1] + self.text[self.slice[1]:]
 				self.slice = [self.slice[0]-1, self.slice[1]-1]
 				
+				
 		elif key == LEFTARROWKEY:
 			slice_len = abs(self.slice[0]-self.slice[1])
 			if ( self.slice_direction in [-1, 0] ):
@@ -297,7 +352,8 @@ class TextInput(Widget):
 						self.slice = [self.slice[0], self.slice[0]]
 					elif self.slice[0] > 0:
 						self.slice = [self.slice[0]-1, self.slice[0]-1]
-					self.slice_direction = 0	
+					self.slice_direction = 0
+						
 			elif self.slice_direction == 1:
 				if is_shifted :
 					self.slice = [self.slice[0], self.slice[1]-1]
@@ -399,12 +455,18 @@ class TextInput(Widget):
 		#update selection widgets after next draw call
 		self.selection_refresh = 1
 		
+		#ensure cursor is not hidden
+		self.time = time.time()
+	
+	
+	
+	
+	
 	def _draw(self):
 		temp = self.text
 		
-		if self == self.system.focused_widget:
-			pass
-			#self.text = self.text[:self.pos] +"|"+ self.text[self.pos:]
+		if self == self.system.focused_widget and self._active == 0:
+			self.activate()
 		
 		self.text = self.text_prefix + self.text
 		
@@ -425,12 +487,13 @@ class TextInput(Widget):
 			self.selection_refresh = 0
 			
 		#handle blinking cursor
-		if time.time() - self.time > 0.5:
-			self.time = time.time()
-			if self.colormode == 1:
-				if self.cursor_state == 1:
-					self.cursor.colors = [[0.0,0.0,0.0,0.0]] *4
-					self.cursor_state = 0
-				else:
-					self.cursor.colors = [self.text_color] *4
-					self.cursor_state = 1
+		if self.slice[0]-self.slice[1] == 0 and self._active:
+			if time.time() - self.time > 1.0:
+				self.time = time.time()
+			
+			elif time.time() - self.time > 0.5:
+				self.cursor.colors = [[0.0,0.0,0.0,0.0]] *4
+			else:
+				self.cursor.colors = [self.colors["text"][1]] *4
+		else:
+			self.cursor.colors = [[0.0,0.0,0.0,0.0]] *4
