@@ -157,15 +157,15 @@ class Widget:
 		# Don't run if we're not visible or frozen
 		if not self.visible or self.frozen: return
 		
+		if self.on_hover:
+			self.on_hover(self)
+		
 		if event == BGUI_MOUSE_CLICK and self.on_click:
 			self.on_click(self)
 		elif event == BGUI_MOUSE_RELEASE and self.on_release:
 			self.on_release(self)
 		elif event == BGUI_MOUSE_ACTIVE and self.on_active:
 			self.on_active(self)
-		elif event == BGUI_MOUSE_NONE and self.on_hover:
-			self.on_hover(self)
-			
 			
 		# Update focus
 		if event == BGUI_MOUSE_CLICK and not self.system.lock_focus and not self.options & BGUI_NO_FOCUS:
