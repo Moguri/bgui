@@ -201,6 +201,8 @@ class Widget:
 		
 		for child in widget.children:
 			widget.children[child]._cleanup()
+
+		widget._cleanup()
 		
 		del self.children[widget.name]
 
