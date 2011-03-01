@@ -134,6 +134,10 @@ class Widget:
 					[x, y+height]
 				]
 				
+		# Update any children
+		for widget in self.children.values():
+			widget._update_position(widget._base_size, widget._base_pos)
+				
 	@property
 	def position(self):
 		"""The text to display"""
