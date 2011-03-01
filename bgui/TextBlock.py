@@ -55,7 +55,7 @@ class TextBlock(Widget):
 			lines[i] = v.split()
 			
 		cur_line = 0
-		line = Label(self, "tmp", "Ay", self._font, self._pt_size, self._color)
+		line = Label(self, "tmp", "Mj|", self._font, self._pt_size, self._color)
 		self._remove_widget(line)
 		char_height = line.size[1]
 	
