@@ -25,6 +25,12 @@ This module defines the following constants:
   * BGUI_MOUSE_CLICK = 1
   * BGUI_MOUSE_RELEASE = 2
   * BGUI_MOUSE_ACTIVE = 4
+  
+.. note::
+
+	The Widget class should not be used directly in a gui, but should instead
+	be subclassed to create other widgets.
+
 """
 
 from .key_defs import *
@@ -169,7 +175,7 @@ class Widget:
 				
 	@property
 	def position(self):
-		"""The text to display"""
+		"""The widget's position"""
 		return self._position
 		
 	@position.setter
@@ -178,7 +184,7 @@ class Widget:
 		
 	@property
 	def size(self):
-		"""The text to display"""
+		"""The widget's size"""
 		return self._size
 		
 	@size.setter
