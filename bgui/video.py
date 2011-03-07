@@ -4,21 +4,19 @@ import bge
 from .widget import *
 
 class Video(Widget):
-	"""Widget for displaying video"""
+	"""Widget for displaying video only (i.e., no sound)"""
 	
 	def __init__(self, parent, name, vid, aspect=None, size=[0, 0], pos=[0, 0],
 				sub_theme='', options=BGUI_DEFAULT):
-		"""The Video constructor
-		
-		Arguments:
-
-		parent -- the widget's parent
-		name -- the name of the widget
-		vid -- the video to use for the widget
-		aspect -- constrain the widget size to a specified aspect ratio
-		size -- a tuple containing the wdith and height
-		pos -- a tuple containing the x and y position
-		options -- various other options
+		"""
+		:param parent: the widget's parent
+		:param name: the name of the widget
+		:param vid: the video to use for the widget
+		:param aspect: constrain the widget size to a specified aspect ratio
+		:param size: a tuple containing the wdith and height
+		:param pos: a tuple containing the x and y position
+		:param sub_theme: name of a sub_theme defined in the theme file (similar to CSS classes)
+		:param options: various other options
 
 		"""
 		

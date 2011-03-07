@@ -81,18 +81,27 @@ and returns a widget to render.</p>
 </div>
 <dl class="class">
 <dt id="bgui.list_box.ListBox">
-<em class="property">class </em><tt class="descclassname">bgui.list_box.</tt><tt class="descname">ListBox</tt><big>(</big><em>parent, name, items=[], padding=0, aspect=None, size=[1, 1], pos=[0, 0], options=12</em><big>)</big><a class="headerlink" href="#bgui.list_box.ListBox" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><tt class="descclassname">bgui.list_box.</tt><tt class="descname">ListBox</tt><big>(</big><em>parent, name, items=[], padding=0, aspect=None, size=[1, 1], pos=[0, 0], sub_theme='', options=12</em><big>)</big><a class="headerlink" href="#bgui.list_box.ListBox" title="Permalink to this definition">¶</a></dt>
 <dd><p>Widget for displaying a list of data</p>
-<div class="line-block">
-<div class="line">parent: the widget&#8217;s parent</div>
-<div class="line">name: the name of the widget</div>
-<div class="line">items: the items to fill the list with (can also be changed via ListBox.items)</div>
-<div class="line">padding: the amount of extra spacing to put between items (can also be changed via ListBox.padding)</div>
-<div class="line">aspect: constrain the widget size to a specified aspect ratio</div>
-<div class="line">size: a tuple containing the wdith and height</div>
-<div class="line">pos: a tuple containing the x and y position</div>
-<div class="line">options: various other options</div>
-</div>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>parent</strong> &#8211; the widget&#8217;s parent</li>
+<li><strong>name</strong> &#8211; the name of the widget</li>
+<li><strong>items</strong> &#8211; the items to fill the list with (can also be changed via ListBox.items)</li>
+<li><strong>padding</strong> &#8211; the amount of extra spacing to put between items (can also be changed via ListBox.padding)</li>
+<li><strong>aspect</strong> &#8211; constrain the widget size to a specified aspect ratio</li>
+<li><strong>size</strong> &#8211; a tuple containing the wdith and height</li>
+<li><strong>pos</strong> &#8211; a tuple containing the x and y position</li>
+<li><strong>sub_theme</strong> &#8211; name of a sub_theme defined in the theme file (similar to CSS classes)</li>
+<li><strong>options</strong> &#8211; various other options</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
 <dl class="attribute">
 <dt id="bgui.list_box.ListBox.padding">
 <tt class="descname">padding</tt><a class="headerlink" href="#bgui.list_box.ListBox.padding" title="Permalink to this definition">¶</a></dt>
@@ -123,10 +132,28 @@ and returns a widget to render.</p>
 <dt id="bgui.list_box.ListBoxRenderer">
 <em class="property">class </em><tt class="descclassname">bgui.list_box.</tt><tt class="descname">ListBoxRenderer</tt><big>(</big><em>listbox</em><big>)</big><a class="headerlink" href="#bgui.list_box.ListBoxRenderer" title="Permalink to this definition">¶</a></dt>
 <dd><p>Base class for rendering an item in a ListBox</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>listbox</strong> &#8211; the listbox the renderer will be used with (used for parenting)</td>
+</tr>
+</tbody>
+</table>
 <dl class="method">
 <dt id="bgui.list_box.ListBoxRenderer.render_item">
 <tt class="descname">render_item</tt><big>(</big><em>item</em><big>)</big><a class="headerlink" href="#bgui.list_box.ListBoxRenderer.render_item" title="Permalink to this definition">¶</a></dt>
-<dd><p>Render the supplied item</p>
+<dd><p>Creates and returns a <a class="reference internal" href="label.html#bgui.label.Label" title="bgui.label.Label"><tt class="xref py py-class docutils literal"><span class="pre">bgui.label.Label</span></tt></a> representation of the supplied item</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>item</strong> &#8211; the item to be rendered</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference internal" href="label.html#bgui.label.Label" title="bgui.label.Label"><tt class="xref py py-class docutils literal"><span class="pre">bgui.label.Label</span></tt></a></td>
+</tr>
+</tbody>
+</table>
 </dd></dl>
 
 </dd></dl>

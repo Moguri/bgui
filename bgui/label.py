@@ -10,17 +10,16 @@ class Label(Widget):
 
 	def __init__(self, parent, name, text="", font=None, pt_size=30, color=None,
 				pos=[0, 0], sub_theme='', options=BGUI_DEFAULT):
-		"""The Label constructor
-
-		Arguments:
-
-		parent -- the widget's parent
-		name -- the name of the widget
-		text -- the text to display (this can be changed later via the text property)
-		font -- the font to use
-		pt_size -- the point size of the text to draw
-		pos -- a tuple containing the x and y position
-		options -- various other options
+		"""
+		:param parent: the widget's parent
+		:param name: the name of the widget
+		:param text: the text to display (this can be changed later via the text property)
+		:param font: the font to use
+		:param pt_size: the point size of the text to draw
+		:param color: the color to use when rendering the font
+		:param pos: a tuple containing the x and y position
+		:param sub_theme: name of a sub_theme defined in the theme file (similar to CSS classes)
+		:param options: various other options
 
 		"""
 		Widget.__init__(self, parent, name, None, [0,0], pos, sub_theme, options)

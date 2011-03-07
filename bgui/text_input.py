@@ -31,22 +31,19 @@ class TextInput(Widget):
 
 	def __init__(self, parent, name, text="", prefix="", font=None, pt_size=30, color=(1, 1, 1, 1),
 					aspect=None, size=[0, 0], pos=[0, 0], sub_theme='',input_options=BGUI_INPUT_DEFAULT, options=BGUI_DEFAULT):
-		"""The TextInput constructor
-
-		Arguments:
-
-		parent -- the widget's parent
-		name -- the name of the widget
-		text -- the text to display (this can be changed later via the text property)
-		prefix -- prefix text displayed before user input, cannot be edited by user (this can be changed later via the prefix property)
-		font -- the font to use
-		pt_size -- the point size of the text to draw
-		color -- color of the font for this widget
-		aspect -- constrain the widget size to a specified aspect ratio
-		size -- a tuple containing the wdith and height
-		pos -- a tuple containing the x and y position
-		sub_theme -- sub theme to be applied to this widget
-		options -- various other options
+		"""
+		:param parent: the widget's parent
+		:param name: the name of the widget
+		:param text: the text to display (this can be changed later via the text property)
+		:param prefix: prefix text displayed before user input, cannot be edited by user (this can be changed later via the prefix property)
+		:param font: the font to use
+		:param pt_size: the point size of the text to draw
+		:param color: color of the font for this widget
+		:param aspect: constrain the widget size to a specified aspect ratio
+		:param size: a tuple containing the wdith and height
+		:param pos: a tuple containing the x and y position
+		:param sub_theme: name of a sub_theme defined in the theme file (similar to CSS classes)
+		:param options: various other options
 
 		"""
 		

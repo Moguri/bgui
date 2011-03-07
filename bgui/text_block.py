@@ -6,19 +6,19 @@ class TextBlock(Widget):
 	
 	def __init__(self, parent, name, text="", font=None, pt_size=30, color=None, aspect=None,
 					size=[1, 1], pos=[0, 0], sub_theme='', overflow=BGUI_OVERFLOW_HIDDEN, options=BGUI_DEFAULT):
-		"""The Label constructor
-
-		Arguments:
-
-		parent -- the widget's parent
-		name -- the name of the widget
-		text -- the text to display (this can be changed later via the text property)
-		font -- the font to use
-		pt_size -- the point size of the text to draw
-		aspect -- constrain the widget size to a specified aspect ratio
-		size -- a tuple containing the width and height
-		pos -- a tuple containing the x and y position
-		options -- various other options
+		"""
+		:param parent: the widget's parent
+		:param name: the name of the widget
+		:param text: the text to display (this can be changed later via the text property)
+		:param font: the font to use
+		:param pt_size: the point size of the text to draw
+		:param color: the color to use when rendering the font
+		:param aspect: constrain the widget size to a specified aspect ratio
+		:param size: a tuple containing the width and height
+		:param pos: a tuple containing the x and y position
+		:param sub_theme: name of a sub_theme defined in the theme file (similar to CSS classes)
+		:param overflow: how to handle excess text
+		:param options: various other options
 
 		"""
 		

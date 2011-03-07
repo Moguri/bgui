@@ -11,21 +11,18 @@ class FrameButton(Widget):
 	
 	def __init__(self, parent, name, base_color=(.4,.4,.4,1), text="", font=None,
 					pt_size=30, aspect=None, size=[1,1], pos=[0,0], sub_theme='', options=BGUI_DEFAULT):
-		"""The Button constructor.
-		
-		Arguments:
-		
-		parent -- the widget's parent
-		name -- the name of the widget
-		base_color -- the color of the button
-		text -- the text to display (this can be changed later via the text property)
-		font -- the font to use
-		pt_size -- the point size of the text to draw
-		aspect -- constrain the widget size to a specified aspect ratio
-		size -- a tuple containing the wdith and height
-		pos -- a tuple containing the x and y position
-		options -- various other options
-		
+		"""		
+		:param parent: the widget's parent
+		:param name: the name of the widget
+		:param base_color: the color of the button
+		:param text: the text to display (this can be changed later via the text property)
+		:param font: the font to use
+		:param pt_size: the point size of the text to draw
+		:param aspect: constrain the widget size to a specified aspect ratio
+		:param size: a tuple containing the wdith and height
+		:param pos: a tuple containing the x and y position
+		:param sub_theme: name of a sub_theme defined in the theme file (similar to CSS classes)
+		:param options: various other options
 		"""
 		
 		Widget.__init__(self, parent, name, aspect, size, pos, sub_theme, options)

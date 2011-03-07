@@ -12,8 +12,8 @@ class System:
 	normalize_text = True
 	
 	def __init__(self, theme=None):
-		"""System constructor
-		theme -- the path to a theme directory
+		"""
+		:param theme: the path to a theme directory
 		
 		"""
 
@@ -65,8 +65,9 @@ class System:
 	def update_mouse(self, pos, click_state=BGUI_MOUSE_NONE):
 		"""Updates the system's mouse data
 
-		pos -- the mouse position
-		click_state -- the current state of the mouse
+		:param pos: the mouse position
+		:param click_state: the current state of the mouse
+		:rtype: None
 
 		"""
 
@@ -83,8 +84,9 @@ class System:
 	def update_keyboard(self, key, is_shifted):
 		"""Updates the system's keyboard data
 		
-		key -- the key being input
-		is_shifted -- is the shift key held down?
+		:param key: the key being input
+		:param is_shifted: is the shift key held down?
+		:rtype: None
 		
 		"""
 		
@@ -93,7 +95,11 @@ class System:
 		
 		
 	def render(self):
-		"""Renders the GUI system"""
+		"""Renders the GUI system
+		
+		:rtype: None
+		
+		"""
 
 		# Get some viewport info
 		view_buf = Buffer(GL_INT, 4)

@@ -10,17 +10,14 @@ class Image(Widget):
 	
 	def __init__(self, parent, name, img, aspect=None, size=[0, 0], pos=[0, 0],
 				sub_theme='', options=BGUI_DEFAULT):
-		"""The ImageWidget constructor
-
-		Arguments:
-
-		parent -- the widget's parent
-		name -- the name of the widget
-		img -- the image to use for the widget
-		size -- a tuple containing the wdith and height
-		pos -- a tuple containing the x and y position
-		options -- various other options
-
+		""":param parent: the widget's parent
+		:param name: the name of the widget
+		:param img: the image to use for the widget
+		:param aspect: constrain the widget size to a specified aspect ratio
+		:param size: a tuple containing the wdith and height
+		:param pos: a tuple containing the x and y position
+		:param sub_theme: name of a sub_theme defined in the theme file (similar to CSS classes)
+		:param options: various other options
 		"""
 
 		Widget.__init__(self, parent, name, aspect, size, pos, sub_theme, options)
@@ -42,11 +39,10 @@ class Image(Widget):
 		Widget._cleanup(self)
 
 	def update_image(self, img):
-		"""Change's the image texture
+		"""Changes the image texture
 
-		Arguments
-		img -- the path to the new image
-
+		:param img: the path to the new image
+		:rtype: None
 		"""
 
 		glBindTexture(GL_TEXTURE_2D, self.tex_id)

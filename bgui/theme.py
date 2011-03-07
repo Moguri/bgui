@@ -13,7 +13,7 @@ class Theme(SafeConfigParser):
 	def supports(self, widget):
 		"""Checks to see if the theme supports a given widget.
 		
-		widget -- the widget to check for support
+		:param widget: the widget to check for support
 		
 		"""
 		
