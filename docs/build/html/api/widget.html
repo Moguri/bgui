@@ -90,20 +90,33 @@
 </ul>
 </dd>
 </dl>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">The Widget class should not be used directly in a gui, but should instead
+be subclassed to create other widgets.</p>
+</div>
 <dl class="class">
 <dt id="bgui.widget.Widget">
 <em class="property">class </em><tt class="descclassname">bgui.widget.</tt><tt class="descname">Widget</tt><big>(</big><em>parent, name, aspect=None, size=[0, 0], pos=[0, 0], sub_theme='', options=12</em><big>)</big><a class="headerlink" href="#bgui.widget.Widget" title="Permalink to this definition">¶</a></dt>
 <dd><p>The base widget class</p>
+<div class="line-block">
+<div class="line">parent:       the widget&#8217;s parent</div>
+<div class="line">name:         the name of the widget</div>
+<div class="line">aspect:       constrain the widget size to a specified aspect ratio</div>
+<div class="line">size:         a tuple containing the wdith and height</div>
+<div class="line">pos:          a tuple containing the x and y position</div>
+<div class="line">options:      various other options</div>
+</div>
 <dl class="attribute">
 <dt id="bgui.widget.Widget.position">
 <tt class="descname">position</tt><a class="headerlink" href="#bgui.widget.Widget.position" title="Permalink to this definition">¶</a></dt>
-<dd><p>The text to display</p>
+<dd><p>The widget&#8217;s position</p>
 </dd></dl>
 
 <dl class="attribute">
 <dt id="bgui.widget.Widget.size">
 <tt class="descname">size</tt><a class="headerlink" href="#bgui.widget.Widget.size" title="Permalink to this definition">¶</a></dt>
-<dd><p>The text to display</p>
+<dd><p>The widget&#8217;s size</p>
 </dd></dl>
 
 </dd></dl>

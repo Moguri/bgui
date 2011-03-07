@@ -68,16 +68,13 @@ class Widget:
 
 	def __init__(self, parent, name, aspect=None, size=[0, 0], pos=[0, 0], sub_theme='',
 			options=BGUI_DEFAULT):
-		"""The Widget constructor
-
-		Arguments:
-
-		parent -- the widget's parent
-		name -- the name of the widget
-		aspect -- constrain the widget size to a specified aspect ratio
-		size -- a tuple containing the wdith and height
-		pos -- a tuple containing the x and y position
-		options -- various other options
+		"""
+		| parent:	the widget's parent
+		| name:		the name of the widget
+		| aspect:	constrain the widget size to a specified aspect ratio
+		| size:		a tuple containing the wdith and height
+		| pos:		a tuple containing the x and y position
+		| options:	various other options
 
 		"""
 		

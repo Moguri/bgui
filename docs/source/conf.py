@@ -216,6 +216,8 @@ man_pages = [
      [u'Mitchell Stokes (Moguri)'], 1)
 ]
 
+autoclass_content = "both"
+
 # Generate the doc files
 import doc_parser, bgui
 d = doc_parser.DocParser(bgui, '.')
