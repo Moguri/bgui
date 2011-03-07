@@ -7,7 +7,7 @@ New Features
 
 Bugs Fixed
 ^^^^^^^^^^
-  * Images would loose their "on_hover" is they were clicked on
+  * Images would loose their "on_hover" when they were clicked on
   * When removing a widget, that widget's cleanup method is now also run
 
 Other Stuff
