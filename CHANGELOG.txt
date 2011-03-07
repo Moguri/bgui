@@ -1,44 +1,77 @@
+SVN
+-------
+New Features
+^^^^^^^^^^^^
+  * Multiple Image widgets can reuse the same image file for efficiency (thanks to andrew-101)
+
+Bugs Fixed
+^^^^^^^^^^
+  * Images would loose their "on_hover" is they were clicked on
+  * When removing a widget, that widget's cleanup method is now also run
+
+Other Stuff
+^^^^^^^^^^^
+  * Various TextInput improvements (thanks to jplur and Gomer)
+  * Updated demo (thanks to jplur)
+  * Moving or resizing a widget now affects it's children
+
 0.05
-  New Features
-   * ProgressBar widget (thanks to andrew-101)
-   * Widgets now support sub-themes (similar to CSS classes)
-   * Widgets now have an aspect option to lock the aspect ratio of the widget
-   * Widgets can now be "frozen" with the frozen property (thanks to Kupoman)
-   * Themeing supoprt and color property added to FrameButton (thanks to Kupoman)
-   * Newline (\n) support added to TextBlock widgets
-   * Overflow options added to TextBlock widgets (thanks to Gomer)
-   * Support for a "prefix" added to TextInput widgets via a prefix property (thanks to Gomer)  
-   * on_enter callback added to TextInput widgets 
+----
+New Features
+^^^^^^^^^^^^
+  * ProgressBar widget (thanks to andrew-101)
+  * Widgets now support sub-themes (similar to CSS classes)
+  * Widgets now have an aspect option to lock the aspect ratio of the widget
+  * Widgets can now be "frozen" with the frozen property (thanks to Kupoman)
+  * Themeing supoprt and color property added to FrameButton (thanks to Kupoman)
+  * Newline (\n) support added to TextBlock widgets
+  * Overflow options added to TextBlock widgets (thanks to Gomer)
+  * Support for a "prefix" added to TextInput widgets via a prefix property (thanks to Gomer)  
+  * on_enter callback added to TextInput widgets 
 
-  Bugs Fixed
-   * BGUI now plays nice with "Show Physics Visualizations"
-   * Various OpenGL state bug fixes
-   * VRAM leaks from Image and Video widgets
+Bugs Fixed
+^^^^^^^^^^
+  * BGUI now plays nice with "Show Physics Visualizations"
+  * Various OpenGL state bug fixes
+  * VRAM leaks from Image and Video widgets
 
-  Other Stuff
-   * Mouse focus is now more "intuitive" (thanks to Gomer)
-   * Available usable keys for TextInput expanded (thanks to Gomer)
+Other Stuff
+^^^^^^^^^^^
+  * Mouse focus is now more "intuitive" (thanks to Gomer)
+  * Available usable keys for TextInput expanded (thanks to Gomer)
 
 0.04
- New Features
+----
+New Features
+^^^^^^^^^^^^
   * Font point sizes for Labels now scale with the screen height (1000px is the baseline). This isn't "correct" but it makes things a lot easier. This can be disabled by setting System.normalize_text = False
   * TextBlock widget added for displaying multi-line text
   * Image widgets now have an aspect option
- Bugs Fixed
+
+Bugs Fixed
+^^^^^^^^^^
   * ENTERKEY added to keydefs to better match Blender
   * TextInput now works a little better (no negative cursor and you can input text when you have an empty string)
 
 0.03
- New Features
+----
+New Features
+^^^^^^^^^^^^
   * BGUI now has themeing support (for mow info go here: http://stokes.dyndns.org/redmine/projects/bgui/wiki/Theming)
- Bugs Fixed
+
+Bugs Fixed
+^^^^^^^^^^
   * BGUI widgets could sometimes clip with scene elements
- Other Stuff
+
+Other Stuff
+^^^^^^^^^^^
   * Widgets are now stored in OrderedDicts to allow for control over z sorting
   * BGUI now uses relative imports so there are less restrictions on where the module is placed
 
 0.02
- New Features
+----
+New Features
+^^^^^^^^^^^^
   * Video widget to display videos using VideoTexture (no sound support at the moment)
   * TextInput widget to get text input from the user
   * Frame widget to place widgets on (can also be used as a "window")
@@ -49,12 +82,15 @@
   * Color support added for Labels
   * Alpha blending enabled for Images
 
- Bugs Fixed
+Bugs Fixed
+^^^^^^^^^^
   * Drawing labels would disable textures for images
   * BGUI_DEFAULT was misspelled (was BGUI_DEFUALT)
  
- Other Stuff
+Other Stuff
+^^^^^^^^^^^
   * BGUI now uses the bottom left as (0, 0) to match OpenGL
 
 0.01
+----
 Initial release
