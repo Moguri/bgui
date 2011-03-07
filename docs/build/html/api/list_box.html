@@ -1,0 +1,194 @@
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>list_box &mdash; Bgui 0.06 documentation</title>
+    
+    <link rel="stylesheet" href="../_static/default.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '0.06',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <link rel="top" title="Bgui 0.06 documentation" href="../index.html" />
+    <link rel="up" title="Auto-Generated API Docs" href="../api.html" />
+    <link rel="next" title="progress_bar" href="progress_bar.html" />
+    <link rel="prev" title="label" href="label.html" /> 
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="progress_bar.html" title="progress_bar"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="label.html" title="label"
+             accesskey="P">previous</a> |</li>
+        <li><a href="../index.html">Bgui 0.06 documentation</a> &raquo;</li>
+          <li><a href="../api.html" accesskey="U">Auto-Generated API Docs</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="module-bgui.list_box">
+<span id="list-box"></span><h1>list_box<a class="headerlink" href="#module-bgui.list_box" title="Permalink to this headline">¶</a></h1>
+<p>ListBoxes make use of a ListBoxRenderer. The default ListBoxRenderer simply
+displays an item&#8217;s string representation. To make your own ListBoxRenderer
+create a class that has a render_item() method that accepts the item to be rendered
+and returns a widget to render.</p>
+<p>Here is an simple example of using the ListBox widget:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="k">class</span> <span class="nc">MySys</span><span class="p">(</span><span class="n">bgui</span><span class="o">.</span><span class="n">System</span><span class="p">):</span>
+        <span class="k">def</span> <span class="nf">lb_click</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">lb</span><span class="p">):</span>
+                <span class="k">print</span><span class="p">(</span><span class="n">lb</span><span class="o">.</span><span class="n">selected</span><span class="p">)</span>
+        
+        <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+                <span class="n">bgui</span><span class="o">.</span><span class="n">System</span><span class="o">.</span><span class="n">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>
+                
+                <span class="n">items</span> <span class="o">=</span> <span class="p">[</span><span class="s">&quot;One&quot;</span><span class="p">,</span> <span class="s">&quot;Two&quot;</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mf">4.6</span><span class="p">]</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">frame</span> <span class="o">=</span> <span class="n">bgui</span><span class="o">.</span><span class="n">Frame</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="s">&#39;window&#39;</span><span class="p">,</span> <span class="n">border</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">size</span><span class="o">=</span><span class="p">[</span><span class="mf">0.5</span><span class="p">,</span> <span class="mf">0.5</span><span class="p">],</span>
+                        <span class="n">options</span><span class="o">=</span><span class="n">bgui</span><span class="o">.</span><span class="n">BGUI_DEFAULT</span><span class="o">|</span><span class="n">bgui</span><span class="o">.</span><span class="n">BGUI_CENTERED</span><span class="p">)</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">lb</span> <span class="o">=</span> <span class="n">bgui</span><span class="o">.</span><span class="n">ListBox</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">frame</span><span class="p">,</span> <span class="s">&quot;lb&quot;</span><span class="p">,</span> <span class="n">items</span><span class="o">=</span><span class="n">items</span><span class="p">,</span> <span class="n">padding</span><span class="o">=</span><span class="mf">0.05</span><span class="p">,</span> <span class="n">size</span><span class="o">=</span><span class="p">[</span><span class="mf">0.9</span><span class="p">,</span> <span class="mf">0.9</span><span class="p">],</span> <span class="n">pos</span><span class="o">=</span><span class="p">[</span><span class="mf">0.05</span><span class="p">,</span> <span class="mf">0.05</span><span class="p">])</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">lb</span><span class="o">.</span><span class="n">on_click</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">lb_click</span>
+                
+                <span class="c"># ... rest of __init__</span>
+</pre></div>
+</div>
+<dl class="class">
+<dt id="bgui.list_box.ListBox">
+<em class="property">class </em><tt class="descclassname">bgui.list_box.</tt><tt class="descname">ListBox</tt><big>(</big><em>parent, name, items=[], padding=0, aspect=None, size=[1, 1], pos=[0, 0], options=12</em><big>)</big><a class="headerlink" href="#bgui.list_box.ListBox" title="Permalink to this definition">¶</a></dt>
+<dd><p>Widget for displaying a list of data</p>
+<div class="line-block">
+<div class="line">parent: the widget&#8217;s parent</div>
+<div class="line">name: the name of the widget</div>
+<div class="line">items: the items to fill the list with (can also be changed via ListBox.items)</div>
+<div class="line">padding: the amount of extra spacing to put between items (can also be changed via ListBox.padding)</div>
+<div class="line">aspect: constrain the widget size to a specified aspect ratio</div>
+<div class="line">size: a tuple containing the wdith and height</div>
+<div class="line">pos: a tuple containing the x and y position</div>
+<div class="line">options: various other options</div>
+</div>
+<dl class="attribute">
+<dt id="bgui.list_box.ListBox.padding">
+<tt class="descname">padding</tt><a class="headerlink" href="#bgui.list_box.ListBox.padding" title="Permalink to this definition">¶</a></dt>
+<dd><p>The amount of extra spacing to put between items</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="bgui.list_box.ListBox.position">
+<tt class="descname">position</tt><a class="headerlink" href="#bgui.list_box.ListBox.position" title="Permalink to this definition">¶</a></dt>
+<dd><p>The widget&#8217;s position</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="bgui.list_box.ListBox.renderer">
+<tt class="descname">renderer</tt><a class="headerlink" href="#bgui.list_box.ListBox.renderer" title="Permalink to this definition">¶</a></dt>
+<dd><p>The ListBoxRenderer to use to display items</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="bgui.list_box.ListBox.size">
+<tt class="descname">size</tt><a class="headerlink" href="#bgui.list_box.ListBox.size" title="Permalink to this definition">¶</a></dt>
+<dd><p>The widget&#8217;s size</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="bgui.list_box.ListBoxRenderer">
+<em class="property">class </em><tt class="descclassname">bgui.list_box.</tt><tt class="descname">ListBoxRenderer</tt><big>(</big><em>listbox</em><big>)</big><a class="headerlink" href="#bgui.list_box.ListBoxRenderer" title="Permalink to this definition">¶</a></dt>
+<dd><p>Base class for rendering an item in a ListBox</p>
+<dl class="method">
+<dt id="bgui.list_box.ListBoxRenderer.render_item">
+<tt class="descname">render_item</tt><big>(</big><em>item</em><big>)</big><a class="headerlink" href="#bgui.list_box.ListBoxRenderer.render_item" title="Permalink to this definition">¶</a></dt>
+<dd><p>Render the supplied item</p>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="label.html"
+                        title="previous chapter">label</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="progress_bar.html"
+                        title="next chapter">progress_bar</a></p>
+  <h3>This Page</h3>
+  <ul class="this-page-menu">
+    <li><a href="../_sources/api/list_box.txt"
+           rel="nofollow">Show Source</a></li>
+  </ul>
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" size="18" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="progress_bar.html" title="progress_bar"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="label.html" title="label"
+             >previous</a> |</li>
+        <li><a href="../index.html">Bgui 0.06 documentation</a> &raquo;</li>
+          <li><a href="../api.html" >Auto-Generated API Docs</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+        &copy; Copyright 2011, Mitchell Stokes (Moguri).
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.1pre.
+    </div>
+  </body>
+</html>
