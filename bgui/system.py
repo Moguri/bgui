@@ -1,6 +1,6 @@
 from bgl import *
-from .Widget import *
-from .Theme import *
+from .widget import *
+from .theme import *
 from collections import OrderedDict
 
 class System:

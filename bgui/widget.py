@@ -1,4 +1,4 @@
-from .KeyDefs import *
+from .key_defs import *
 from collections import OrderedDict
 
 # Widget options

@@ -1,6 +1,6 @@
-from .Widget import *
-from .Label import *
-from .Frame import *
+from .widget import *
+from .label import *
+from .frame import *
 
 import blf
 import time

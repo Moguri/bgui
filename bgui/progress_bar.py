@@ -1,5 +1,5 @@
 from bgl import *
-from .Widget import *
+from .widget import *
 
 class ProgressBar(Widget):
 	"""A solid progress bar.

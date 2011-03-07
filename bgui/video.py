@@ -1,7 +1,7 @@
 from bgl import *
 import bge
 
-from .Widget import *
+from .widget import *
 
 class Video(Widget):
 	"""Widget for displaying video"""

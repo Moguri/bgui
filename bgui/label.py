@@ -1,7 +1,7 @@
 from bgl import *
 import blf
 
-from .Widget import *
+from .widget import *
 
 class Label(Widget):
 	"""Widget for displaying text"""

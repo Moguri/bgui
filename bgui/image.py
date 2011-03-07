@@ -1,7 +1,7 @@
 from bgl import *
 import bge
 
-from .Widget import *
+from .widget import *
 
 class Image(Widget):
 	"""Widget for displaying images"""

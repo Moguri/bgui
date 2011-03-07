@@ -1,5 +1,5 @@
-from .Widget import *
-from .Label import *
+from .widget import *
+from .label import *
 
 class TextBlock(Widget):
 	"""Widget for displaying blocks of text"""

@@ -1,8 +1,8 @@
 from bgl import *
 
-from .Widget import *
-from .Frame import *
-from .Label import *
+from .widget import *
+from .frame import *
+from .label import *
 
 class FrameButton(Widget):
 	"""A clickable frame-based button."""
