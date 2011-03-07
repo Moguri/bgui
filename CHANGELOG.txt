@@ -3,6 +3,7 @@ SVN
 New Features
 ^^^^^^^^^^^^
   * Multiple Image widgets can reuse the same image file for efficiency (thanks to andrew-101)
+  * ListBox widget
 
 Bugs Fixed
 ^^^^^^^^^^
