@@ -1,3 +1,32 @@
+"""
+
+This module defines the following constants:
+
+*Widget options*
+  * BGUI_NONE = 0
+  * BGUI_CENTERX = 1
+  * BGUI_CENTERY = 2
+  * BGUI_NORMALIZED = 4
+  * BGUI_THEMED = 8
+  * BGUI_NO_FOCUS = 16
+  * BGUI_CACHE = 32
+
+  * BGUI_DEFAULT = BGUI_NORMALIZED | BGUI_THEMED
+  * BGUI_CENTERED = BGUI_CENTERX | BGUI_CENTERY
+
+*Widget overflow*
+  * BGUI_OVERFLOW_NONE = 0
+  * BGUI_OVERFLOW_HIDDEN = 1
+  * BGUI_OVERFLOW_REPLACE = 2
+  * BGUI_OVERFLOW_CALLBACK = 3
+
+*Mouse event states*
+  * BGUI_MOUSE_NONE = 0
+  * BGUI_MOUSE_CLICK = 1
+  * BGUI_MOUSE_RELEASE = 2
+  * BGUI_MOUSE_ACTIVE = 4
+"""
+
 from .key_defs import *
 from collections import OrderedDict
 
