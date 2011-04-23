@@ -60,7 +60,7 @@
 <span id="image"></span><h1>image<a class="headerlink" href="#module-bgui.image" title="Permalink to this headline">¶</a></h1>
 <dl class="class">
 <dt id="bgui.image.Image">
-<em class="property">class </em><tt class="descclassname">bgui.image.</tt><tt class="descname">Image</tt><big>(</big><em>parent, name, img, aspect=None, size=[0, 0], pos=[0, 0], sub_theme='', options=12</em><big>)</big><a class="headerlink" href="#bgui.image.Image" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><tt class="descclassname">bgui.image.</tt><tt class="descname">Image</tt><big>(</big><em>parent, name, img, aspect=None, size=[0, 0], pos=[0, 0], texco=[(0, 0), (1, 0), (1, 1), (0, 1)], sub_theme='', options=12</em><big>)</big><a class="headerlink" href="#bgui.image.Image" title="Permalink to this definition">¶</a></dt>
 <dd><p>Widget for displaying images</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
@@ -73,6 +73,7 @@
 <li><strong>aspect</strong> &#8211; constrain the widget size to a specified aspect ratio</li>
 <li><strong>size</strong> &#8211; a tuple containing the wdith and height</li>
 <li><strong>pos</strong> &#8211; a tuple containing the x and y position</li>
+<li><strong>texco</strong> &#8211; the UV texture coordinates to use for the image</li>
 <li><strong>sub_theme</strong> &#8211; name of a sub_theme defined in the theme file (similar to CSS classes)</li>
 <li><strong>options</strong> &#8211; various other options</li>
 </ul>

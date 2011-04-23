@@ -9,13 +9,14 @@ class Image(Widget):
 	_cache = {}
 	
 	def __init__(self, parent, name, img, aspect=None, size=[0, 0], pos=[0, 0],
-				sub_theme='', options=BGUI_DEFAULT):
+				texco=[(0,0), (1,0), (1,1), (0,1)], sub_theme='', options=BGUI_DEFAULT):
 		""":param parent: the widget's parent
 		:param name: the name of the widget
 		:param img: the image to use for the widget
 		:param aspect: constrain the widget size to a specified aspect ratio
 		:param size: a tuple containing the wdith and height
 		:param pos: a tuple containing the x and y position
+		:param texco: the UV texture coordinates to use for the image
 		:param sub_theme: name of a sub_theme defined in the theme file (similar to CSS classes)
 		:param options: various other options
 		"""
@@ -27,6 +28,7 @@ class Image(Widget):
 		glGenTextures(1, id_buf)
 
 		self.tex_id = id_buf.list[0]
+		self.texco = texco
 
 
 		self.update_image(img)
@@ -87,14 +89,13 @@ class Image(Widget):
 
 		# Bind the texture
 		glBindTexture(GL_TEXTURE_2D, self.tex_id)
-		texco = [(0, 0), (1, 0), (1, 1), (0, 1)]
 
 		# Draw the textured quad
 		glColor4f(1, 1, 1, 1)
 
 		glBegin(GL_QUADS)
 		for i in range(4):
-			glTexCoord2f(texco[i][0], texco[i][1])
+			glTexCoord2f(self.texco[i][0], self.texco[i][1])
 			glVertex2f(self.gl_position[i][0], self.gl_position[i][1])
 		glEnd()
 

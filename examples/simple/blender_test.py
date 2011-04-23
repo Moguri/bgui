@@ -69,9 +69,9 @@ class MySys(bgui.System):
 		self.lbl.text = "You've clicked me %d times" % self.counter
 		self.progress.percent += .1
 		if self.counter % 2 == 1:
-			self.win.img.update_image('img_flipped.jpg')
+			self.win.img.texco = [(1,0), (0,0), (0,1), (1,1)]
 		else:
-			self.win.img.update_image('img.jpg')
+			self.win.img.texco = [(0,0), (1,0), (1,1), (0,1)]
 	
 	def main(self):
 		"""A high-level method to be run every frame"""

@@ -4,6 +4,7 @@ New Features
 ^^^^^^^^^^^^
   * Multiple Image widgets can reuse the same image file for efficiency (thanks to andrew-101)
   * ListBox widget
+  * Image.texco is now exposed allowing for UV coordinates to be changed (thanks to jplur)
 
 Bugs Fixed
 ^^^^^^^^^^
