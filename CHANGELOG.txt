@@ -1,4 +1,4 @@
-SVN
+0.06
 -------
 New Features
 ^^^^^^^^^^^^
@@ -10,6 +10,7 @@ Bugs Fixed
 ^^^^^^^^^^
   * Images would loose their "on_hover" when they were clicked on
   * When removing a widget, that widget's cleanup method is now also run
+  * Issue 3: Positioning of TextBlock is off when not passing BGUI_NORMALIZED
 
 Other Stuff
 ^^^^^^^^^^^
