@@ -17,6 +17,7 @@ AUTODOC_STRING = """
 .. automodule:: %s
 	:members:
 	:inherited-members:
+	:exclude-members: theme_options, theme_section
 	
 """
 
