@@ -79,7 +79,7 @@ class Widget:
 
 		"""
 		
-		self.name = name
+		self._name = name
 		self.options = options
 		
 		# Store the system so children can access theming data
@@ -98,23 +98,23 @@ class Widget:
 			self.theme = None
 		
 		self._hover = False
-		self.frozen = False
+		self._frozen = False
 		
 		# The widget is visible by default
-		self.visible = True
+		self._visible = True
 		
 		# Event callbacks
-		self.on_click = None
-		self.on_release = None
-		self.on_hover = None
-		self.on_active = None
+		self._on_click = None
+		self._on_release = None
+		self._on_hover = None
+		self._on_active = None
 
 		# Setup the parent
 		parent._attach_widget(self)
-		self.parent = parent
+		self._parent = parent
 
 		# A dictionary to store children widgets
-		self.children = OrderedDict()
+		self._children = OrderedDict()
 
 		# Setup the widget's position
 		self._position = [None]*4
@@ -170,6 +170,83 @@ class Widget:
 		# Update any children
 		for widget in self.children.values():
 			widget._update_position(widget._base_size, widget._base_pos)
+	@property
+	def name(self):
+		"""The widget's name"""
+		return self._name
+		
+	@name.setter
+	def name(self, value):
+		self._name = name
+		
+	@property
+	def frozen(self):
+		"""Whether or not the widget should accept events"""
+		return self._frozen
+	
+	@frozen.setter
+	def frozen(self, value):
+		self._frozen = value
+		
+	@property
+	def visible(self):
+		"""Whether or not the widget is visible"""
+		return self._visible
+		
+	@visible.setter
+	def visible(self, value):
+		self._visible = value
+		
+	@property
+	def on_click(self):
+		"""The widget's on_click callback"""
+		return self._on_click
+		
+	@on_click.setter
+	def on_click(self, value):
+		self._on_click = value	
+		
+	@property
+	def on_release(self):
+		"""The widget's on_release callback"""
+		return self._on_release
+		
+	@on_release.setter
+	def on_release(self, value):
+		self._on_release = value		
+		
+	@property
+	def on_hover(self):
+		"""The widget's on_hover callback"""
+		return self._on_hover
+		
+	@on_hover.setter
+	def on_hover(self, value):
+		self._on_hover = value	
+		
+	@property
+	def on_active(self):
+		"""The widget's on_active callback"""
+		return self._on_active
+		
+	@on_active.setter
+	def on_active(self, value):
+		self._on_active = value
+		
+	@property
+	def parent(self):
+		"""The widget's parent"""
+		return self._parent
+		
+	@parent.setter
+	def parent(self, value):
+		self._parent = value
+		self._update_position(self._base_size, self._base_value)
+		
+	@property
+	def children(self):
+		"""The widget's children"""
+		return self._children
 				
 	@property
 	def position(self):
