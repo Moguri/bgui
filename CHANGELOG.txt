@@ -1,3 +1,16 @@
+SVN
+-------
+New Features
+^^^^^^^^^^^^
+
+Bugs Fixed
+^^^^^^^^^^
+
+Other Stuff
+^^^^^^^^^^^
+  * The themeing interface has been updated to simply access to theme options.
+  * System is now a subclass of Widget to simplify code and reduce code duplication.
+
 0.06
 -------
 New Features
