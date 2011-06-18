@@ -65,7 +65,7 @@ class ListBox(Widget):
 		:param items: the items to fill the list with (can also be changed via ListBox.items)
 		:param padding: the amount of extra spacing to put between items (can also be changed via ListBox.padding)
 		:param aspect: constrain the widget size to a specified aspect ratio
-		:param size: a tuple containing the wdith and height
+		:param size: a tuple containing the width and height
 		:param pos: a tuple containing the x and y position
 		:param sub_theme: name of a sub_theme defined in the theme file (similar to CSS classes)
 		:param options:	various other options

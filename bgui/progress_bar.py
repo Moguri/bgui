@@ -14,7 +14,7 @@ class ProgressBar(Widget):
 		:param percent: the initial percent 
 		:param sub_theme: sub type of theme to use
 		:param aspect: constrain the widget size to a specified aspect ratio
-		:param size: a tuple containing the wdith and height
+		:param size: a tuple containing the width and height
 		:param pos: a tuple containing the x and y position
 		:param options: various other options
 		

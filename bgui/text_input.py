@@ -40,7 +40,7 @@ class TextInput(Widget):
 		:param pt_size: the point size of the text to draw
 		:param color: color of the font for this widget
 		:param aspect: constrain the widget size to a specified aspect ratio
-		:param size: a tuple containing the wdith and height
+		:param size: a tuple containing the width and height
 		:param pos: a tuple containing the x and y position
 		:param sub_theme: name of a sub_theme defined in the theme file (similar to CSS classes)
 		:param options: various other options

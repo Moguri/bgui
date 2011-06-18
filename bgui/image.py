@@ -14,7 +14,7 @@ class Image(Widget):
 		:param name: the name of the widget
 		:param img: the image to use for the widget
 		:param aspect: constrain the widget size to a specified aspect ratio
-		:param size: a tuple containing the wdith and height
+		:param size: a tuple containing the width and height
 		:param pos: a tuple containing the x and y position
 		:param texco: the UV texture coordinates to use for the image
 		:param sub_theme: name of a sub_theme defined in the theme file (similar to CSS classes)
