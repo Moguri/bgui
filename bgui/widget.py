@@ -94,7 +94,7 @@ class Widget:
 			else:
 				print("Theming is enabled, but the current theme does not support", self.theme_section)
 				self.theme = None
-		else:
+		elif not hasattr(self, "theme"):
 			self.theme = None
 		
 		self._hover = False
@@ -151,8 +151,13 @@ class Widget:
 		if self.options & BGUI_CENTERY:
 			pos[1] = self.parent.size[1]/2 - size[1]/2
 
-		x = pos[0] + self.parent.position[0]
-		y = pos[1] + self.parent.position[1]
+		if self.parent != self:
+			x = pos[0] + self.parent.position[0]
+			y = pos[1] + self.parent.position[1]
+		else: # A widget should only be its own parent if it's the system...
+			x = pos[0]
+			y = pos[1]
+
 		width = size[0]
 		height = size[1]
 		self._size = [width, height]
