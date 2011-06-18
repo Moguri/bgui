@@ -30,10 +30,12 @@ class FrameButton(Widget):
 		self.frame = Frame(self, name + '_frame', size=[1,1], pos=[0,0], options=BGUI_DEFAULT & ~BGUI_THEMED)
 		self.label = Label(self, name + '_label', text, font, pt_size, pos=[0,0], options=BGUI_DEFAULT | BGUI_CENTERED)
 		
-		if self.theme:
-			self.base_color = [float(i) for i in self.theme.get(self.theme_section, 'Color').split(',')]
-			self.frame.border = float(self.theme.get(self.theme_section, 'BorderSize'))
-			self.frame.border_color = [float(i) for i in self.theme.get(self.theme_section, 'BorderColor').split(',')]
+		theme = self.theme[self.theme_section] if self.theme else None
+		
+		if theme:
+			self.base_color = theme['Color']
+			self.frame.border = theme['BorderSize']
+			self.frame.border_color = theme['BorderColor']
 		else:
 			self.base_color = base_color
 			self.frame.border = 1

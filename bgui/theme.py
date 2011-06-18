@@ -1,9 +1,39 @@
-from configparser import SafeConfigParser
+import configparser
 
-class Theme(SafeConfigParser):
+# The following is a bit of a hack so we can get our own SectionProxy in.
+# This allows us to return some nicer values from our config files
+configparser._SectionProxy = configparser.SectionProxy
+
+class NewSectionProxy(configparser._SectionProxy):
+	
+	def __getitem__(self, key):
+		val = configparser._SectionProxy.__getitem__(self, key)
+		
+		if isinstance(val, configparser._SectionProxy):
+			return val
+		
+		# Lets try to make a nicer value
+		try:
+			return float(val)
+		except ValueError:
+			pass
+		except TypeError:
+			print(type(val))
+		
+		if ',' in val:
+			try:
+				return [float(i) for i in val.split(',')]
+			except ValueError:
+				return val.split()
+			
+		return val
+
+configparser.SectionProxy = NewSectionProxy
+
+class Theme(configparser.SafeConfigParser):
 	def __init__(self, file):
 		
-		SafeConfigParser.__init__(self)
+		configparser.SafeConfigParser.__init__(self)
 		
 		self.path = file
 		
@@ -28,4 +58,3 @@ class Theme(SafeConfigParser):
 			
 		# All looks good, return True
 		return True
-		

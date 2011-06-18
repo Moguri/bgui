@@ -22,23 +22,25 @@ class ProgressBar(Widget):
 		
 		Widget.__init__(self, parent, name, aspect, size, pos, sub_theme, options)
 		
-		if self.theme:
+		theme = self.theme[self.theme_section] if self.theme else None
+		
+		if theme:
 			self.fill_colors = [
-					[float(i) for i in self.theme.get(self.theme_section, 'FillColor1').split(',')],
-					[float(i) for i in self.theme.get(self.theme_section, 'FillColor2').split(',')],
-					[float(i) for i in self.theme.get(self.theme_section, 'FillColor3').split(',')],
-					[float(i) for i in self.theme.get(self.theme_section, 'FillColor4').split(',')],
+					theme['FillColor1'],
+					theme['FillColor2'],
+					theme['FillColor3'],
+					theme['FillColor4'],
 					]
 					
 			self.bg_colors = [
-					[float(i) for i in self.theme.get(self.theme_section, 'BGColor1').split(',')],
-					[float(i) for i in self.theme.get(self.theme_section, 'BGColor2').split(',')],
-					[float(i) for i in self.theme.get(self.theme_section, 'BGColor3').split(',')],
-					[float(i) for i in self.theme.get(self.theme_section, 'BGColor4').split(',')],
+					theme['BGColor1'],
+					theme['BGColor2'],
+					theme['BGColor3'],
+					theme['BGColor4'],
 					]
 					
-			self.border_color = [float(i) for i in self.theme.get(self.theme_section, 'BorderColor').split(',')]
-			self.border = float(self.theme.get(self.theme_section, 'BorderSize'))
+			self.border_color = theme['BorderColor']
+			self.border = theme['BorderSize']
 		else:
 			self.fill_colors = [(0.0,0.42,0.02,1.0)] * 4
 			self.bg_colors = [(0.0,0.0,0.0,1.0)] * 4

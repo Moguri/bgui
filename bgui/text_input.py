@@ -63,26 +63,28 @@ class TextInput(Widget):
 		#Color and setting initialization
 		self.colormode = 0
 		
-		if self.theme:
+		theme = self.theme[self.theme_section] if self.theme else None
+		
+		if theme:
 			self.colors["text"] = [None, None]
-			self.colors["text"][0] = [float(i) for i in self.theme.get(self.theme_section, 'InactiveTextColor').split(',')]
-			self.colors["text"][1] = [float(i) for i in self.theme.get(self.theme_section, 'TextColor').split(',')]
+			self.colors["text"][0] = theme['InactiveTextColor']
+			self.colors["text"][1] = theme['TextColor']
 			
 			self.colors["frame"] = [None, None]
-			self.colors["frame"][0] = [float(i) for i in self.theme.get(self.theme_section, 'InactiveFrameColor').split(',')]
-			self.colors["frame"][1] = [float(i) for i in self.theme.get(self.theme_section, 'FrameColor').split(',')]
+			self.colors["frame"][0] = theme['InactiveFrameColor']
+			self.colors["frame"][1] = theme['FrameColor']
 			
 			self.colors["border"] = [None, None]
-			self.colors["border"][0] = [float(i) for i in self.theme.get(self.theme_section, 'InactiveBorderColor').split(',')]
-			self.colors["border"][1] = [float(i) for i in self.theme.get(self.theme_section, 'BorderColor').split(',')]
+			self.colors["border"][0] = theme['InactiveBorderColor']
+			self.colors["border"][1] = theme['BorderColor']
 			
 			self.colors["highlight"] = [None, None]
-			self.colors["highlight"][0] = [float(i) for i in self.theme.get(self.theme_section, 'HighlightColor').split(',')]
-			self.colors["highlight"][1] = [float(i) for i in self.theme.get(self.theme_section, 'HighlightColor').split(',')]
+			self.colors["highlight"][0] = theme['HighlightColor']
+			self.colors["highlight"][1] = theme['HighlightColor']
 			
 			self.border_size = [None, None]
-			self.border_size[0] = float(self.theme.get(self.theme_section, 'InactiveBorderSize'))
-			self.border_size[1] = float(self.theme.get(self.theme_section, 'BorderSize'))
+			self.border_size[0] = theme['InactiveBorderSize']
+			self.border_size[1] = theme['BorderSize']
 			
 		else:
 			self.colors["text"] = [None, None]

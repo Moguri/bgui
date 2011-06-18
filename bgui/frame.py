@@ -22,15 +22,17 @@ class Frame(Widget):
 		
 		Widget.__init__(self, parent, name, aspect, size, pos, sub_theme, options)
 		
-		if self.theme:
+		theme = self.theme[self.theme_section] if self.theme else None
+		
+		if theme:
 			self.colors = [
-					[float(i) for i in self.theme.get(self.theme_section, 'Color1').split(',')],
-					[float(i) for i in self.theme.get(self.theme_section, 'Color2').split(',')],
-					[float(i) for i in self.theme.get(self.theme_section, 'Color3').split(',')],
-					[float(i) for i in self.theme.get(self.theme_section, 'Color4').split(',')],
+					theme['Color1'],
+					theme['Color2'],
+					theme['Color3'],
+					theme['Color4']
 					]
 					
-			self.border_color = [float(i) for i in self.theme.get(self.theme_section, 'BorderColor').split(',')]
+			self.border_color = theme['BorderColor']
 		else:
 			self.colors = (
 				(1, 1, 1, 1),
@@ -43,8 +45,8 @@ class Frame(Widget):
 			
 		if border:
 			self.border = border
-		elif self.theme:
-			self.border = float(self.theme.get(self.theme_section, 'BorderSize'))
+		elif theme:
+			self.border = theme['BorderSize']
 		else:
 			# Default to 0
 			self.border = 0
