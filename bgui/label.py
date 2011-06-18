@@ -27,7 +27,8 @@ class Label(Widget):
 		if font:
 			self.fontid = blf.load(font)
 		elif self.theme:
-			self.fontid = blf.load(self.theme.get(self.theme_section, 'Font'))
+			font = self.theme.get(self.theme_section, 'Font')
+			self.fontid = blf.load(font) if font else 0
 		else:
 			self.fontid = 0
 		
