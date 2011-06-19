@@ -35,6 +35,7 @@ This module defines the following constants:
 
 from .key_defs import *
 from collections import OrderedDict
+import time
 
 # Widget options
 BGUI_NONE = 0
@@ -59,6 +60,44 @@ BGUI_MOUSE_NONE = 0
 BGUI_MOUSE_CLICK = 1
 BGUI_MOUSE_RELEASE = 2
 BGUI_MOUSE_ACTIVE = 4
+
+class Animation:
+	def __init__(self, widget, newpos, time_, callback):
+		self.widget = widget
+		self.prevpos = widget.position[:]
+		if widget.options & BGUI_NORMALIZED:
+			self.prevpos[0] /= widget.parent.size[0]
+			self.prevpos[1] /= widget.parent.size[1]
+		self.newpos = newpos
+		self.start_time = self.last_update = time.time()
+		self.time = time_
+		self.callback = callback
+		
+	def update(self):
+		if (time.time()-self.start_time)*1000 >= self.time:
+			# We're done, run the callback and
+			# return false to let widget know we can be removed
+			if self.callback: self.callback()
+			return False
+		
+		dt = (time.time() - self.last_update)*1000
+		self.last_update = time.time()
+		
+		dx = ((self.newpos[0] - self.prevpos[0])/self.time)*dt
+		dy = ((self.newpos[1] - self.prevpos[1])/self.time)*dt
+		
+		
+		p = self.widget.position
+		if self.widget.options & BGUI_NORMALIZED:
+			p[0] /= self.widget.parent.size[0]
+			p[1] /= self.widget.parent.size[1]
+			
+		p[0] += dx
+		p[1] += dy
+		
+		self.widget.position = p
+		
+		return True
 
 class Widget:
 	"""The base widget class"""
@@ -125,6 +164,9 @@ class Widget:
 			if self.options & BGUI_NORMALIZED:
 				size = [size[0]/self.parent.size[0], size[1]/self.parent.size[1]]
 			self._update_position(size, self._base_pos)
+			
+		# A list of running animations
+		self.anims = []
 	
 	def __del__(self):
 		self._cleanup()
@@ -182,7 +224,7 @@ class Widget:
 		
 	@name.setter
 	def name(self, value):
-		self._name = name
+		self._name = value
 		
 	@property
 	def frozen(self):
@@ -270,6 +312,21 @@ class Widget:
 	@size.setter
 	def size(self, value):
 		self._update_position(value, self._base_pos)
+		
+	def move(self, position, time, callback=None):
+		"""Move a widget to a new position over a number of frames
+		
+		:param positon: The new position
+		:param time: The time in milliseconds to take doing the move
+		:param callback: An optional callback that is called when he animation is complete
+		"""
+		self.anims.append(Animation(self, position, time, callback))
+		
+	def _update_anims(self):
+		self.anims[:] = [i for i in self.anims if i.update()]
+		
+		for widget in self.children.values():
+			widget._update_anims()
 
 	def _handle_mouse(self, pos, event):
 		"""Run any event callbacks"""
@@ -293,7 +350,7 @@ class Widget:
 		self._hover = True
 			
 		# Run any children callback methods
-		for widget in [self.children[i] for i in self.children]:
+		for widget in self.children.values():
 			if (widget.gl_position[0][0] <= pos[0] <= widget.gl_position[1][0]) and \
 				(widget.gl_position[0][1] <= pos[1] <= widget.gl_position[2][1]):
 					widget._handle_mouse(pos, event)
@@ -311,7 +368,7 @@ class Widget:
 			raise TypeError("Expected a Widget object")
 
 		if widget in self.children:
-			raise ValueError("%s is already attached to this widget" %s (widget.name))
+			raise ValueError("%s is already attached to this widget" % (widget.name))
 
 		self.children[widget.name] = widget
 		

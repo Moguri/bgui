@@ -102,6 +102,9 @@ class System(Widget):
 		glMatrixMode(GL_MODELVIEW)
 		glPushMatrix()
 		glLoadIdentity()
+		
+		# Update any animations
+		Widget._update_anims(self)
 
 		# Render the windows
 		Widget._draw(self)
