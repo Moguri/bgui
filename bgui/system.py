@@ -1,7 +1,6 @@
 from bgl import *
 from .widget import *
 from .theme import *
-from collections import OrderedDict
 
 class System(Widget):
 	"""The main gui system. Add widgets to this and then call the render() method
