@@ -68,8 +68,6 @@ class Video(Widget):
 		
 		if self.aud_handle:
 			self.aud_handle.stop()
-			
-		del self.video
 		
 		Widget._cleanup(self)
 		

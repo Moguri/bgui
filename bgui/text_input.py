@@ -137,7 +137,7 @@ class TextInput(Widget):
 		self.double_click_time = 0.0
 		
 		# On Enter callback
-		self.on_enter_key = None
+		self._on_enter_key = None
 		
 	@property
 	def text(self):
@@ -156,7 +156,14 @@ class TextInput(Widget):
 		self.fd = blf.dimensions(self.label.fontid, value)[0] + fd[1]/3.2
 		self.text_prefix = value
 		
+	@property
+	def on_enter_key(self):
+		"""A callback for when the enter key is pressed while the TextInput has focus"""
+		return self._on_enter_key
 	
+	@on_enter_key.setter
+	def on_enter_key(self, value):
+		self._on_enter_key = WeakMethod(value)
 	
 	
 	

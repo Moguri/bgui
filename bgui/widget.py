@@ -35,6 +35,7 @@ This module defines the following constants:
 
 from .key_defs import *
 from collections import OrderedDict
+import weakref
 import time
 
 # Widget options
@@ -60,6 +61,16 @@ BGUI_MOUSE_NONE = 0
 BGUI_MOUSE_CLICK = 1
 BGUI_MOUSE_RELEASE = 2
 BGUI_MOUSE_ACTIVE = 4
+
+class WeakMethod:
+	def __init__(self, f):
+		self.f = f.__func__
+		self.c = weakref.ref(f.__self__)
+		
+	def __call__(self, *args):
+		if self.c() == None:
+			return None
+		self.f(*((self.c(),)+args))
 
 class Animation:
 	def __init__(self, widget, newpos, time_, callback):
@@ -150,7 +161,7 @@ class Widget:
 
 		# Setup the parent
 		parent._attach_widget(self)
-		self._parent = parent
+		self._parent = weakref.proxy(parent)
 
 		# A dictionary to store children widgets
 		self._children = OrderedDict()
@@ -169,6 +180,8 @@ class Widget:
 		self.anims = []
 	
 	def __del__(self):
+		# Debug print
+		# print("Deleting", self.name)
 		self._cleanup()
 		
 	def _cleanup(self):
@@ -251,7 +264,7 @@ class Widget:
 		
 	@on_click.setter
 	def on_click(self, value):
-		self._on_click = value	
+		self._on_click = WeakMethod(value)	
 		
 	@property
 	def on_release(self):
@@ -260,7 +273,7 @@ class Widget:
 		
 	@on_release.setter
 	def on_release(self, value):
-		self._on_release = value		
+		self._on_release = WeakMethod(value)		
 		
 	@property
 	def on_hover(self):
@@ -269,7 +282,7 @@ class Widget:
 		
 	@on_hover.setter
 	def on_hover(self, value):
-		self._on_hover = value	
+		self._on_hover = WeakMethod(value)
 		
 	@property
 	def on_active(self):
@@ -278,7 +291,7 @@ class Widget:
 		
 	@on_active.setter
 	def on_active(self, value):
-		self._on_active = value
+		self._on_active = WeakMethod(value)
 		
 	@property
 	def parent(self):
