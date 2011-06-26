@@ -6,16 +6,16 @@ from .widget import *
 class Label(Widget):
 	"""Widget for displaying text"""
 	theme_section = 'Label'
-	theme_options = {'Font', 'Color'}
+	theme_options = {'Font', 'Color', 'Size'}
 
-	def __init__(self, parent, name, text="", font=None, pt_size=30, color=None,
+	def __init__(self, parent, name, text="", font=None, pt_size=None, color=None,
 				pos=[0, 0], sub_theme='', options=BGUI_DEFAULT):
 		"""
 		:param parent: the widget's parent
 		:param name: the name of the widget
 		:param text: the text to display (this can be changed later via the text property)
 		:param font: the font to use
-		:param pt_size: the point size of the text to draw
+		:param pt_size: the point size of the text to draw (defaults to 30 if None)
 		:param color: the color to use when rendering the font
 		:param pos: a tuple containing the x and y position
 		:param sub_theme: name of a sub_theme defined in the theme file (similar to CSS classes)
@@ -34,11 +34,13 @@ class Label(Widget):
 		else:
 			self.fontid = 0
 		
-		# Normalize the pt size (1000px height = 1)
-		if self.system.normalize_text:
-			self.pt_size = int(pt_size * (self.system.size[1]/1000))
-		else:
+		self._pt_size = 0
+		if pt_size:
 			self.pt_size = pt_size
+		elif theme:
+			self.pt_size = theme['Size']
+		else:
+			self.pt_size = 30
 		
 		if color:
 			self.color = color
@@ -69,6 +71,19 @@ class Label(Widget):
 		self._update_position(size, self._base_pos)
 
 		self._text = value
+		
+	@property
+	def pt_size(self):
+		"""The point size of the label's font"""
+		return self._pt_size
+	
+	@pt_size.setter
+	def pt_size(self, value):
+		# Normalize the pt size (1000px height = 1)
+		if self.system.normalize_text:
+			self._pt_size = int(value * (self.system.size[1]/1000))
+		else:
+			self._pt_size = value
 
 	def _draw(self):
 		"""Display the text"""

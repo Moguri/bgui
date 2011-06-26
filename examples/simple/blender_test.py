@@ -33,8 +33,8 @@ class MySys(bgui.System):
 		self.button.on_click = self.on_img_click
 
 		# Add a label
-		self.lbl = bgui.Label(self, 'label', text="I'm a label!", pt_size=70, pos=[0, 0.9],
-			options = bgui.BGUI_DEFAULT | bgui.BGUI_CENTERX)
+		self.lbl = bgui.Label(self, 'label', text="I'm a label!", pos=[0, 0.9],
+			sub_theme='Large', options = bgui.BGUI_DEFAULT | bgui.BGUI_CENTERX)
 		
 		# A couple of progress bars to demonstrate sub themes
 		self.progress = bgui.ProgressBar(self.win, "progess", percent=0.0, size=[0.92, 0.06], pos=[.2, 0.17],
@@ -44,12 +44,12 @@ class MySys(bgui.System):
 											sub_theme="Health",	options=bgui.BGUI_DEFAULT|bgui.BGUI_CENTERX)
 			
 		# A few TextInput widgets
-		self.input = bgui.TextInput(self.win, 'input', "I'm active.", font="myfont.otf", pt_size=24, size=[.4, .04], pos=[.04, 0.02],
+		self.input = bgui.TextInput(self.win, 'input', "I'm active.", font="myfont.otf", size=[.4, .04], pos=[.04, 0.02],
 			input_options = bgui.BGUI_INPUT_NONE, options = bgui.BGUI_DEFAULT)
 		self.input.activate()
 		self.input.on_enter_key = self.on_input_enter
 		
-		self.input2 = bgui.TextInput(self.win, 'input2', "I select all when activated.", pt_size=24, size=[.4, .04], pos=[.04, 0.08],
+		self.input2 = bgui.TextInput(self.win, 'input2', "I select all when activated.", size=[.4, .04], pos=[.04, 0.08],
 			input_options = bgui.BGUI_INPUT_SELECT_ALL, options = bgui.BGUI_DEFAULT)
 		
 		# A counter property used for the on_img_click() method
