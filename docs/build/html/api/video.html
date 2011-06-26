@@ -60,7 +60,7 @@
 <span id="video"></span><h1>video<a class="headerlink" href="#module-bgui.video" title="Permalink to this headline">¶</a></h1>
 <dl class="class">
 <dt id="bgui.video.Video">
-<em class="property">class </em><tt class="descclassname">bgui.video.</tt><tt class="descname">Video</tt><big>(</big><em>parent, name, vid, aspect=None, size=[0, 0], pos=[0, 0], sub_theme='', options=12</em><big>)</big><a class="headerlink" href="#bgui.video.Video" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><tt class="descclassname">bgui.video.</tt><tt class="descname">Video</tt><big>(</big><em>parent, name, vid, play_audio=False, repeat=0, aspect=None, size=[1, 1], pos=[0, 0], sub_theme='', options=12</em><big>)</big><a class="headerlink" href="#bgui.video.Video" title="Permalink to this definition">¶</a></dt>
 <dd><p>Widget for displaying video only (i.e., no sound)</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
@@ -70,6 +70,8 @@
 <li><strong>parent</strong> &#8211; the widget&#8217;s parent</li>
 <li><strong>name</strong> &#8211; the name of the widget</li>
 <li><strong>vid</strong> &#8211; the video to use for the widget</li>
+<li><strong>play_audio</strong> &#8211; play the audio track of the video</li>
+<li><strong>repeat</strong> &#8211; how many times to repeat the video (-1 = infinite)</li>
 <li><strong>aspect</strong> &#8211; constrain the widget size to a specified aspect ratio</li>
 <li><strong>size</strong> &#8211; a tuple containing the width and height</li>
 <li><strong>pos</strong> &#8211; a tuple containing the x and y position</li>

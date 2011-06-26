@@ -60,7 +60,7 @@
 <span id="frame-button"></span><h1>frame_button<a class="headerlink" href="#module-bgui.frame_button" title="Permalink to this headline">¶</a></h1>
 <dl class="class">
 <dt id="bgui.frame_button.FrameButton">
-<em class="property">class </em><tt class="descclassname">bgui.frame_button.</tt><tt class="descname">FrameButton</tt><big>(</big><em>parent, name, base_color=(0.4, 0.4, 0.4, 1), text='', font=None, pt_size=30, aspect=None, size=[1, 1], pos=[0, 0], sub_theme='', options=12</em><big>)</big><a class="headerlink" href="#bgui.frame_button.FrameButton" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><tt class="descclassname">bgui.frame_button.</tt><tt class="descname">FrameButton</tt><big>(</big><em>parent, name, base_color=(0.4, 0.4, 0.4, 1), text='', font=None, pt_size=None, aspect=None, size=[1, 1], pos=[0, 0], sub_theme='', options=12</em><big>)</big><a class="headerlink" href="#bgui.frame_button.FrameButton" title="Permalink to this definition">¶</a></dt>
 <dd><p>A clickable frame-based button.</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
@@ -72,7 +72,7 @@
 <li><strong>base_color</strong> &#8211; the color of the button</li>
 <li><strong>text</strong> &#8211; the text to display (this can be changed later via the text property)</li>
 <li><strong>font</strong> &#8211; the font to use</li>
-<li><strong>pt_size</strong> &#8211; the point size of the text to draw</li>
+<li><strong>pt_size</strong> &#8211; the point size of the text to draw (defaults to 30 if None)</li>
 <li><strong>aspect</strong> &#8211; constrain the widget size to a specified aspect ratio</li>
 <li><strong>size</strong> &#8211; a tuple containing the width and height</li>
 <li><strong>pos</strong> &#8211; a tuple containing the x and y position</li>
