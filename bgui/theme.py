@@ -30,10 +30,10 @@ class NewSectionProxy(configparser._SectionProxy):
 
 configparser.SectionProxy = NewSectionProxy
 
-class Theme(configparser.SafeConfigParser):
+class Theme(configparser.ConfigParser):
 	def __init__(self, file):
 		
-		configparser.SafeConfigParser.__init__(self)
+		configparser.ConfigParser.__init__(self)
 		
 		self.path = file
 		
