@@ -38,11 +38,11 @@ class System(Widget):
 	@property
 	def focused_widget(self):
 		"""The widget which currently has \"focus\""""
-		return self._focused_widget
+		return self._focused_widget()
 	
 	@focused_widget.setter
 	def focused_widget(self, value):
-		self._focused_widget = weakref.proxy(value)
+		self._focused_widget = weakref.ref(value)
 
 	def update_mouse(self, pos, click_state=BGUI_MOUSE_NONE):
 		"""Updates the system's mouse data
