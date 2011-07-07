@@ -103,9 +103,6 @@ class Video(Widget):
 		glBindTexture(GL_TEXTURE_2D, 0)
 		
 		# Invalidate the image
-		if self.aud_handle:
-			self.video.preseek = int(self.aud_handle.position)
-			self.video.play()
 		self.video.refresh()
 		
 		# Now draw the children
