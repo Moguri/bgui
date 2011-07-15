@@ -30,7 +30,7 @@ class Video(Widget):
 		id_buf = Buffer(GL_INT, 1)
 		glGenTextures(1, id_buf)
 		
-		self.tex_id = id_buf.list[0]
+		self.tex_id = id_buf.to_list()[0]
 		
 		# Bind and load the texture data
 		glBindTexture(GL_TEXTURE_2D, self.tex_id)
