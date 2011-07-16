@@ -27,7 +27,7 @@ class Image(Widget):
 		id_buf = Buffer(GL_INT, 1)
 		glGenTextures(1, id_buf)
 
-		self.tex_id = id_buf.to_list()[0]
+		self.tex_id = id_buf.to_list()[0] if hasattr(id_buf, "to_list") else id_buf.list[0]
 		self.texco = texco
 
 

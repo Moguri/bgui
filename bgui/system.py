@@ -24,7 +24,7 @@ class System(Widget):
 		# Get some viewport info
 		view_buf = Buffer(GL_INT, 4)
 		glGetIntegerv(GL_VIEWPORT, view_buf)
-		view = view_buf.to_list()
+		view = view_buf.to_list() if hasattr(view_buf, "to_list") else view_buf.list
 		
 		# Theming
 		self.system = weakref.proxy(self)
@@ -84,7 +84,7 @@ class System(Widget):
 		# Get some viewport info
 		view_buf = Buffer(GL_INT, 4)
 		glGetIntegerv(GL_VIEWPORT, view_buf)
-		view = view_buf.to_list()
+		view = view_buf.to_list() if hasattr(view_buf, "to_list") else view_buf.list
 
 		# Save the state
 		glPushAttrib(GL_ALL_ATTRIB_BITS)

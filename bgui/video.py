@@ -30,7 +30,7 @@ class Video(Widget):
 		id_buf = Buffer(GL_INT, 1)
 		glGenTextures(1, id_buf)
 		
-		self.tex_id = id_buf.to_list()[0]
+		self.tex_id = id_buf.to_list()[0] if hasattr(id_buf, "to_list") else id_buf.list[0]
 		
 		# Bind and load the texture data
 		glBindTexture(GL_TEXTURE_2D, self.tex_id)
@@ -60,6 +60,23 @@ class Video(Widget):
 						
 		# Store the video for later
 		self.video = video
+		
+	def play(self, start, end, use_frames=True, fps=None):
+		start = float(start)
+		end = float(end)
+
+		if use_frames:
+			if not fps:
+				fps = self.video.framerate
+				print("Using fps:", fps)
+			start /= fps
+			end /= fps
+		
+		if start == end:
+			end += 0.1
+		self.video.stop()
+		self.video.range = [start, end]
+		self.video.play()
 		
 	def _cleanup(self):
 		id_buf = Buffer(GL_INT, 1)
