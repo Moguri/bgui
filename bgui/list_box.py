@@ -75,7 +75,7 @@ class ListBox(Widget):
 		
 		theme = self.theme[self.theme_section] if self.theme else None
 		
-		self.items = items
+		self._items = items
 		if padding:
 			self._padding = padding
 		elif theme:
@@ -121,6 +121,16 @@ class ListBox(Widget):
 	def padding(self, value):
 		self._padding = value
 		
+	@property
+	def items(self):
+		"""The list of items to display in the ListBox"""
+		return self._items
+	
+	@items.setter
+	def items(self, value):
+		self._items = value
+		self._spatial_map.clear()
+		
 	def _draw(self):
 		
 		for idx, item in enumerate(self.items):
@@ -133,16 +143,16 @@ class ListBox(Widget):
 			if self.selected == item:
 				self.highlight.gl_position = [i[:] for i in w.gl_position]
 				self.highlight.visible = True
-			
-		Widget._draw(self)
 		
 	def _handle_mouse(self, pos, event):
-		self.selected = None
 	
 		if event == BGUI_MOUSE_CLICK:
 			for item, gl_position in self._spatial_map.items():
 				if (gl_position[0][0] <= pos[0] <= gl_position[1][0]) and \
 					(gl_position[0][1] <= pos[1] <= gl_position[2][1]):
 						self.selected = item
+						break
+			else:
+				self.selected = None
 		
 		Widget._handle_mouse(self, pos, event)
