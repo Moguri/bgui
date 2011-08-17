@@ -56,6 +56,13 @@
 <h2>SVN<a class="headerlink" href="#svn" title="Permalink to this headline">¶</a></h2>
 <div class="section" id="new-features">
 <h3>New Features<a class="headerlink" href="#new-features" title="Permalink to this headline">¶</a></h3>
+<blockquote>
+<div><ul class="simple">
+<li>A simple animation system has been added that allows widgets to move over time using linear interpolation.</li>
+<li>The Video widget can now also play the audio from a video file if play_audio=True.</li>
+<li>FontSize on labels is now themeable.</li>
+</ul>
+</div></blockquote>
 </div>
 <div class="section" id="bugs-fixed">
 <h3>Bugs Fixed<a class="headerlink" href="#bugs-fixed" title="Permalink to this headline">¶</a></h3>
@@ -64,8 +71,9 @@
 <h3>Other Stuff<a class="headerlink" href="#other-stuff" title="Permalink to this headline">¶</a></h3>
 <blockquote>
 <div><ul class="simple">
-<li>The themeing interface has been updated to simply access to theme options.</li>
+<li>The themeing interface has been updated to simplify access to theme options.</li>
 <li>System is now a subclass of Widget to simplify code and reduce code duplication.</li>
+<li>Bgui now uses weakrefs to break dependency cycles and allow Python&#8217;s GC to clean up widgets. This should solve most memory leak problems with Bgui.</li>
 </ul>
 </div></blockquote>
 </div>

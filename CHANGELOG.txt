@@ -2,14 +2,17 @@ SVN
 -------
 New Features
 ^^^^^^^^^^^^
-
+  * A simple animation system has been added that allows widgets to move over time using linear interpolation.
+  * The Video widget can now also play the audio from a video file if play_audio=True.
+  * FontSize on labels is now themeable.
 Bugs Fixed
 ^^^^^^^^^^
 
 Other Stuff
 ^^^^^^^^^^^
-  * The themeing interface has been updated to simply access to theme options.
+  * The themeing interface has been updated to simplify access to theme options.
   * System is now a subclass of Widget to simplify code and reduce code duplication.
+  * Bgui now uses weakrefs to break dependency cycles and allow Python's GC to clean up widgets. This should solve most memory leak problems with Bgui.
 
 0.06
 -------
