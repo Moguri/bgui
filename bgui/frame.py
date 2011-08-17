@@ -23,6 +23,9 @@ class Frame(Widget):
 		Widget.__init__(self, parent, name, aspect, size, pos, sub_theme, options)
 		
 		theme = self.theme[self.theme_section] if self.theme else None
+        
+		self._colors = []
+		self._border = 0
 		
 		if theme:
 			self.colors = [
@@ -50,6 +53,24 @@ class Frame(Widget):
 		else:
 			# Default to 0
 			self.border = 0
+			
+	@property
+	def colors(self):
+		"""The colors for the four corners of the frame."""
+		return self._colors
+		
+	@colors.setter
+	def colors(self, value):
+		self._colors = value
+		
+	@property
+	def border(self):
+		"""The size of the border around the frame."""
+		return self._border
+		
+	@border.setter
+	def border(self, value):
+		self._border = value
 		
 	def _draw(self):
 		"""Draw the frame"""
