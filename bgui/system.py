@@ -85,6 +85,10 @@ class System(Widget):
 		view_buf = Buffer(GL_INT, 4)
 		glGetIntegerv(GL_VIEWPORT, view_buf)
 		view = view_buf.to_list() if hasattr(view_buf, "to_list") else view_buf.list
+		
+		# Update the size if the viewport has changed
+		if self.size != [view[2], view[3]]:
+			self.size=[view[2], view[3]]
 
 		# Save the state
 		glPushAttrib(GL_ALL_ATTRIB_BITS)
