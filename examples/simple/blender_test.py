@@ -11,7 +11,7 @@ class MySys(bgui.System):
 	A subclass to handle our game specific gui
 	"""
 	def __init__(self):
-		# Initiate the system
+		# Initialize the system
 		bgui.System.__init__(self, '../../themes/default')
 		
 		# Use a frame to store all of our widgets

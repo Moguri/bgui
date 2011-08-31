@@ -13,7 +13,7 @@ class MySys(bgui.System):
 	"""
 
 	def __init__(self):
-		# Initiate the system
+		# Initialize the system
 		bgui.System.__init__(self)
 		self.clear_time = time.time()
 		self.note_visible = False
