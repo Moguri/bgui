@@ -10,16 +10,17 @@ class MySys(bgui.System):
 	"""
 	A subclass to handle our game specific gui
 	"""
-	def __init__(self, camera):
+	def __init__(self, viewport):
 		# Initialize the system
 		bgui.System.__init__(self, '../../themes/default')
 		
+		# viewport = [x, y, width, height]		
 		# Use a frame to store all of our widgets
-		self.frame = bgui.Frame(self, 'window', border=0)
-		self.frame.colors = [(0, 0, 0, 0) for i in range(4)]
+		self.frame = bgui.Frame(self, 'window', border=0, size=viewport[2:], pos=viewport[:2])
+		self.frame.colors = [(0, 0, 0, 0)] * 4
 
 		# A themed frame
-		self.win = bgui.Frame(self, 'win', size=[0.6, 0.8],
+		self.win = bgui.Frame(self.frame, 'win', size=[0.6, 0.8],
 			options=bgui.BGUI_DEFAULT|bgui.BGUI_CENTERED)
 			
 		# Create an image to display
@@ -33,7 +34,7 @@ class MySys(bgui.System):
 		self.button.on_click = self.on_img_click
 
 		# Add a label
-		self.lbl = bgui.Label(self, 'label', text="I'm a label!", pos=[0, 0.9],
+		self.lbl = bgui.Label(self.frame, 'label', text="I'm a label!", pos=[0, 0.9],
 			sub_theme='Large', options = bgui.BGUI_DEFAULT | bgui.BGUI_CENTERX)
 		
 		# A couple of progress bars to demonstrate sub themes
@@ -59,10 +60,7 @@ class MySys(bgui.System):
 		self.keymap = {getattr(bge.events, val): getattr(bgui, val) for val in dir(bge.events) if val.endswith('KEY') or val.startswith('PAD')}
 		
 		# Now setup the scene callback so we can draw
-		bge.logic.getCurrentScene().post_draw.append(self.main)
-		
-		# We only want to render if the "active" camera is the camera we want
-		self.camera = camera
+		bge.logic.getCurrentScene().post_draw.append(self.render)
 
 	def on_input_enter(self, widget):
 		self.lbl.text = "You've entered: " + widget.text
@@ -82,9 +80,6 @@ class MySys(bgui.System):
 	
 	def main(self):
 		"""A high-level method to be run every frame"""
-		
-		if bge.logic.getCurrentScene().active_camera != self.camera:
-			return
 		
 		# Handle the mouse
 		mouse = bge.logic.mouse
@@ -118,8 +113,6 @@ class MySys(bgui.System):
 		for key, state in keyboard.events.items():
 			if state == bge.logic.KX_INPUT_JUST_ACTIVATED:
 				self.update_keyboard(self.keymap[key], is_shifted)
-				
-		bgui.System.render(self)
 		
 def main(cont):
 	own = cont.owner
@@ -141,10 +134,10 @@ def main(cont):
 		cam.setViewport(x//2, 0, x, y)
 	
 		# Create our systems and show the mouse
-		own['sys'] = MySys(ob_list['Camera'])
-		own['sys2'] = MySys(ob_list['Camera2'])
+		own['sys'] = MySys([0, 0, 0.5, 1])
+		own['sys2'] = MySys([0.5, 0, 0.5, 1])
 		mouse.visible = True
 
-	# else:
-		# own['sys'].main()
-		# own['sys2'].main()
+	else:
+		own['sys'].main()
+		own['sys2'].main()
