@@ -119,9 +119,7 @@ class TextInput(Widget):
 		self.mouse_slice_start = 0
 		self.mouse_slice_end = 0
 		#create the char width list
-		self.char_widths = []
-		for char in self.text:
-			self.char_widths.append( blf.dimensions(self.label.fontid, char*20 )[0]/20 )
+		self._update_char_widths()
 		
 		#initial call to update_selection
 		self.selection_refresh = 1
@@ -145,7 +143,11 @@ class TextInput(Widget):
 	
 	@text.setter
 	def text(self, value):
-		self.label.text = value
+		#setter intended for external access, internal changes can just change self.label.text
+		self.label.text = self.text_prefix + value
+		self._update_char_widths()
+		self.slice = [0,0] 
+		self.update_selection()
 	
 	@property
 	def prefix(self):
@@ -165,9 +167,22 @@ class TextInput(Widget):
 	def on_enter_key(self, value):
 		self._on_enter_key = WeakMethod(value)
 	
+	#utility functions
+	def _update_char_widths(self):
+		self.char_widths = []
+		for char in self.text:
+			self.char_widths.append( blf.dimensions(self.label.fontid, char*20 )[0]/20 )
 	
-	
-	
+	def select_all(self):
+		"""Change the selection to include all of the text"""
+		self.slice = [0,len(self.text)]
+		self.update_selection()
+		
+	def select_none(self):
+		"""Change the selection to include none of the text"""
+		self.slice = [0,0]
+		self.update_selection()
+		
 	#Activation Code
 	def activate(self):
 		if self.frozen:
@@ -348,12 +363,12 @@ class TextInput(Widget):
 		
 		if key == BACKSPACEKEY:
 			if slice_len != 0:
-				self.text = self.text[:self.slice[0]] + self.text[self.slice[1]:]
+				self.label.text = self.text[:self.slice[0]] + self.text[self.slice[1]:]
 				self.char_widths = self.char_widths[:self.slice[0]] + self.char_widths[self.slice[1]:]
 				self.slice = [self.slice[0], self.slice[0]]
 				#handle char length list
 			elif self.slice[0] > 0:
-				self.text = self.text[:self.slice[0]-1] + self.text[self.slice[1]:]
+				self.label.text = self.text[:self.slice[0]-1] + self.text[self.slice[1]:]
 				self.slice = [self.slice[0]-1, self.slice[1]-1]
 				
 				
@@ -465,7 +480,7 @@ class TextInput(Widget):
 				#need to replace all selected text with new char
 				#need copy place somewhere
 				
-				self.text = self.text[:self.slice[0]] + char + self.text[self.slice[1]:]
+				self.label.text = self.text[:self.slice[0]] + char + self.text[self.slice[1]:]
 				self.char_widths = self.char_widths[:self.slice[0]] + [ blf.dimensions(self.label.fontid, char*20 )[0]/20 ] + self.char_widths[self.slice[1]:]
 				self.slice = [self.slice[0]+1, self.slice[0]+1]
 				self.slice_direction = 0
@@ -486,7 +501,6 @@ class TextInput(Widget):
 		if self == self.system.focused_widget and self._active == 0:
 			self.activate()
 		
-		self.text = self.text_prefix + self.text
 		
 		# Now draw the children
 		Widget._draw(self)
