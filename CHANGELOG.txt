@@ -5,9 +5,11 @@ New Features
   * A simple animation system has been added that allows widgets to move over time using linear interpolation.
   * The Video widget can now also play the audio from a video file if play_audio=True.
   * FontSize on labels is now themeable.
+  * Two new utility functions for TextInput: select_all() and select_none(). (thanks to jplur)
 Bugs Fixed
 ^^^^^^^^^^
-
+  * The system's size now updates if the viewport size changes.
+  * Issue 11: Externally resetting text input contents breaks selection. (thanks to jplur)
 Other Stuff
 ^^^^^^^^^^^
   * The themeing interface has been updated to simplify access to theme options.
