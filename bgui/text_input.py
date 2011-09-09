@@ -26,10 +26,19 @@ BGUI_INPUT_DEFAULT = BGUI_INPUT_NONE
 class TextInput(Widget):
 	"""Widget for getting text input"""
 	theme_section = 'TextInput'
-	theme_options = {'TextColor', 'FrameColor', 'BorderSize', 'BorderColor', 'HighlightColor',
-						'InactiveTextColor', 'InactiveFrameColor', 'InactiveBorderSize', 'InactiveBorderColor', 'InactiveHighlightColor'}
+	theme_options = {'TextColor': (1, 1, 1, 1),
+					 'FrameColor': (0, 0, 0, 0),
+					 'BorderSize': 0,
+					 'BorderColor': (0, 0, 0, 0),
+					 'HighlightColor': (0.6, 0.6, 0.6, 0.5),
+					 'InactiveTextColor': (1, 1, 1, 1),
+					 'InactiveFrameColor': (0, 0, 0, 0),
+					 'InactiveBorderSize': 0,
+					 'InactiveBorderColor': (0, 0, 0, 0),
+					 'InactiveHighlightColor': (0.6, 0.6, 0.6, 0.5)
+					}
 
-	def __init__(self, parent, name, text="", prefix="", font=None, pt_size=30, color=(1, 1, 1, 1),
+	def __init__(self, parent, name, text="", prefix="", font=None, pt_size=30, color=None,
 					aspect=None, size=[0, 0], pos=[0, 0], sub_theme='',input_options=BGUI_INPUT_DEFAULT, options=BGUI_DEFAULT):
 		"""
 		:param parent: the widget's parent
@@ -63,43 +72,27 @@ class TextInput(Widget):
 		#Color and setting initialization
 		self.colormode = 0
 		
-		theme = self.theme[self.theme_section] if self.theme else None
+		theme = self.theme
+
+		self.colors["text"] = [None, None]
+		self.colors["text"][0] = theme['InactiveTextColor']
+		self.colors["text"][1] = theme['TextColor']
 		
-		if theme:
-			self.colors["text"] = [None, None]
-			self.colors["text"][0] = theme['InactiveTextColor']
-			self.colors["text"][1] = theme['TextColor']
-			
-			self.colors["frame"] = [None, None]
-			self.colors["frame"][0] = theme['InactiveFrameColor']
-			self.colors["frame"][1] = theme['FrameColor']
-			
-			self.colors["border"] = [None, None]
-			self.colors["border"][0] = theme['InactiveBorderColor']
-			self.colors["border"][1] = theme['BorderColor']
-			
-			self.colors["highlight"] = [None, None]
-			self.colors["highlight"][0] = theme['HighlightColor']
-			self.colors["highlight"][1] = theme['HighlightColor']
-			
-			self.border_size = [None, None]
-			self.border_size[0] = theme['InactiveBorderSize']
-			self.border_size[1] = theme['BorderSize']
-			
-		else:
-			self.colors["text"] = [None, None]
-			self.colors["text"][0] = self.colors["text"][1] = [1, 1, 1, 1]
-			
-			self.colors["frame"] = [None, None]
-			self.colors["frame"][0] = self.colors["frame"][1] = [0, 0, 0, 0]
-			
-			self.colors["border"] = [None, None]
-			self.colors["border"][0] = self.colors["border"][1] = [0, 0, 0, 0]
-			
-			self.colors["highlight"] = [None, None]
-			self.colors["highlight"][0] = self.colors["highlight"][1] = [0.6, 0.6, 0.6, 0.5]
-			
-			self.border_size = [0, 0]
+		self.colors["frame"] = [None, None]
+		self.colors["frame"][0] = theme['InactiveFrameColor']
+		self.colors["frame"][1] = theme['FrameColor']
+		
+		self.colors["border"] = [None, None]
+		self.colors["border"][0] = theme['InactiveBorderColor']
+		self.colors["border"][1] = theme['BorderColor']
+		
+		self.colors["highlight"] = [None, None]
+		self.colors["highlight"][0] = theme['HighlightColor']
+		self.colors["highlight"][1] = theme['HighlightColor']
+		
+		self.border_size = [None, None]
+		self.border_size[0] = theme['InactiveBorderSize']
+		self.border_size[1] = theme['BorderSize']
 			
 		self.swapcolors(0)
 			

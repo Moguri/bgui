@@ -7,9 +7,12 @@ from .label import *
 class FrameButton(Widget):
 	"""A clickable frame-based button."""
 	theme_section = 'FrameButton'
-	theme_options = {'Color', 'BorderSize', 'BorderColor'}
+	theme_options = {'Color': (0.4,0.4,0.4,1),
+					 'BorderSize': 1,
+					 'BorderColor': (0, 0, 0, 1)
+				}
 	
-	def __init__(self, parent, name, base_color=(.4,.4,.4,1), text="", font=None,
+	def __init__(self, parent, name, base_color=None, text="", font=None,
 					pt_size=None, aspect=None, size=[1,1], pos=[0,0], sub_theme='', options=BGUI_DEFAULT):
 		"""		
 		:param parent: the widget's parent
@@ -30,16 +33,13 @@ class FrameButton(Widget):
 		self.frame = Frame(self, name + '_frame', size=[1,1], pos=[0,0], options=BGUI_DEFAULT & ~BGUI_THEMED)
 		self.label = Label(self, name + '_label', text, font, pt_size, pos=[0,0], options=BGUI_DEFAULT | BGUI_CENTERED)
 		
-		theme = self.theme[self.theme_section] if self.theme else None
 		
-		if theme:
-			self.base_color = theme['Color']
-			self.frame.border = theme['BorderSize']
-			self.frame.border_color = theme['BorderColor']
-		else:
-			self.base_color = base_color
-			self.frame.border = 1
-			self.frame.border_color = (0,0,0,1)
+		if not base_color:
+			base_color = self.theme['Color']
+		self.base_color = base_color
+		self.frame.border = self.theme['BorderSize']
+		self.frame.border_color = self.theme['BorderColor']
+
 			
 		self.light = [
 			self.base_color[0] + 0.15,

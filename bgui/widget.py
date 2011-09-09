@@ -135,17 +135,10 @@ class Widget:
 		# Store the system so children can access theming data
 		self.system = parent.system
 		
-		if self.system.theme and options & BGUI_THEMED and self.theme_section != Widget.theme_section:
-			if sub_theme:
-				self.theme_section += ':'+sub_theme
-		
-			if self.system.theme.supports(self):
-				self.theme = self.system.theme
-			else:
-				print("Theming is enabled, but the current theme does not support", self.theme_section)
-				self.theme = None
-		elif not hasattr(self, "theme"):
-			self.theme = None
+		if sub_theme:
+			self.theme_section += ':'+sub_theme
+
+		self._generate_theme()
 		
 		self._hover = False
 		self._frozen = False
@@ -184,6 +177,34 @@ class Widget:
 		# print("Deleting", self.name)
 		self._cleanup()
 		
+	def _generate_theme(self):
+		if isinstance(self.theme_options, set):
+			if self.system.theme:
+				self.system.theme.warn_legacy(self.theme_section)
+			# Legacy theming
+			if self.system.theme and self.options & BGUI_THEMED and self.theme_section != Widget.theme_section:
+				if self.system.theme.supports(self):
+					self.theme = self.system.theme
+				else:
+					self.system.theme.warn_support(self.theme_section)
+					self.theme = None
+			elif not hasattr(self, "theme"):
+				self.theme = None
+		else:
+			theme = self.system.theme
+			theme = theme[self.theme_section] if theme.has_section(self.theme_section) else None
+			
+			if theme and self.options & BGUI_THEMED:
+				self.theme = {}
+				
+				for k, v in self.theme_options.items():
+					if k in theme:
+						self.theme[k] = theme[k]
+					else:
+						self.theme[k] = v
+			elif not hasattr(self, "theme"):
+				self.theme = self.theme_options
+
 	def _cleanup(self):
 		"""Override this if needed"""
 		for child in self.children:

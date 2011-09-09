@@ -50,12 +50,12 @@ class ListBox(Widget):
 	
 	theme_section = 'ListBox'
 	theme_options = {
-				'HighlightColor1',
-				'HighlightColor2',
-				'HighlightColor3',
-				'HighlightColor4',
-				'Border',
-				'Padding'
+				'HighlightColor1': (1, 1, 1, 1),
+				'HighlightColor2': (0, 0, 1, 1),
+				'HighlightColor3': (0, 0, 1, 1),
+				'HighlightColor4': (0, 0, 1, 1),
+				'Border': 1,
+				'Padding': 0
 				}
 	
 	def __init__(self, parent, name, items=[], padding=0, aspect=None, size=[1, 1], pos=[0, 0], sub_theme='', options=BGUI_DEFAULT):
@@ -78,22 +78,18 @@ class ListBox(Widget):
 		self._items = items
 		if padding:
 			self._padding = padding
-		elif theme:
+		else:
 			self._padding = theme['Padding']
-		else: # Use the default
-			self._padding = padding
 			
 		self.highlight = Frame(self, "frame", border=1, size=[1, 1], pos=[0, 0])
 		self.highlight.visible = False
-		if theme:
-			self.highlight.border = theme['Border']
-		if theme:
-			self.highlight.colors = [
-					theme['HighlightColor1'],
-					theme['HighlightColor2'],
-					theme['HighlightColor3'],
-					theme['HighlightColor4'],
-					]
+		self.highlight.border = theme['Border']
+		self.highlight.colors = [
+				theme['HighlightColor1'],
+				theme['HighlightColor2'],
+				theme['HighlightColor3'],
+				theme['HighlightColor4'],
+				]
 		
 		self.selected = None
 		self._spatial_map = {}

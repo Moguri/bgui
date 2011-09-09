@@ -39,6 +39,9 @@ class Theme(configparser.ConfigParser):
 		
 		if file:
 			self.read(file+'/theme.cfg')
+			
+		self._legacy_warnings = []
+		self._support_warnings = []
 		
 	def supports(self, widget):
 		"""Checks to see if the theme supports a given widget.
@@ -58,3 +61,13 @@ class Theme(configparser.ConfigParser):
 			
 		# All looks good, return True
 		return True
+	
+	def warn_legacy(self, section):
+		if section not in self._legacy_warnings:
+			print("WARNING: Legacy theming used for", section)
+			self._legacy_warnings.append(section)
+			
+	def warn_support(self, section):
+		if section not in self._support_warnings:
+			print("WARNING: Theming is enabled, but the current theme does not support", section)
+			self._support_warnings.append(section)

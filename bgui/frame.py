@@ -4,7 +4,13 @@ from .widget import *
 class Frame(Widget):
 	"""Frame for storing other widgets"""
 	theme_section = 'Frame'
-	theme_options = {'Color1', 'Color2', 'Color3', 'Color4', 'BorderSize', 'BorderColor'}
+	theme_options = {'Color1': (1, 1, 1, 1),
+					 'Color2': (0, 0, 1, 1),
+					 'Color3': (0, 0, 1, 1),
+					 'Color4': (0, 0, 1, 1),
+					 'BorderSize': 0,
+					 'BorderColor': (0, 0, 0, 1)
+				}
 	
 	def __init__(self, parent, name, border=None, aspect=None, size=[1, 1], pos=[0, 0],
 				sub_theme='', options=BGUI_DEFAULT):
@@ -22,37 +28,19 @@ class Frame(Widget):
 		
 		Widget.__init__(self, parent, name, aspect, size, pos, sub_theme, options)
 		
-		theme = self.theme[self.theme_section] if self.theme else None
-        
-		self._colors = []
-		self._border = 0
-		
-		if theme:
-			self.colors = [
-					theme['Color1'],
-					theme['Color2'],
-					theme['Color3'],
-					theme['Color4']
-					]
-					
-			self.border_color = theme['BorderColor']
-		else:
-			self.colors = (
-				(1, 1, 1, 1),
-				(0, 0, 1, 1),
-				(0, 0, 1, 1),
-				(0, 0, 1, 1),
-				)
-				
-			self.border_color = (0.0, 0.0, 0.0, 1.0)
+		self._colors = [
+				self.theme['Color1'],
+				self.theme['Color2'],
+				self.theme['Color3'],
+				self.theme['Color4']
+				]
+
+		self.border_color = self.theme['BorderColor']
 			
 		if border:
-			self.border = border
-		elif theme:
-			self.border = theme['BorderSize']
+			self._border = border
 		else:
-			# Default to 0
-			self.border = 0
+			self._border = self.theme['BorderSize']
 			
 	@property
 	def colors(self):

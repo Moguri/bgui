@@ -6,7 +6,10 @@ from .widget import *
 class Label(Widget):
 	"""Widget for displaying text"""
 	theme_section = 'Label'
-	theme_options = {'Font', 'Color', 'Size'}
+	theme_options = {'Font': '',
+					 'Color': (1, 1, 1, 1),
+					 'Size': 30
+				}
 
 	def __init__(self, parent, name, text="", font=None, pt_size=None, color=None,
 				pos=[0, 0], sub_theme='', options=BGUI_DEFAULT):
@@ -23,34 +26,22 @@ class Label(Widget):
 
 		"""
 		Widget.__init__(self, parent, name, None, [0,0], pos, sub_theme, options)
-
-		theme = self.theme[self.theme_section] if self.theme else None
 		
 		if font:
 			self.fontid = blf.load(font)
-		elif theme:
-			font = theme['Font']
-			self.fontid = blf.load(font) if font else 0
 		else:
-			self.fontid = 0
-		
-		self._pt_size = 0
+			font = self.theme['Font']
+			self.fontid = blf.load(font) if font else 0
+
 		if pt_size:
 			self.pt_size = pt_size
-		elif theme:
-			self.pt_size = theme['Size']
 		else:
-			self.pt_size = 30
+			self.pt_size = self.theme['Size']
 		
 		if color:
 			self.color = color
-		elif theme:
-			# self.color = (1, 1, 1, 1)
-			# self.color = list(self.theme.get(Label.theme_section, 'Color'))
-			self.color = theme['Color']
 		else:
-			# default to white
-			self.color = (1, 1, 1, 1)
+			self.color = self.theme['Color']
 
 		self.text = text
 
