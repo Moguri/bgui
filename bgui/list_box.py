@@ -73,22 +73,20 @@ class ListBox(Widget):
 		
 		Widget.__init__(self, parent, name, aspect=aspect, size=size, pos=pos, sub_theme='', options=options)
 		
-		theme = self.theme[self.theme_section] if self.theme else None
-		
 		self._items = items
 		if padding:
 			self._padding = padding
 		else:
-			self._padding = theme['Padding']
+			self._padding = self.theme['Padding']
 			
 		self.highlight = Frame(self, "frame", border=1, size=[1, 1], pos=[0, 0])
 		self.highlight.visible = False
-		self.highlight.border = theme['Border']
+		self.highlight.border = self.theme['Border']
 		self.highlight.colors = [
-				theme['HighlightColor1'],
-				theme['HighlightColor2'],
-				theme['HighlightColor3'],
-				theme['HighlightColor4'],
+				self.theme['HighlightColor1'],
+				self.theme['HighlightColor2'],
+				self.theme['HighlightColor3'],
+				self.theme['HighlightColor4'],
 				]
 		
 		self.selected = None
