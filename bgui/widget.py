@@ -393,7 +393,9 @@ class Widget:
 				
 	def _handle_key(self, key, is_shifted):
 		"""Handle any keyboard input"""
-		pass
+		for widget in self.children.values():
+			if self._hover:
+				widget._handle_key(key, is_shifted)
 
 	def _attach_widget(self, widget):
 		"""Attaches a widget to this widget"""

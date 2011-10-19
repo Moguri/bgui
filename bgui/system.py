@@ -27,13 +27,14 @@ class System(Widget):
 		view = view_buf.to_list() if hasattr(view_buf, "to_list") else view_buf.list
 		
 		# Theming
-		self.system = weakref.proxy(self)
+		self._system = weakref.ref(self)
 		self.theme = Theme(theme) if theme else None
-		self._focused_widget = None
-		self.lock_focus = False
 		
 		Widget.__init__(self, self, "<System>", size=[view[2], view[3]],
 					pos=[0, 0], options=0)
+		
+		self._focused_widget = weakref.ref(self)
+		self.lock_focus = False
 
 	@property
 	def focused_widget(self):
@@ -43,6 +44,14 @@ class System(Widget):
 	@focused_widget.setter
 	def focused_widget(self, value):
 		self._focused_widget = weakref.ref(value)
+		
+	@property
+	def system(self):
+		return self._system()
+	
+	@system.setter
+	def system(self, value):
+		self._system = weakref.ref(value)
 
 	def update_mouse(self, pos, click_state=BGUI_MOUSE_NONE):
 		"""Updates the system's mouse data
@@ -66,8 +75,7 @@ class System(Widget):
 		
 		"""
 		
-		if self.focused_widget:
-			self.focused_widget._handle_key(key, is_shifted)
+		Widget._handle_key(self, key, is_shifted)
 		
 	def _attach_widget(self, widget):
 		if widget == self:
