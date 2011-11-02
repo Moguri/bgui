@@ -28,7 +28,7 @@ class System(Widget):
 		
 		# Theming
 		self._system = weakref.ref(self)
-		self.theme = Theme(theme) if theme else None
+		self.theme = Theme(theme)
 		
 		Widget.__init__(self, self, "<System>", size=[view[2], view[3]],
 					pos=[0, 0], options=0)

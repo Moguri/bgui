@@ -31,14 +31,19 @@ class NewSectionProxy(configparser._SectionProxy):
 configparser.SectionProxy = NewSectionProxy
 
 class Theme(configparser.ConfigParser):
+	path = ''
+	
 	def __init__(self, file):
 		
 		configparser.ConfigParser.__init__(self)
 		
-		self.path = file
+		if file:
+			Theme.path = file+'/'
+		else:
+			Theme.path = './'
 		
 		if file:
-			self.read(file+'/theme.cfg')
+			self.read(Theme.path+'theme.cfg')
 			
 		self._legacy_warnings = []
 		self._support_warnings = []
