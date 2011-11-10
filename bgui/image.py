@@ -32,6 +32,17 @@ class Image(Widget):
 
 
 		self.update_image(img)
+		
+		self._color = [1, 1, 1, 1]
+		
+	@property
+	def color(self):
+		"""The color of the plane the texture is on."""
+		return self._color
+	
+	@color.setter
+	def color(self, value):
+		self._color = value
 
 	def _cleanup(self):
 		id_buf = Buffer(GL_INT, 1)
@@ -91,7 +102,7 @@ class Image(Widget):
 		glBindTexture(GL_TEXTURE_2D, self.tex_id)
 
 		# Draw the textured quad
-		glColor4f(1, 1, 1, 1)
+		glColor4f(*self.color)
 
 		glBegin(GL_QUADS)
 		for i in range(4):
