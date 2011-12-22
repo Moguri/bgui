@@ -366,7 +366,13 @@ class TextInput(Widget):
 			elif self.slice[0] > 0:
 				self.label.text = self.text[:self.slice[0]-1] + self.text[self.slice[1]:]
 				self.slice = [self.slice[0]-1, self.slice[1]-1]
-				
+		elif key == DELKEY:
+			if slice_len != 0:
+				self.label.text = self.text[:self.slice[0]] + self.text[self.slice[1]:]
+				self.char_widths = self.char_widths[:self.slice[0]] + self.char_widths[self.slice[1]:]
+				self.slice = [self.slice[0], self.slice[0]]
+			elif self.slice[1] < len(self.text):
+				self.label.text = self.text[:self.slice[0]] + self.text[self.slice[1]+1:]
 				
 		elif key == LEFTARROWKEY:
 			slice_len = abs(self.slice[0]-self.slice[1])
