@@ -22,9 +22,14 @@ class NewSectionProxy(configparser._SectionProxy):
 		
 		if ',' in val:
 			try:
-				return [float(i) for i in val.split(',')]
+				val = [float(i) for i in val.split(',')]
 			except ValueError:
-				return val.split()
+				val = val.split(',')
+
+			if isinstance(val[0], str) and val[0].startswith('img:'):
+				val[0] = val[0].replace('img:', Theme.path)
+				val[1:] = [float(i) for i in val[1:]]
+
 			
 		return val
 

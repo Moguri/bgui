@@ -30,7 +30,7 @@ class Image(Widget):
 		self.tex_id = id_buf.to_list()[0] if hasattr(id_buf, "to_list") else id_buf.list[0]
 		self.texco = texco
 
-
+		self.image = None
 		self.update_image(img)
 		
 		self._color = [1, 1, 1, 1]
@@ -57,6 +57,12 @@ class Image(Widget):
 		:param img: the path to the new image
 		:rtype: None
 		"""
+
+		# Try to avoid unnecessary texture uploads
+		if img == self.image:
+			return
+		
+		self.image = img
 
 		glBindTexture(GL_TEXTURE_2D, self.tex_id)
 		

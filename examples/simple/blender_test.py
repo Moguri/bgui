@@ -29,6 +29,8 @@ class MySys(bgui.System):
 		# A button
 		self.button = bgui.FrameButton(self.win, 'button', text='Click Me!', size=[.14, .09], pos=[.815, .03],
 			options = bgui.BGUI_DEFAULT)
+		self.audio_button = bgui.ImageButton(self.win, 'ab', sub_theme='Audio',
+										size=[0.05, 0.05], pos=[0.75, 0.05])
 		# Setup an on_click callback for the image
 		self.button.on_click = self.on_img_click
 
