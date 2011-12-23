@@ -64,13 +64,20 @@ BGUI_MOUSE_ACTIVE = 4
 
 class WeakMethod:
 	def __init__(self, f):
-		self.f = f.__func__
-		self.c = weakref.ref(f.__self__)
+		if hasattr(f, "__func__"):
+			self.f = f.__func__
+			self.c = weakref.ref(f.__self__)
+		else:
+			self.f = f
+			self.c = None
 		
 	def __call__(self, *args):
-		if self.c() == None:
+		if self.c == None:
+			self.f(*args)
+		elif self.c() == None:
 			return None
-		self.f(*((self.c(),)+args))
+		else:
+			self.f(*((self.c(),)+args))
 
 class Animation:
 	def __init__(self, widget, newpos, time_, callback):
