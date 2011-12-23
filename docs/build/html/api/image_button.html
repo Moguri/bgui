@@ -8,7 +8,7 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>frame &mdash; Bgui 0.07 documentation</title>
+    <title>image_button &mdash; Bgui 0.07 documentation</title>
     
     <link rel="stylesheet" href="../_static/default.css" type="text/css" />
     <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
@@ -27,8 +27,8 @@
     <script type="text/javascript" src="../_static/doctools.js"></script>
     <link rel="top" title="Bgui 0.07 documentation" href="../index.html" />
     <link rel="up" title="Auto-Generated API Docs" href="../api.html" />
-    <link rel="next" title="frame_button" href="frame_button.html" />
-    <link rel="prev" title="Auto-Generated API Docs" href="../api.html" /> 
+    <link rel="next" title="key_defs" href="key_defs.html" />
+    <link rel="prev" title="image" href="image.html" /> 
   </head>
   <body>
     <div class="related">
@@ -41,10 +41,10 @@
           <a href="../py-modindex.html" title="Python Module Index"
              >modules</a> |</li>
         <li class="right" >
-          <a href="frame_button.html" title="frame_button"
+          <a href="key_defs.html" title="key_defs"
              accesskey="N">next</a> |</li>
         <li class="right" >
-          <a href="../api.html" title="Auto-Generated API Docs"
+          <a href="image.html" title="image"
              accesskey="P">previous</a> |</li>
         <li><a href="../index.html">Bgui 0.07 documentation</a> &raquo;</li>
           <li><a href="../api.html" accesskey="U">Auto-Generated API Docs</a> &raquo;</li> 
@@ -56,12 +56,12 @@
         <div class="bodywrapper">
           <div class="body">
             
-  <div class="section" id="module-bgui.frame">
-<span id="frame"></span><h1>frame<a class="headerlink" href="#module-bgui.frame" title="Permalink to this headline">¶</a></h1>
+  <div class="section" id="module-bgui.image_button">
+<span id="image-button"></span><h1>image_button<a class="headerlink" href="#module-bgui.image_button" title="Permalink to this headline">¶</a></h1>
 <dl class="class">
-<dt id="bgui.frame.Frame">
-<em class="property">class </em><tt class="descclassname">bgui.frame.</tt><tt class="descname">Frame</tt><big>(</big><em>parent, name, border=None, aspect=None, size=[1, 1], pos=[0, 0], sub_theme='', options=12</em><big>)</big><a class="headerlink" href="#bgui.frame.Frame" title="Permalink to this definition">¶</a></dt>
-<dd><p>Frame for storing other widgets</p>
+<dt id="bgui.image_button.ImageButton">
+<em class="property">class </em><tt class="descclassname">bgui.image_button.</tt><tt class="descname">ImageButton</tt><big>(</big><em>parent, name, default_image=None, default2_image=None, hover_image=None, click_image=None, aspect=None, size=[1, 1], pos=[0, 0], sub_theme='', options=12</em><big>)</big><a class="headerlink" href="#bgui.image_button.ImageButton" title="Permalink to this definition">¶</a></dt>
+<dd><p>A clickable image-based button.</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
@@ -69,7 +69,10 @@
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
 <li><strong>parent</strong> &#8211; the widget&#8217;s parent</li>
 <li><strong>name</strong> &#8211; the name of the widget</li>
-<li><strong>border</strong> &#8211; the size of the border around the frame (0 for no border)</li>
+<li><strong>default_image</strong> &#8211; list containing image data for the default state (&#8216;image&#8217;, xcoord, ycoord, xsize, ysize)</li>
+<li><strong>default2_image</strong> &#8211; list containing image data for a second default state, which is used for toggling (&#8216;image&#8217;, xcoord, ycoord, xsize, ysize)</li>
+<li><strong>hover_image</strong> &#8211; list containing image data for the hover state (&#8216;image&#8217;, xcoord, ycoord, xsize, ysize)</li>
+<li><strong>click_image</strong> &#8211; list containing image data for the click state (&#8216;image&#8217;, xcoord, ycoord, xsize, ysize)</li>
 <li><strong>aspect</strong> &#8211; constrain the widget size to a specified aspect ratio</li>
 <li><strong>size</strong> &#8211; a tuple containing the width and height</li>
 <li><strong>pos</strong> &#8211; a tuple containing the x and y position</li>
@@ -81,32 +84,20 @@
 </tbody>
 </table>
 <dl class="attribute">
-<dt id="bgui.frame.Frame.border">
-<tt class="descname">border</tt><a class="headerlink" href="#bgui.frame.Frame.border" title="Permalink to this definition">¶</a></dt>
-<dd><p>The size of the border around the frame.</p>
-</dd></dl>
-
-<dl class="attribute">
-<dt id="bgui.frame.Frame.children">
-<tt class="descname">children</tt><a class="headerlink" href="#bgui.frame.Frame.children" title="Permalink to this definition">¶</a></dt>
+<dt id="bgui.image_button.ImageButton.children">
+<tt class="descname">children</tt><a class="headerlink" href="#bgui.image_button.ImageButton.children" title="Permalink to this definition">¶</a></dt>
 <dd><p>The widget&#8217;s children</p>
 </dd></dl>
 
 <dl class="attribute">
-<dt id="bgui.frame.Frame.colors">
-<tt class="descname">colors</tt><a class="headerlink" href="#bgui.frame.Frame.colors" title="Permalink to this definition">¶</a></dt>
-<dd><p>The colors for the four corners of the frame.</p>
-</dd></dl>
-
-<dl class="attribute">
-<dt id="bgui.frame.Frame.frozen">
-<tt class="descname">frozen</tt><a class="headerlink" href="#bgui.frame.Frame.frozen" title="Permalink to this definition">¶</a></dt>
+<dt id="bgui.image_button.ImageButton.frozen">
+<tt class="descname">frozen</tt><a class="headerlink" href="#bgui.image_button.ImageButton.frozen" title="Permalink to this definition">¶</a></dt>
 <dd><p>Whether or not the widget should accept events</p>
 </dd></dl>
 
 <dl class="method">
-<dt id="bgui.frame.Frame.move">
-<tt class="descname">move</tt><big>(</big><em>position</em>, <em>time</em>, <em>callback=None</em><big>)</big><a class="headerlink" href="#bgui.frame.Frame.move" title="Permalink to this definition">¶</a></dt>
+<dt id="bgui.image_button.ImageButton.move">
+<tt class="descname">move</tt><big>(</big><em>position</em>, <em>time</em>, <em>callback=None</em><big>)</big><a class="headerlink" href="#bgui.image_button.ImageButton.move" title="Permalink to this definition">¶</a></dt>
 <dd><p>Move a widget to a new position over a number of frames</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
@@ -124,68 +115,68 @@
 </dd></dl>
 
 <dl class="attribute">
-<dt id="bgui.frame.Frame.name">
-<tt class="descname">name</tt><a class="headerlink" href="#bgui.frame.Frame.name" title="Permalink to this definition">¶</a></dt>
+<dt id="bgui.image_button.ImageButton.name">
+<tt class="descname">name</tt><a class="headerlink" href="#bgui.image_button.ImageButton.name" title="Permalink to this definition">¶</a></dt>
 <dd><p>The widget&#8217;s name</p>
 </dd></dl>
 
 <dl class="attribute">
-<dt id="bgui.frame.Frame.on_active">
-<tt class="descname">on_active</tt><a class="headerlink" href="#bgui.frame.Frame.on_active" title="Permalink to this definition">¶</a></dt>
+<dt id="bgui.image_button.ImageButton.on_active">
+<tt class="descname">on_active</tt><a class="headerlink" href="#bgui.image_button.ImageButton.on_active" title="Permalink to this definition">¶</a></dt>
 <dd><p>The widget&#8217;s on_active callback</p>
 </dd></dl>
 
 <dl class="attribute">
-<dt id="bgui.frame.Frame.on_click">
-<tt class="descname">on_click</tt><a class="headerlink" href="#bgui.frame.Frame.on_click" title="Permalink to this definition">¶</a></dt>
+<dt id="bgui.image_button.ImageButton.on_click">
+<tt class="descname">on_click</tt><a class="headerlink" href="#bgui.image_button.ImageButton.on_click" title="Permalink to this definition">¶</a></dt>
 <dd><p>The widget&#8217;s on_click callback</p>
 </dd></dl>
 
 <dl class="attribute">
-<dt id="bgui.frame.Frame.on_hover">
-<tt class="descname">on_hover</tt><a class="headerlink" href="#bgui.frame.Frame.on_hover" title="Permalink to this definition">¶</a></dt>
+<dt id="bgui.image_button.ImageButton.on_hover">
+<tt class="descname">on_hover</tt><a class="headerlink" href="#bgui.image_button.ImageButton.on_hover" title="Permalink to this definition">¶</a></dt>
 <dd><p>The widget&#8217;s on_hover callback</p>
 </dd></dl>
 
 <dl class="attribute">
-<dt id="bgui.frame.Frame.on_mouse_enter">
-<tt class="descname">on_mouse_enter</tt><a class="headerlink" href="#bgui.frame.Frame.on_mouse_enter" title="Permalink to this definition">¶</a></dt>
+<dt id="bgui.image_button.ImageButton.on_mouse_enter">
+<tt class="descname">on_mouse_enter</tt><a class="headerlink" href="#bgui.image_button.ImageButton.on_mouse_enter" title="Permalink to this definition">¶</a></dt>
 <dd><p>The widget&#8217;s on_mouse_enter callback</p>
 </dd></dl>
 
 <dl class="attribute">
-<dt id="bgui.frame.Frame.on_mouse_exit">
-<tt class="descname">on_mouse_exit</tt><a class="headerlink" href="#bgui.frame.Frame.on_mouse_exit" title="Permalink to this definition">¶</a></dt>
+<dt id="bgui.image_button.ImageButton.on_mouse_exit">
+<tt class="descname">on_mouse_exit</tt><a class="headerlink" href="#bgui.image_button.ImageButton.on_mouse_exit" title="Permalink to this definition">¶</a></dt>
 <dd><p>The widget&#8217;s on_mouse_exit callback</p>
 </dd></dl>
 
 <dl class="attribute">
-<dt id="bgui.frame.Frame.on_release">
-<tt class="descname">on_release</tt><a class="headerlink" href="#bgui.frame.Frame.on_release" title="Permalink to this definition">¶</a></dt>
+<dt id="bgui.image_button.ImageButton.on_release">
+<tt class="descname">on_release</tt><a class="headerlink" href="#bgui.image_button.ImageButton.on_release" title="Permalink to this definition">¶</a></dt>
 <dd><p>The widget&#8217;s on_release callback</p>
 </dd></dl>
 
 <dl class="attribute">
-<dt id="bgui.frame.Frame.parent">
-<tt class="descname">parent</tt><a class="headerlink" href="#bgui.frame.Frame.parent" title="Permalink to this definition">¶</a></dt>
+<dt id="bgui.image_button.ImageButton.parent">
+<tt class="descname">parent</tt><a class="headerlink" href="#bgui.image_button.ImageButton.parent" title="Permalink to this definition">¶</a></dt>
 <dd><p>The widget&#8217;s parent</p>
 </dd></dl>
 
 <dl class="attribute">
-<dt id="bgui.frame.Frame.position">
-<tt class="descname">position</tt><a class="headerlink" href="#bgui.frame.Frame.position" title="Permalink to this definition">¶</a></dt>
+<dt id="bgui.image_button.ImageButton.position">
+<tt class="descname">position</tt><a class="headerlink" href="#bgui.image_button.ImageButton.position" title="Permalink to this definition">¶</a></dt>
 <dd><p>The widget&#8217;s position</p>
 </dd></dl>
 
 <dl class="attribute">
-<dt id="bgui.frame.Frame.size">
-<tt class="descname">size</tt><a class="headerlink" href="#bgui.frame.Frame.size" title="Permalink to this definition">¶</a></dt>
+<dt id="bgui.image_button.ImageButton.size">
+<tt class="descname">size</tt><a class="headerlink" href="#bgui.image_button.ImageButton.size" title="Permalink to this definition">¶</a></dt>
 <dd><p>The widget&#8217;s size</p>
 </dd></dl>
 
 <dl class="attribute">
-<dt id="bgui.frame.Frame.visible">
-<tt class="descname">visible</tt><a class="headerlink" href="#bgui.frame.Frame.visible" title="Permalink to this definition">¶</a></dt>
+<dt id="bgui.image_button.ImageButton.visible">
+<tt class="descname">visible</tt><a class="headerlink" href="#bgui.image_button.ImageButton.visible" title="Permalink to this definition">¶</a></dt>
 <dd><p>Whether or not the widget is visible</p>
 </dd></dl>
 
@@ -200,14 +191,14 @@
       <div class="sphinxsidebar">
         <div class="sphinxsidebarwrapper">
   <h4>Previous topic</h4>
-  <p class="topless"><a href="../api.html"
-                        title="previous chapter">Auto-Generated API Docs</a></p>
+  <p class="topless"><a href="image.html"
+                        title="previous chapter">image</a></p>
   <h4>Next topic</h4>
-  <p class="topless"><a href="frame_button.html"
-                        title="next chapter">frame_button</a></p>
+  <p class="topless"><a href="key_defs.html"
+                        title="next chapter">key_defs</a></p>
   <h3>This Page</h3>
   <ul class="this-page-menu">
-    <li><a href="../_sources/api/frame.txt"
+    <li><a href="../_sources/api/image_button.txt"
            rel="nofollow">Show Source</a></li>
   </ul>
 <div id="searchbox" style="display: none">
@@ -237,10 +228,10 @@
           <a href="../py-modindex.html" title="Python Module Index"
              >modules</a> |</li>
         <li class="right" >
-          <a href="frame_button.html" title="frame_button"
+          <a href="key_defs.html" title="key_defs"
              >next</a> |</li>
         <li class="right" >
-          <a href="../api.html" title="Auto-Generated API Docs"
+          <a href="image.html" title="image"
              >previous</a> |</li>
         <li><a href="../index.html">Bgui 0.07 documentation</a> &raquo;</li>
           <li><a href="../api.html" >Auto-Generated API Docs</a> &raquo;</li> 

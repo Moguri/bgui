@@ -2,16 +2,20 @@ SVN
 -------
 New Features
 ^^^^^^^^^^^^
+  * An ImageButton widget has been added.
   * A simple animation system has been added that allows widgets to move over time using linear interpolation.
   * The Video widget can now also play the audio from a video file if play_audio=True.
   * FontSize on labels is now themeable.
   * Two new utility functions for TextInput: select_all() and select_none(). (thanks to jplur)
+  * TextInput now supports the delete key.
+  * Widgets now have on_mouse_enter and on_mouse_exit callbacks.
 Bugs Fixed
 ^^^^^^^^^^
   * The system's size now updates if the viewport size changes.
   * Issue 11: Externally resetting text input contents breaks selection. (thanks to jplur)
 Other Stuff
 ^^^^^^^^^^^
+  * Widgets can now define various _handle_*() methods that match the callbacks. This allows subclasses to use callbacks without interfering with the user-defined ones.
   * The themeing interface has been updated to simplify access to theme options.
   * System is now a subclass of Widget to simplify code and reduce code duplication.
   * Bgui now uses weakrefs to break dependency cycles and allow Python's GC to clean up widgets. This should solve most memory leak problems with Bgui.
