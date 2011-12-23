@@ -138,11 +138,15 @@ class ListBox(Widget):
 				self.highlight.gl_position = [i[:] for i in w.gl_position]
 				self.highlight.visible = True
 		
-	def _handle_mouse_click(self):
-		for item, gl_position in self._spatial_map.items():
-			if (gl_position[0][0] <= pos[0] <= gl_position[1][0]) and \
-				(gl_position[0][1] <= pos[1] <= gl_position[2][1]):
-					self.selected = item
-					break
-		else:
-			self.selected = None
+	def _handle_mouse(self, pos, event):
+	
+		if event == BGUI_MOUSE_CLICK:
+			for item, gl_position in self._spatial_map.items():
+				if (gl_position[0][0] <= pos[0] <= gl_position[1][0]) and \
+					(gl_position[0][1] <= pos[1] <= gl_position[2][1]):
+						self.selected = item
+						break
+			else:
+				self.selected = None
+		
+		Widget._handle_mouse(self, pos, event)
