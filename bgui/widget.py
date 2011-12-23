@@ -151,6 +151,8 @@ class Widget:
 		self._on_release = None
 		self._on_hover = None
 		self._on_active = None
+		self._on_mouse_enter = None
+		self._on_mouse_exit = None
 
 		# Setup the parent
 		parent._attach_widget(self)
@@ -210,9 +212,15 @@ class Widget:
 		for child in self.children:
 			self.children[child]._cleanup()
 
-	def _update_position(self, size, pos):
-		self._base_size = size[:]
-		self._base_pos = pos[:]
+	def _update_position(self, size=None, pos=None):
+		if size is not None:
+			self._base_size = size[:]
+		else:
+			size = self._base_size[:]
+		if pos is not None:
+			self._base_pos = pos[:]
+		else:
+			pos = self._base_pos[:]
 
 		if self.options & BGUI_NORMALIZED:
 			pos[0] *= self.parent.size[0]
@@ -306,6 +314,24 @@ class Widget:
 		self._on_hover = WeakMethod(value)
 		
 	@property
+	def on_mouse_enter(self):
+		"""The widget's on_mouse_enter callback"""
+		return self._on_mouse_enter
+
+	@on_mouse_enter.setter
+	def on_mouse_enter(self, value):
+		self._on_mouse_enter = WeakMethod(value)
+		
+	@property
+	def on_mouse_exit(self):
+		"""The widget's on_mouse_exit callback"""
+		return self._on_mouse_exit
+
+	@on_mouse_exit.setter
+	def on_mouse_exit(self, value):
+		self._on_mouse_exit = WeakMethod(value)
+		
+	@property
 	def on_active(self):
 		"""The widget's on_active callback"""
 		return self._on_active
@@ -381,6 +407,8 @@ class Widget:
 		if event == BGUI_MOUSE_CLICK and not self.system.lock_focus and not self.options & BGUI_NO_FOCUS:
 			self.system.focused_widget = self
 				
+		if not self._hover and self.on_mouse_enter:
+			self.on_mouse_enter(self)
 		self._hover = True
 			
 		# Run any children callback methods
@@ -389,7 +417,15 @@ class Widget:
 				(widget.gl_position[0][1] <= pos[1] <= widget.gl_position[2][1]):
 					widget._handle_mouse(pos, event)
 			else:
-				widget._hover = False
+				widget._update_hover(False)
+				
+	def _update_hover(self, hover=False):
+		if not hover and self._hover and self.on_mouse_exit:
+			self.on_mouse_exit(self)
+		self._hover = hover
+	
+		for widget in self.children.values():
+			widget._update_hover(hover)
 				
 	def _handle_key(self, key, is_shifted):
 		"""Handle any keyboard input"""
