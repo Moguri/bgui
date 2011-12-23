@@ -400,22 +400,31 @@ class Widget:
 		# Don't run if we're not visible or frozen
 		if not self.visible or self.frozen: return
 		
+		self._handle_hover()
 		if self.on_hover:
 			self.on_hover(self)
 		
-		if event == BGUI_MOUSE_CLICK and self.on_click:
-			self.on_click(self)
-		elif event == BGUI_MOUSE_RELEASE and self.on_release:
-			self.on_release(self)
-		elif event == BGUI_MOUSE_ACTIVE and self.on_active:
-			self.on_active(self)
+		if event == BGUI_MOUSE_CLICK:
+			self._handle_click()
+			if self.on_click:
+				self.on_click(self)
+		elif event == BGUI_MOUSE_RELEASE:
+			self._handle_release()
+			if self.on_release:
+				self.on_release(self)
+		elif event == BGUI_MOUSE_ACTIVE:
+			self._handle_active()
+			if self.on_active:
+				self.on_active(self)
 			
 		# Update focus
 		if event == BGUI_MOUSE_CLICK and not self.system.lock_focus and not self.options & BGUI_NO_FOCUS:
 			self.system.focused_widget = self
 				
-		if not self._hover and self.on_mouse_enter:
-			self.on_mouse_enter(self)
+		if not self._hover:
+			self._handle_mouse_enter()
+			if self.on_mouse_enter:
+				self.on_mouse_enter(self)
 		self._hover = True
 			
 		# Run any children callback methods
@@ -427,8 +436,10 @@ class Widget:
 				widget._update_hover(False)
 				
 	def _update_hover(self, hover=False):
-		if not hover and self._hover and self.on_mouse_exit:
-			self.on_mouse_exit(self)
+		if not hover and self._hover:
+			self._handle_mouse_exit()
+			if self.on_mouse_exit:
+				self.on_mouse_exit(self)
 		self._hover = hover
 	
 		for widget in self.children.values():
@@ -439,6 +450,20 @@ class Widget:
 		for widget in self.children.values():
 			if self._hover:
 				widget._handle_key(key, is_shifted)
+
+	# These exist so they can be overridden by subclasses
+	def _handle_click(self):
+		pass
+	def _handle_release(self):
+		pass
+	def _handle_hover(self):
+		pass
+	def _handle_active(self):
+		pass
+	def _handle_mouse_enter(self):
+		pass
+	def _handle_mouse_exit(self):
+		pass
 
 	def _attach_widget(self, widget):
 		"""Attaches a widget to this widget"""

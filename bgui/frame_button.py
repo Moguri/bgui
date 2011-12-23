@@ -80,33 +80,26 @@ class FrameButton(Widget):
 			self.base_color[3]]
 		self.frame.colors = [self.dark, self.dark, self.light, self.light]
 		
-		
-	def _handle_mouse(self, pos, event):
-		"""Extend function's behaviour by altering the frame's color based
-		on the event
-		"""
-		if self.frozen:
-			return
-		
+	def _handle_hover(self):
 		light = self.light[:]
 		dark = self.dark[:]
 		
 		# Lighten button when hovered over.
-		if event == BGUI_MOUSE_NONE:
-			for n in range(3):
-				light[n] += .1
-				dark[n] += .1
-			self.frame.colors = [dark, dark, light, light]
+		for n in range(3):
+			light[n] += .1
+			dark[n] += .1
+		self.frame.colors = [dark, dark, light, light]
+		
+	def _handle_active(self):
+		light = self.light[:]
+		dark = self.dark[:]
 			
 		# Darken button when clicked.
-		elif event == BGUI_MOUSE_ACTIVE:
-			for n in range(3):
-				light[n] -= .1
-				dark[n] -= .1
-			self.frame.colors = [light, light, dark, dark]
-			
-		Widget._handle_mouse(self, pos, event)
-		
+		for n in range(3):
+			light[n] -= .1
+			dark[n] -= .1
+		self.frame.colors = [light, light, dark, dark]
+
 	def _draw(self):
 		"""Draw the button"""
 		
