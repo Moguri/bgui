@@ -35,10 +35,11 @@ class TextInput(Widget):
 					 'InactiveFrameColor': (0, 0, 0, 0),
 					 'InactiveBorderSize': 0,
 					 'InactiveBorderColor': (0, 0, 0, 0),
-					 'InactiveHighlightColor': (0.6, 0.6, 0.6, 0.5)
+					 'InactiveHighlightColor': (0.6, 0.6, 0.6, 0.5),
+					 'LabelSubTheme': '',
 					}
 
-	def __init__(self, parent, name, text="", prefix="", font=None, pt_size=30, color=None,
+	def __init__(self, parent, name, text="", prefix="", font=None, pt_size=None, color=None,
 					aspect=None, size=[0, 0], pos=[0, 0], sub_theme='',input_options=BGUI_INPUT_DEFAULT, options=BGUI_DEFAULT):
 		"""
 		:param parent: the widget's parent
@@ -67,7 +68,7 @@ class TextInput(Widget):
 		self.frame = Frame(self, name+"_frame", size=[1,1], options = BGUI_NO_FOCUS | BGUI_DEFAULT | BGUI_CENTERY)
 		self.highlight = Frame(self, name+"_highlight", size=self.frame.size, options = BGUI_NO_FOCUS | BGUI_CENTERY)
 		self.cursor = Frame(self, name+"_cursor", size=[1,1], border=0, options = BGUI_NO_FOCUS | BGUI_CENTERY)
-		self.label = Label(self, name+"_label", text, font, pt_size, options = BGUI_NO_FOCUS | BGUI_DEFAULT )
+		self.label = Label(self, name+"_label", text, font, pt_size, sub_theme=self.theme['LabelSubTheme'], options = BGUI_NO_FOCUS | BGUI_DEFAULT )
 		
 		#Color and setting initialization
 		self.colormode = 0

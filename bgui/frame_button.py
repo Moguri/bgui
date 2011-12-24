@@ -9,7 +9,8 @@ class FrameButton(Widget):
 	theme_section = 'FrameButton'
 	theme_options = {'Color': (0.4,0.4,0.4,1),
 					 'BorderSize': 1,
-					 'BorderColor': (0, 0, 0, 1)
+					 'BorderColor': (0, 0, 0, 1),
+					 'LabelSubTheme': '',
 				}
 	
 	def __init__(self, parent, name, base_color=None, text="", font=None,
@@ -31,7 +32,7 @@ class FrameButton(Widget):
 		Widget.__init__(self, parent, name, aspect, size, pos, sub_theme, options)
 		
 		self.frame = Frame(self, name + '_frame', size=[1,1], pos=[0,0], options=BGUI_DEFAULT & ~BGUI_THEMED)
-		self.label = Label(self, name + '_label', text, font, pt_size, pos=[0,0], options=BGUI_DEFAULT | BGUI_CENTERED)
+		self.label = Label(self, name + '_label', text, font, pt_size, pos=[0,0], sub_theme=self.theme['LabelSubTheme'], options=BGUI_DEFAULT | BGUI_CENTERED)
 		
 		
 		if not base_color:
