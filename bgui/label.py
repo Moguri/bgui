@@ -8,11 +8,14 @@ class Label(Widget):
 	theme_section = 'Label'
 	theme_options = {'Font': '',
 					 'Color': (1, 1, 1, 1),
+					 'OutlineColor': (0, 0, 0, 1),
+					 'OutlineSize': 0,
+					 'OutlineSmoothing': False,
 					 'Size': 30
 				}
 
 	def __init__(self, parent, name, text="", font=None, pt_size=None, color=None,
-				pos=[0, 0], sub_theme='', options=BGUI_DEFAULT):
+				outline_color=None, outline_size=None, outline_smoothing=None, pos=[0, 0], sub_theme='', options=BGUI_DEFAULT):
 		"""
 		:param parent: the widget's parent
 		:param name: the name of the widget
@@ -42,6 +45,22 @@ class Label(Widget):
 			self.color = color
 		else:
 			self.color = self.theme['Color']
+
+		if outline_color:
+			self.outline_color = color
+		else:
+			self.outline_color = self.theme['OutlineColor']
+
+		if outline_size is not None:
+			self.outline_size = outline_size 
+		else:
+			self.outline_size = self.theme['OutlineSize']
+		self.outline_size = int(self.outline_size)
+		
+		if outline_smoothing is not None:
+			self.outline_smoothing = outline_smoothing
+		else:
+			self.outline_smoothing = self.theme['OutlineSmoothing']
 
 		self.text = text
 
@@ -76,16 +95,29 @@ class Label(Widget):
 		else:
 			self._pt_size = value
 
+	def _draw_text(self, x, y):
+		for i, txt in enumerate([i for i in self._text.split('\n')]):
+			blf.position(self.fontid, x, y - (self.size[1]*i), 0)
+			blf.draw(self.fontid, txt.replace('\t', '    '))
+
 	def _draw(self):
 		"""Display the text"""
 
 		blf.size(self.fontid, self.pt_size, 72)
-		
-		glColor4f(self.color[0], self.color[1], self.color[2], self.color[3])
 
-		for i, txt in enumerate([i for i in self._text.split('\n')]):
-			blf.position(self.fontid, self.position[0], self.position[1] - (self.size[1]*i), 0)
-			blf.draw(self.fontid, txt.replace('\t', '    '))
+		if self.outline_size:
+			glColor4f(*self.outline_color)
+			if self.outline_smoothing:
+				steps = range(-self.outline_size, self.outline_size+1)
+			else:
+				steps = (-self.outline_size, 0, self.outline_size)
+				
+			for x in steps:
+				for y in steps:
+					self._draw_text(self.position[0]+x, self.position[1]+y)
+		
+		glColor4f(*self.color)
+		self._draw_text(*self.position)
 			
 		Widget._draw(self)
 		
