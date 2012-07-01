@@ -60,7 +60,7 @@
 <span id="label"></span><h1>label<a class="headerlink" href="#module-bgui.label" title="Permalink to this headline">¶</a></h1>
 <dl class="class">
 <dt id="bgui.label.Label">
-<em class="property">class </em><tt class="descclassname">bgui.label.</tt><tt class="descname">Label</tt><big>(</big><em>parent, name, text='', font=None, pt_size=None, color=None, pos=[0, 0], sub_theme='', options=12</em><big>)</big><a class="headerlink" href="#bgui.label.Label" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><tt class="descclassname">bgui.label.</tt><tt class="descname">Label</tt><big>(</big><em>parent, name, text='', font=None, pt_size=None, color=None, outline_color=None, outline_size=None, outline_smoothing=None, pos=[0, 0], sub_theme='', options=12</em><big>)</big><a class="headerlink" href="#bgui.label.Label" title="Permalink to this definition">¶</a></dt>
 <dd><p>Widget for displaying text</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
@@ -188,6 +188,13 @@
 <dt id="bgui.label.Label.visible">
 <tt class="descname">visible</tt><a class="headerlink" href="#bgui.label.Label.visible" title="Permalink to this definition">¶</a></dt>
 <dd><p>Whether or not the widget is visible</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="bgui.label.Label.z_index">
+<tt class="descname">z_index</tt><a class="headerlink" href="#bgui.label.Label.z_index" title="Permalink to this definition">¶</a></dt>
+<dd><p>The widget&#8217;s z-index. Widget&#8217;s with a higher z-index are drawn
+over those that have a lower z-index</p>
 </dd></dl>
 
 </dd></dl>
