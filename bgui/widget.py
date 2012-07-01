@@ -168,6 +168,9 @@ class Widget:
 		# A dictionary to store children widgets
 		self._children = OrderedDict()
 
+		# The z-index of the widget, determines drawing order
+		self._z_index = 0
+
 		# Setup the widget's position
 		self._position = [None]*4
 		self._update_position(size, pos)	
@@ -274,6 +277,18 @@ class Widget:
 	@name.setter
 	def name(self, value):
 		self._name = value
+
+	@property
+	def z_index(self):
+		"""The widget's z-index. Widget's with a higher z-index are drawn
+		over those that have a lower z-index"""
+		return self._z_index
+
+	@z_index.setter
+	def z_index(self, value):
+		self._z_index = value
+		self.parent._children = OrderedDict(sorted(self.parent._children.items(),
+			key=lambda item: item[1].z_index))
 		
 	@property
 	def frozen(self):
