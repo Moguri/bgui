@@ -3,13 +3,14 @@ import bge
 
 from .widget import *
 
+
 class Image(Widget):
 	"""Widget for displaying images"""
-	
+
 	_cache = {}
-	
+
 	def __init__(self, parent, name, img, aspect=None, size=[0, 0], pos=[0, 0],
-				texco=[(0,0), (1,0), (1,1), (0,1)], sub_theme='', options=BGUI_DEFAULT):
+				texco=[(0, 0), (1, 0), (1, 1), (0, 1)], sub_theme='', options=BGUI_DEFAULT):
 		""":param parent: the widget's parent
 		:param name: the name of the widget
 		:param img: the image to use for the widget
@@ -32,14 +33,14 @@ class Image(Widget):
 
 		self.image = None
 		self.update_image(img)
-		
+
 		self._color = [1, 1, 1, 1]
-		
+
 	@property
 	def color(self):
 		"""The color of the plane the texture is on."""
 		return self._color
-	
+
 	@color.setter
 	def color(self, value):
 		self._color = value
@@ -48,7 +49,7 @@ class Image(Widget):
 		id_buf = Buffer(GL_INT, 1)
 		id_buf[0] = self.tex_id
 		glDeleteTextures(1, id_buf)
-		
+
 		Widget._cleanup(self)
 
 	def update_image(self, img):
@@ -61,11 +62,11 @@ class Image(Widget):
 		# Try to avoid unnecessary texture uploads
 		if img == self.image:
 			return
-		
+
 		self.image = img
 
 		glBindTexture(GL_TEXTURE_2D, self.tex_id)
-		
+
 		if img in Image._cache:
 			# Image has already been loaded from disk, recall it from the cache
 			image = Image._cache[img]
@@ -75,9 +76,9 @@ class Image(Widget):
 			image.scale = False
 			if self.options & BGUI_CACHE:
 				Image._cache[img] = image
-		
+
 		im_buf = image.image
-		
+
 		# If the image failed to load the im_buf will be None
 		# If this happens stop before things get ugly.
 		if im_buf == None:
@@ -96,10 +97,10 @@ class Image(Widget):
 
 	def _draw(self):
 		"""Draws the image"""
-		
+
 		# Enable textures
 		glEnable(GL_TEXTURE_2D)
-		
+
 		# Enable alpha blending
 		glEnable(GL_BLEND)
 		glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA)

@@ -1,9 +1,10 @@
 from .widget import *
 from .label import *
 
+
 class TextBlock(Widget):
 	"""Widget for displaying blocks of text"""
-	
+
 	theme_section = 'TextBlock'
 	theme_options = {'LabelSubTheme': '',
 				}
@@ -25,86 +26,86 @@ class TextBlock(Widget):
 		:param options: various other options
 
 		"""
-		
+
 		Widget.__init__(self, parent, name, aspect, size, pos, sub_theme, options)
-		
+
 		self.overflow = overflow
 		self._font = font
 		self._pt_size = pt_size
 		self._color = color
 		self._lines = []
-		
+
 		self.text = text
-		
+
 	@property
 	def text(self):
 		"""The text to display"""
 		return self._text
-		
+
 	@text.setter
 	def text(self, value):
-		
+
 		# Get rid of any old lines
 		for line in self._lines:
 			self._remove_widget(line)
-		
+
 		self._lines = []
 		self._text = value
-	
+
 		# If the string is empty, then we are done
-		if not value: return
-	
+		if not value:
+			return
+
 		lines = value.split('\n')
 		for i, v in enumerate(lines):
 			lines[i] = v.split()
-			
+
 		cur_line = 0
 		line = Label(self, "tmp", "Mj|", font=self._font, pt_size=self._pt_size, color=self._color, sub_theme=self.theme['LabelSubTheme'])
 		self._remove_widget(line)
 		char_height = line.size[1]
-	
+
 		char_height /= self.size[1]
-		
+
 		for words in lines:
-			line = Label(self, "lines_"+str(cur_line), "", self._font, self._pt_size, self._color, pos=[0, 1-(cur_line+1)*char_height], sub_theme=self.theme['LabelSubTheme'])
-			
+			line = Label(self, "lines_" + str(cur_line), "", self._font, self._pt_size, self._color, pos=[0, 1 - (cur_line + 1) * char_height], sub_theme=self.theme['LabelSubTheme'])
+
 			while words:
-				# Try to add a word			
+				# Try to add a word
 				if line.text:
 					line.text += " " + words[0]
 				else:
 					line.text = words[0]
-				
+
 				# The line is too big, remove the word and create a new line
 				if line.size[0] > self.size[0]:
-					line.text = line.text[0:-(len(words[0])+1)]
+					line.text = line.text[0:-(len(words[0]) + 1)]
 					self._lines.append(line)
 					cur_line += 1
-					line = Label(self, "lines_"+str(cur_line), "", self._font, self._pt_size, self._color, pos=[0, 1-(cur_line+1)*char_height], sub_theme=self.theme['LabelSubTheme'])
+					line = Label(self, "lines_" + str(cur_line), "", self._font, self._pt_size, self._color, pos=[0, 1 - (cur_line + 1) * char_height], sub_theme=self.theme['LabelSubTheme'])
 				else:
 					# The word fit, so remove it from the words list
 					words.remove(words[0])
-					
+
 			# Add what's left
 			self._lines.append(line)
 			cur_line += 1
-			
+
 		if self.overflow:
-			line_height = char_height*self.size[1]
-		
-			while self.size[1] < len(self._lines)*line_height:
+			line_height = char_height * self.size[1]
+
+			while self.size[1] < len(self._lines) * line_height:
 				if self.overflow == BGUI_OVERFLOW_HIDDEN:
 					self._remove_widget(self._lines[-1])
 					self._lines = self._lines[:-1]
-					
+
 				elif self.overflow == BGUI_OVERFLOW_REPLACE:
 					self._remove_widget(self._lines[0])
 					self._lines = self._lines[1:]
 					for line in self._lines:
-						line._update_position(line.size, [0, line._base_pos[1]+char_height])
-				
+						line._update_position(line.size, [0, line._base_pos[1] + char_height])
+
 				elif self.overflow == BGUI_OVERFLOW_CALLBACK:
 					if self.on_overflow:
 						self.on_overflow(self)
-						
-		
+

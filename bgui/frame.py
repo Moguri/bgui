@@ -1,6 +1,7 @@
 from bgl import *
 from .widget import *
 
+
 class Frame(Widget):
 	"""Frame for storing other widgets"""
 	theme_section = 'Frame'
@@ -11,7 +12,7 @@ class Frame(Widget):
 					 'BorderSize': 0,
 					 'BorderColor': (0, 0, 0, 1)
 				}
-	
+
 	def __init__(self, parent, name, border=None, aspect=None, size=[1, 1], pos=[0, 0],
 				sub_theme='', options=BGUI_DEFAULT):
 		"""
@@ -25,9 +26,9 @@ class Frame(Widget):
 		:param options: various other options
 
 		"""
-		
+
 		Widget.__init__(self, parent, name, aspect, size, pos, sub_theme, options)
-		
+
 		self._colors = [
 				self.theme['Color1'],
 				self.theme['Color2'],
@@ -36,49 +37,49 @@ class Frame(Widget):
 				]
 
 		self.border_color = self.theme['BorderColor']
-			
+
 		if border:
 			self._border = border
 		else:
 			self._border = self.theme['BorderSize']
-			
+
 	@property
 	def colors(self):
 		"""The colors for the four corners of the frame."""
 		return self._colors
-		
+
 	@colors.setter
 	def colors(self, value):
 		self._colors = value
-		
+
 	@property
 	def border(self):
 		"""The size of the border around the frame."""
 		return self._border
-		
+
 	@border.setter
 	def border(self, value):
 		self._border = value
-		
+
 	def _draw(self):
 		"""Draw the frame"""
-		
+
 		# Enable alpha blending
 		glEnable(GL_BLEND)
 		glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA)
-		
+
 		# Enable polygon offset
 		glEnable(GL_POLYGON_OFFSET_FILL)
 		glPolygonOffset(1.0, 1.0)
-			
+
 		glBegin(GL_QUADS)
 		for i in range(4):
 			glColor4f(self.colors[i][0], self.colors[i][1], self.colors[i][2], self.colors[i][3])
 			glVertex2f(self.gl_position[i][0], self.gl_position[i][1])
 		glEnd()
-		
+
 		glDisable(GL_POLYGON_OFFSET_FILL)
-		
+
 		# Draw an outline
 		if self.border > 0:
 			# border = self.border/2
@@ -86,16 +87,14 @@ class Frame(Widget):
 			glColor4f(r, g, b, a)
 			glPolygonMode(GL_FRONT, GL_LINE)
 			glLineWidth(self.border)
-			
+
 			glBegin(GL_QUADS)
 			for i in range(4):
 				glVertex2f(self.gl_position[i][0], self.gl_position[i][1])
-				
+
 			glEnd()
-		
+
 			glLineWidth(1.0)
 			glPolygonMode(GL_FRONT, GL_FILL)
-		
-		
+
 		Widget._draw(self)
-			
