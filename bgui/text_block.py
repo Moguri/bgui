@@ -6,7 +6,8 @@ class TextBlock(Widget):
 	"""Widget for displaying blocks of text"""
 
 	theme_section = 'TextBlock'
-	theme_options = {'LabelSubTheme': '',
+	theme_options = {
+				'LabelSubTheme': '',
 				}
 
 	def __init__(self, parent, name, text="", font=None, pt_size=None, color=None, aspect=None,

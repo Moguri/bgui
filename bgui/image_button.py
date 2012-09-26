@@ -7,11 +7,12 @@ class ImageButton(Widget):
 	"""A clickable image-based button."""
 
 	theme_section = 'ImageButton'
-	theme_options = {'DefaultImage': (None, 0, 0, 1, 1),
-					 'Default2Image': (None, 0, 0, 1, 1),
-					 'HoverImage': (None, 0, 0, 1, 1),
-					 'ClickImage': (None, 0, 0, 1, 1)
-					 }
+	theme_options = {
+				'DefaultImage': (None, 0, 0, 1, 1),
+				'Default2Image': (None, 0, 0, 1, 1),
+				'HoverImage': (None, 0, 0, 1, 1),
+				'ClickImage': (None, 0, 0, 1, 1),
+				}
 
 	def __init__(self, parent, name, default_image=None, default2_image=None, hover_image=None,
 					click_image=None, aspect=None, size=[1, 1], pos=[0, 0], sub_theme='',

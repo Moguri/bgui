@@ -57,7 +57,7 @@ class ListBox(Widget):
 				'HighlightColor3': (0, 0, 1, 1),
 				'HighlightColor4': (0, 0, 1, 1),
 				'Border': 1,
-				'Padding': 0
+				'Padding': 0,
 				}
 
 	def __init__(self, parent, name, items=[], padding=0, aspect=None, size=[1, 1], pos=[0, 0], sub_theme='', options=BGUI_DEFAULT):

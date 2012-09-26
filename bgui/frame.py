@@ -5,12 +5,13 @@ from .widget import Widget, BGUI_DEFAULT
 class Frame(Widget):
 	"""Frame for storing other widgets"""
 	theme_section = 'Frame'
-	theme_options = {'Color1': (1, 1, 1, 1),
-					 'Color2': (0, 0, 1, 1),
-					 'Color3': (0, 0, 1, 1),
-					 'Color4': (0, 0, 1, 1),
-					 'BorderSize': 0,
-					 'BorderColor': (0, 0, 0, 1)
+	theme_options = {
+				'Color1': (1, 1, 1, 1),
+				'Color2': (0, 0, 1, 1),
+				'Color3': (0, 0, 1, 1),
+				'Color4': (0, 0, 1, 1),
+				'BorderSize': 0,
+				'BorderColor': (0, 0, 0, 1),
 				}
 
 	def __init__(self, parent, name, border=None, aspect=None, size=[1, 1], pos=[0, 0],

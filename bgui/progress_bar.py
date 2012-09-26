@@ -6,17 +6,18 @@ class ProgressBar(Widget):
 	"""A solid progress bar.
 	Controlled via the 'percent' property which assumes percent as a 0-1 floating point number."""
 	theme_section = 'ProgressBar'
-	theme_options = {'FillColor1': (0.0, 0.42, 0.02, 1.0),
-					 'FillColor2': (0.0, 0.42, 0.02, 1.0),
-					 'FillColor3': (0.0, 0.42, 0.02, 1.0),
-					 'FillColor4': (0.0, 0.42, 0.02, 1.0),
-					 'BGColor1': (0, 0, 0, 1),
-					 'BGColor2': (0, 0, 0, 1),
-					 'BGColor3': (0, 0, 0, 1),
-					 'BGColor4': (0, 0, 0, 1),
-					 'BorderSize': 1,
-					 'BorderColor': (0, 0, 0, 1)
-					 }
+	theme_options = {
+				'FillColor1': (0.0, 0.42, 0.02, 1.0),
+				'FillColor2': (0.0, 0.42, 0.02, 1.0),
+				'FillColor3': (0.0, 0.42, 0.02, 1.0),
+				'FillColor4': (0.0, 0.42, 0.02, 1.0),
+				'BGColor1': (0, 0, 0, 1),
+				'BGColor2': (0, 0, 0, 1),
+				'BGColor3': (0, 0, 0, 1),
+				'BGColor4': (0, 0, 0, 1),
+				'BorderSize': 1,
+				'BorderColor': (0, 0, 0, 1),
+				}
 
 	def __init__(self, parent, name, percent=1.0, sub_theme='', aspect=None, size=[1, 1], pos=[0, 0], options=BGUI_DEFAULT):
 		"""

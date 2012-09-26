@@ -8,10 +8,11 @@ from .label import Label
 class FrameButton(Widget):
 	"""A clickable frame-based button."""
 	theme_section = 'FrameButton'
-	theme_options = {'Color': (0.4, 0.4, 0.4, 1),
-					 'BorderSize': 1,
-					 'BorderColor': (0, 0, 0, 1),
-					 'LabelSubTheme': '',
+	theme_options = {
+				'Color': (0.4, 0.4, 0.4, 1),
+				'BorderSize': 1,
+				'BorderColor': (0, 0, 0, 1),
+				'LabelSubTheme': '',
 				}
 
 	def __init__(self, parent, name, base_color=None, text="", font=None,

@@ -7,12 +7,13 @@ from .widget import Widget, BGUI_DEFAULT, BGUI_NORMALIZED
 class Label(Widget):
 	"""Widget for displaying text"""
 	theme_section = 'Label'
-	theme_options = {'Font': '',
-					 'Color': (1, 1, 1, 1),
-					 'OutlineColor': (0, 0, 0, 1),
-					 'OutlineSize': 0,
-					 'OutlineSmoothing': False,
-					 'Size': 30
+	theme_options = {
+				'Font': '',
+				'Color': (1, 1, 1, 1),
+				'OutlineColor': (0, 0, 0, 1),
+				'OutlineSize': 0,
+				'OutlineSmoothing': False,
+				'Size': 30,
 				}
 
 	def __init__(self, parent, name, text="", font=None, pt_size=None, color=None,
