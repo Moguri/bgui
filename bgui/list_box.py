@@ -23,9 +23,9 @@ Here is an simple example of using the ListBox widget::
 
 """
 
-from .widget import *
-from .frame import *
-from .label import *
+from .widget import Widget, BGUI_DEFAULT, BGUI_MOUSE_CLICK
+from .frame import Frame
+from .label import Label
 
 
 class ListBoxRenderer():

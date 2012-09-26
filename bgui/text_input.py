@@ -9,9 +9,11 @@ This module defines the following constants:
 	* BGUI_INPUT_DEFAULT = BGUI_INPUT_NONE
 """
 
-from .widget import *
-from .label import *
-from .frame import *
+from .widget import Widget, WeakMethod, BGUI_DEFAULT, BGUI_CENTERY, \
+	BGUI_NO_FOCUS, BGUI_MOUSE_ACTIVE, BGUI_MOUSE_CLICK, BGUI_MOUSE_RELEASE
+from .key_defs import *
+from .label import Label
+from .frame import Frame
 
 import blf
 import time

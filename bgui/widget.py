@@ -32,7 +32,6 @@ This module defines the following constants:
 	be subclassed to create other widgets.
 """
 
-from .key_defs import *
 from collections import OrderedDict
 import weakref
 import time

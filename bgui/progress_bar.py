@@ -1,5 +1,5 @@
 from bgl import *
-from .widget import *
+from .widget import Widget, BGUI_DEFAULT
 
 
 class ProgressBar(Widget):

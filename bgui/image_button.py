@@ -1,6 +1,6 @@
-from .widget import *
-from .image import *
-from .frame import *
+from .widget import Widget, BGUI_DEFAULT
+from .image import Image
+from .frame import Frame
 
 
 class ImageButton(Widget):

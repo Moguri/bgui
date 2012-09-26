@@ -1,8 +1,8 @@
 from bgl import *
-import bge
+from bge import texture
 import aud
 
-from .widget import *
+from .widget import Widget, BGUI_DEFAULT
 from .image import Image
 
 
@@ -29,7 +29,7 @@ class Video(Image):
 
 		# Bind and load the texture data
 		glBindTexture(GL_TEXTURE_2D, self.tex_id)
-		video = bge.texture.VideoFFmpeg(vid)
+		video = texture.VideoFFmpeg(vid)
 		video.repeat = repeat
 		video.play()
 		im_buf = video.image

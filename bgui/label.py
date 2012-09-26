@@ -1,7 +1,7 @@
 from bgl import *
 import blf
 
-from .widget import *
+from .widget import Widget, BGUI_DEFAULT, BGUI_NORMALIZED
 
 
 class Label(Widget):

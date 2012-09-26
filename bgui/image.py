@@ -1,7 +1,7 @@
 from bgl import *
-import bge
+from bge import texture
 
-from .widget import *
+from .widget import Widget, BGUI_DEFAULT, BGUI_CACHE
 
 
 class Image(Widget):
@@ -72,7 +72,7 @@ class Image(Widget):
 			image = Image._cache[img]
 		else:
 			# Load the texture data from disk
-			image = bge.texture.ImageFFmpeg(img)
+			image = texture.ImageFFmpeg(img)
 			image.scale = False
 			if self.options & BGUI_CACHE:
 				Image._cache[img] = image

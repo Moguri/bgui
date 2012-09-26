@@ -1,8 +1,8 @@
 from bgl import *
 
-from .widget import *
-from .frame import *
-from .label import *
+from .widget import Widget, BGUI_DEFAULT, BGUI_THEMED, BGUI_CENTERED
+from .frame import Frame
+from .label import Label
 
 
 class FrameButton(Widget):

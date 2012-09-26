@@ -1,6 +1,6 @@
 from bgl import *
-from .widget import *
-from .theme import *
+from .widget import Widget, BGUI_MOUSE_NONE
+from .theme import Theme
 import weakref
 
 

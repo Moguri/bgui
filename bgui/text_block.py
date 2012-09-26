@@ -1,5 +1,5 @@
-from .widget import *
-from .label import *
+from .widget import Widget, BGUI_OVERFLOW_HIDDEN, BGUI_OVERFLOW_REPLACE, BGUI_OVERFLOW_CALLBACK, BGUI_DEFAULT
+from .label import Label
 
 
 class TextBlock(Widget):
@@ -108,4 +108,3 @@ class TextBlock(Widget):
 				elif self.overflow == BGUI_OVERFLOW_CALLBACK:
 					if self.on_overflow:
 						self.on_overflow(self)
-
