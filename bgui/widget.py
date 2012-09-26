@@ -80,41 +80,61 @@ class WeakMethod:
 			self.f(*((self.c(),)+args))
 
 class Animation:
-	def __init__(self, widget, newpos, time_, callback):
+	def __init__(self, widget, attrib, value, time_, callback):
 		self.widget = widget
-		self.prevpos = widget.position[:]
-		if widget.options & BGUI_NORMALIZED:
-			self.prevpos[0] /= widget.parent.size[0]
-			self.prevpos[1] /= widget.parent.size[1]
-		self.newpos = newpos
+		self.attrib = attrib
+		self.prev_value = getattr(widget, attrib)
+		self.next_value = value
 		self.start_time = self.last_update = time.time()
 		self.time = time_
 		self.callback = callback
-		
+
 	def update(self):
-		if (time.time()-self.start_time)*1000 >= self.time:
+		if (time.time() - self.start_time) * 1000 >= self.time:
 			# We're done, run the callback and
 			# return false to let widget know we can be removed
 			if self.callback: self.callback()
 			return False
-		
-		dt = (time.time() - self.last_update)*1000
+
+		dt = (time.time() - self.last_update) * 1000
 		self.last_update = time.time()
-		
-		dx = ((self.newpos[0] - self.prevpos[0])/self.time)*dt
-		dy = ((self.newpos[1] - self.prevpos[1])/self.time)*dt
-		
-		
-		p = self.widget.position
-		if self.widget.options & BGUI_NORMALIZED:
-			p[0] /= self.widget.parent.size[0]
-			p[1] /= self.widget.parent.size[1]
-			
-		p[0] += dx
-		p[1] += dy
-		
-		self.widget.position = p
-		
+
+		dv = ((self.next_value - self.prev_value) / self.time) * dt
+
+		setattr(self.widget, self.attrib, getattr(self.widget, self.attrib) + dv)
+
+		return True
+
+class ArrayAnimation(Animation):
+	def __init__(self, widget, attrib, value, time_, callback):
+		super().__init__(widget, attrib, value, time_, callback)
+		self.prev_value = getattr(widget, attrib)[:]
+
+		if attrib == "position" and widget.options & BGUI_NORMALIZED:
+			self.prev_value[0] /= widget.parent.size[0]
+			self.prev_value[1] /= widget.parent.size[1]
+
+	def update(self):
+		if (time.time() - self.start_time) * 1000 >= self.time:
+			# We're done, run the callback and
+			# return false to let widget know we can be removed
+			if self.callback: self.callback()
+			return False
+
+		dt = (time.time() - self.last_update) * 1000
+		self.last_update = time.time()
+
+		new_value = getattr(self.widget, self.attrib)[:]
+		if self.attrib == "position" and self.widget.options & BGUI_NORMALIZED:
+			new_value[0] /= self.widget.parent.size[0]
+			new_value[1] /= self.widget.parent.size[1]
+
+		for i in range(len(self.prev_value)):
+			dv = ((self.next_value[i] - self.prev_value[i]) / self.time) * dt
+
+			new_value[i] += dv
+		setattr(self.widget, self.attrib, new_value)
+
 		return True
 
 class Widget:
@@ -402,8 +422,16 @@ class Widget:
 		:param time: The time in milliseconds to take doing the move
 		:param callback: An optional callback that is called when he animation is complete
 		"""
-		self.anims.append(Animation(self, position, time, callback))
+
+		self.anims.append(ArrayAnimation(self, "position", position, time, callback))
+
+	def add_animation(self, animation):
+		"""Add the animation to the list of currently running animations
 		
+		:param animation: The animation
+		"""
+		self.anims.append(animation)
+
 	def _update_anims(self):
 		self.anims[:] = [i for i in self.anims if i.update()]
 		
