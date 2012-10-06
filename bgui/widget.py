@@ -163,7 +163,7 @@ class Widget:
 		self.options = options
 
 		# Store the system so children can access theming data
-		self.system = parent.system
+		self._system = parent._system
 
 		if sub_theme:
 			self.theme_section += ':' + sub_theme
@@ -244,6 +244,7 @@ class Widget:
 		"""Override this if needed"""
 		for child in self.children:
 			self.children[child]._cleanup()
+		self._children = OrderedDict()
 
 	def _update_position(self, size=None, pos=None):
 		if size is not None:
@@ -390,6 +391,11 @@ class Widget:
 	def parent(self):
 		"""The widget's parent"""
 		return self._parent
+
+	@property
+	def system(self):
+		"""A reference to the system object"""
+		return self._system()
 
 	@parent.setter
 	def parent(self, value):
