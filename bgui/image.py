@@ -50,6 +50,10 @@ class Image(Widget):
 		id_buf[0] = self.tex_id
 		glDeleteTextures(1, id_buf)
 
+		# Set self.image to None to force ImageFFmpeg() to be deleted and free
+		# its image data.
+		self.image = None
+
 		Widget._cleanup(self)
 
 	def update_image(self, img):

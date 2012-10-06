@@ -77,6 +77,9 @@ class Video(Image):
 		if self.aud_handle:
 			self.aud_handle.stop()
 
+		# Set self.video to None to force VideoFFmpeg() to be deleted and free
+		# its video data.
+		self.video = None
 		Image._cleanup(self)
 
 	def update_image(self, img):
