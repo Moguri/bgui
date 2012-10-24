@@ -107,6 +107,9 @@ class System(Widget):
 		glShadeModel(GL_SMOOTH)
 
 		# Setup the matrices
+		glMatrixMode(GL_TEXTURE)
+		glPushMatrix()
+		glLoadIdentity()
 		glMatrixMode(GL_PROJECTION)
 		glPushMatrix()
 		glLoadIdentity()
@@ -124,5 +127,7 @@ class System(Widget):
 		# Reset the state
 		glPopMatrix()
 		glMatrixMode(GL_PROJECTION)
+		glPopMatrix()
+		glMatrixMode(GL_TEXTURE)
 		glPopMatrix()
 		glPopAttrib()
