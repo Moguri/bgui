@@ -5,10 +5,13 @@ New Features
   * FrameButton, TextBlock and TextInput now have a LabelSubTheme theme option which can be used to control the subtheme used for the underlying labels in these widgets.
   * Labels can now have outlines.
   * Widgets now have a z_index value for additional control over drawing order. (thanks to andrew-101)
+  * New animation system that allows for any property of a widget to be animated using the Animation and ArrayAnimation classes along with Widget.add_animation().
 Bugs Fixed
 ^^^^^^^^^^
+  * Issue #25: "Image from image widget is repeated when using animated tiled textures"
 Other Stuff
 ^^^^^^^^^^^
+  * Labels now have a fixed height based on the font instead of the individual characters in the string. This makes the default ListBoxRenderer have consistent spacing between elements.
 0.07
 -------
 New Features

@@ -66,16 +66,16 @@ and returns a widget to render.</p>
 <div class="highlight-python"><div class="highlight"><pre><span class="k">class</span> <span class="nc">MySys</span><span class="p">(</span><span class="n">bgui</span><span class="o">.</span><span class="n">System</span><span class="p">):</span>
         <span class="k">def</span> <span class="nf">lb_click</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">lb</span><span class="p">):</span>
                 <span class="k">print</span><span class="p">(</span><span class="n">lb</span><span class="o">.</span><span class="n">selected</span><span class="p">)</span>
-        
+
         <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
                 <span class="n">bgui</span><span class="o">.</span><span class="n">System</span><span class="o">.</span><span class="n">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>
-                
+
                 <span class="n">items</span> <span class="o">=</span> <span class="p">[</span><span class="s">&quot;One&quot;</span><span class="p">,</span> <span class="s">&quot;Two&quot;</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mf">4.6</span><span class="p">]</span>
                 <span class="bp">self</span><span class="o">.</span><span class="n">frame</span> <span class="o">=</span> <span class="n">bgui</span><span class="o">.</span><span class="n">Frame</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="s">&#39;window&#39;</span><span class="p">,</span> <span class="n">border</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">size</span><span class="o">=</span><span class="p">[</span><span class="mf">0.5</span><span class="p">,</span> <span class="mf">0.5</span><span class="p">],</span>
                         <span class="n">options</span><span class="o">=</span><span class="n">bgui</span><span class="o">.</span><span class="n">BGUI_DEFAULT</span><span class="o">|</span><span class="n">bgui</span><span class="o">.</span><span class="n">BGUI_CENTERED</span><span class="p">)</span>
                 <span class="bp">self</span><span class="o">.</span><span class="n">lb</span> <span class="o">=</span> <span class="n">bgui</span><span class="o">.</span><span class="n">ListBox</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">frame</span><span class="p">,</span> <span class="s">&quot;lb&quot;</span><span class="p">,</span> <span class="n">items</span><span class="o">=</span><span class="n">items</span><span class="p">,</span> <span class="n">padding</span><span class="o">=</span><span class="mf">0.05</span><span class="p">,</span> <span class="n">size</span><span class="o">=</span><span class="p">[</span><span class="mf">0.9</span><span class="p">,</span> <span class="mf">0.9</span><span class="p">],</span> <span class="n">pos</span><span class="o">=</span><span class="p">[</span><span class="mf">0.05</span><span class="p">,</span> <span class="mf">0.05</span><span class="p">])</span>
                 <span class="bp">self</span><span class="o">.</span><span class="n">lb</span><span class="o">.</span><span class="n">on_click</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">lb_click</span>
-                
+
                 <span class="c"># ... rest of __init__</span>
 </pre></div>
 </div>
@@ -102,6 +102,20 @@ and returns a widget to render.</p>
 </tr>
 </tbody>
 </table>
+<dl class="method">
+<dt id="bgui.list_box.ListBox.add_animation">
+<tt class="descname">add_animation</tt><big>(</big><em>animation</em><big>)</big><a class="headerlink" href="#bgui.list_box.ListBox.add_animation" title="Permalink to this definition">¶</a></dt>
+<dd><p>Add the animation to the list of currently running animations</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>animation</strong> &#8211; The animation</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
 <dl class="attribute">
 <dt id="bgui.list_box.ListBox.children">
 <tt class="descname">children</tt><a class="headerlink" href="#bgui.list_box.ListBox.children" title="Permalink to this definition">¶</a></dt>
@@ -209,6 +223,12 @@ and returns a widget to render.</p>
 <dt id="bgui.list_box.ListBox.size">
 <tt class="descname">size</tt><a class="headerlink" href="#bgui.list_box.ListBox.size" title="Permalink to this definition">¶</a></dt>
 <dd><p>The widget&#8217;s size</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="bgui.list_box.ListBox.system">
+<tt class="descname">system</tt><a class="headerlink" href="#bgui.list_box.ListBox.system" title="Permalink to this definition">¶</a></dt>
+<dd><p>A reference to the system object</p>
 </dd></dl>
 
 <dl class="attribute">
