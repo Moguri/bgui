@@ -6,6 +6,7 @@ New Features
   * Labels can now have outlines.
   * Widgets now have a z_index value for additional control over drawing order. (thanks to andrew-101)
   * New animation system that allows for any property of a widget to be animated using the Animation and ArrayAnimation classes along with Widget.add_animation().
+  * The minification and magnification filters to use for Image widgets is now user settable between two possible values: BGUI_NEAREST (crisper) and BGUI_LINEAR (smoother). (thanks to SolarLune)
 Bugs Fixed
 ^^^^^^^^^^
   * Issue #25: "Image from image widget is repeated when using animated tiled textures"

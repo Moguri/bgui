@@ -1,7 +1,20 @@
+"""
+
+This module defines the following constants:
+
+*Texture interpolation modes*
+	* BGUI_NEAREST
+	* BGUI_LINEAR
+"""
+
 from bgl import *
 from bge import texture
 
 from .widget import Widget, BGUI_DEFAULT, BGUI_CACHE
+
+# Interpolation mode constants for texture filtering
+BGUI_NEAREST = GL_NEAREST
+BGUI_LINEAR = GL_LINEAR
 
 
 class Image(Widget):
@@ -10,7 +23,7 @@ class Image(Widget):
 	_cache = {}
 
 	def __init__(self, parent, name, img, aspect=None, size=[0, 0], pos=[0, 0],
-				texco=[(0, 0), (1, 0), (1, 1), (0, 1)], sub_theme='', options=BGUI_DEFAULT):
+				texco=[(0, 0), (1, 0), (1, 1), (0, 1)], interp_mode=BGUI_LINEAR, sub_theme='', options=BGUI_DEFAULT):
 		""":param parent: the widget's parent
 		:param name: the name of the widget
 		:param img: the image to use for the widget
@@ -18,6 +31,7 @@ class Image(Widget):
 		:param size: a tuple containing the width and height
 		:param pos: a tuple containing the x and y position
 		:param texco: the UV texture coordinates to use for the image
+		:param interp_mode: texture interpolating mode for both maximizing and minifying the texture (defaults to BGUI_LINEAR)
 		:param sub_theme: name of a sub_theme defined in the theme file (similar to CSS classes)
 		:param options: various other options
 		"""
@@ -30,11 +44,20 @@ class Image(Widget):
 
 		self.tex_id = id_buf.to_list()[0] if hasattr(id_buf, "to_list") else id_buf.list[0]
 		self.texco = texco
-
+		self._interp_mode = interp_mode
 		self.image = None
 		self.update_image(img)
 
 		self._color = [1, 1, 1, 1]
+
+	@property
+	def interp_mode(self):
+		"""The type of image filtering to be performed on the texture."""
+		return self._interp_mode
+
+	@interp_mode.setter
+	def interp_mode(self, value):
+		self._interp_mode = value
 
 	@property
 	def color(self):
@@ -90,8 +113,8 @@ class Image(Widget):
 			return
 
 		# Setup some parameters
-		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR)
-		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR)
+		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, self.interp_mode)
+		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, self.interp_mode)
 
 		glTexEnvf(GL_TEXTURE_ENV, GL_TEXTURE_ENV_MODE, GL_MODULATE)
 
