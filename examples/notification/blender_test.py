@@ -24,6 +24,7 @@ class MySys(bgui.System):
 		# Create the note
 		self.note = bgui.Frame(self, 'note', border=1, size=[.25, .25], pos=[0.7, -0.3],
 				options=bgui.BGUI_DEFAULT)
+		self.note.colors = [[0, 0, 1, 0.5]] * 4
 		self.note_hdr = bgui.Label(self.note, 'hdr', text="Notification:", pt_size=42, pos=[0.05, 0.8])
 		self.note_msg = bgui.Label(self.note, 'msg', text="The button was clicked!", pos=[0.1, 0],
 				options=bgui.BGUI_DEFAULT|bgui.BGUI_CENTERY)

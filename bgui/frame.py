@@ -6,10 +6,10 @@ class Frame(Widget):
 	"""Frame for storing other widgets"""
 	theme_section = 'Frame'
 	theme_options = {
-				'Color1': (1, 1, 1, 1),
-				'Color2': (0, 0, 1, 1),
-				'Color3': (0, 0, 1, 1),
-				'Color4': (0, 0, 1, 1),
+				'Color1': (0, 0, 0, 0),
+				'Color2': (0, 0, 0, 0),
+				'Color3': (0, 0, 0, 0),
+				'Color4': (0, 0, 0, 0),
 				'BorderSize': 0,
 				'BorderColor': (0, 0, 0, 1),
 				}
