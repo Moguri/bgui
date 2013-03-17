@@ -1,4 +1,4 @@
-SVN
+0.08
 -------
 New Features
 ^^^^^^^^^^^^
@@ -7,12 +7,16 @@ New Features
   * Widgets now have a z_index value for additional control over drawing order. (thanks to andrew-101)
   * New animation system that allows for any property of a widget to be animated using the Animation and ArrayAnimation classes along with Widget.add_animation().
   * The minification and magnification filters to use for Image widgets is now user settable between two possible values: BGUI_NEAREST (crisper) and BGUI_LINEAR (smoother). (thanks to SolarLune)
+
 Bugs Fixed
 ^^^^^^^^^^
   * Issue #25: "Image from image widget is repeated when using animated tiled textures"
+
 Other Stuff
 ^^^^^^^^^^^
   * Labels now have a fixed height based on the font instead of the individual characters in the string. This makes the default ListBoxRenderer have consistent spacing between elements.
+  * The default color for all four corners of a Frame are now (0, 0, 0, 0) as opposed to the blue/white gradient.
+
 0.07
 -------
 New Features
@@ -24,10 +28,12 @@ New Features
   * Two new utility functions for TextInput: select_all() and select_none(). (thanks to jplur)
   * TextInput now supports the delete key.
   * Widgets now have on_mouse_enter and on_mouse_exit callbacks.
+
 Bugs Fixed
 ^^^^^^^^^^
   * The system's size now updates if the viewport size changes.
   * Issue 11: Externally resetting text input contents breaks selection. (thanks to jplur)
+
 Other Stuff
 ^^^^^^^^^^^
   * Widgets can now define various _handle_*() methods that match the callbacks. This allows subclasses to use callbacks without interfering with the user-defined ones.
