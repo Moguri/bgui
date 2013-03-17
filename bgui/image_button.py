@@ -14,7 +14,7 @@ class ImageButton(Widget):
 				'ClickImage': (None, 0, 0, 1, 1),
 				}
 
-	def __init__(self, parent, name, default_image=None, default2_image=None, hover_image=None,
+	def __init__(self, parent, name=None, default_image=None, default2_image=None, hover_image=None,
 					click_image=None, aspect=None, size=[1, 1], pos=[0, 0], sub_theme='',
 					options=BGUI_DEFAULT):
 		"""

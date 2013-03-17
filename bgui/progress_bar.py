@@ -19,7 +19,7 @@ class ProgressBar(Widget):
 				'BorderColor': (0, 0, 0, 1),
 				}
 
-	def __init__(self, parent, name, percent=1.0, sub_theme='', aspect=None, size=[1, 1], pos=[0, 0], options=BGUI_DEFAULT):
+	def __init__(self, parent, name=None, percent=1.0, sub_theme='', aspect=None, size=[1, 1], pos=[0, 0], options=BGUI_DEFAULT):
 		"""
 		:param parent: the widget's parent
 		:param name: the name of the widget

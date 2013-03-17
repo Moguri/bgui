@@ -9,7 +9,7 @@ from .image import Image
 class Video(Image):
 	"""Widget for displaying video only (i.e., no sound)"""
 
-	def __init__(self, parent, name, vid, play_audio=False, repeat=0, aspect=None, size=[1, 1], pos=[0, 0],
+	def __init__(self, parent, vid, name=None, play_audio=False, repeat=0, aspect=None, size=[1, 1], pos=[0, 0],
 				sub_theme='', options=BGUI_DEFAULT):
 		"""
 		:param parent: the widget's parent

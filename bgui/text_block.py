@@ -10,7 +10,7 @@ class TextBlock(Widget):
 				'LabelSubTheme': '',
 				}
 
-	def __init__(self, parent, name, text="", font=None, pt_size=None, color=None, aspect=None,
+	def __init__(self, parent, name=None, text="", font=None, pt_size=None, color=None, aspect=None,
 					size=[1, 1], pos=[0, 0], sub_theme='', overflow=BGUI_OVERFLOW_HIDDEN, options=BGUI_DEFAULT):
 		"""
 		:param parent: the widget's parent

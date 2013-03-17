@@ -16,7 +16,7 @@ class Label(Widget):
 				'Size': 30,
 				}
 
-	def __init__(self, parent, name, text="", font=None, pt_size=None, color=None,
+	def __init__(self, parent, name=None, text="", font=None, pt_size=None, color=None,
 				outline_color=None, outline_size=None, outline_smoothing=None, pos=[0, 0], sub_theme='', options=BGUI_DEFAULT):
 		"""
 		:param parent: the widget's parent

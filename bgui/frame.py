@@ -14,7 +14,7 @@ class Frame(Widget):
 				'BorderColor': (0, 0, 0, 1),
 				}
 
-	def __init__(self, parent, name, border=None, aspect=None, size=[1, 1], pos=[0, 0],
+	def __init__(self, parent, name=None, border=None, aspect=None, size=[1, 1], pos=[0, 0],
 				sub_theme='', options=BGUI_DEFAULT):
 		"""
 		:param parent: the widget's parent

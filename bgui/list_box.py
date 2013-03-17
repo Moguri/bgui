@@ -60,7 +60,7 @@ class ListBox(Widget):
 				'Padding': 0,
 				}
 
-	def __init__(self, parent, name, items=[], padding=0, aspect=None, size=[1, 1], pos=[0, 0], sub_theme='', options=BGUI_DEFAULT):
+	def __init__(self, parent, name=None, items=[], padding=0, aspect=None, size=[1, 1], pos=[0, 0], sub_theme='', options=BGUI_DEFAULT):
 		"""
 		:param parent: the widget's parent
 		:param name: the name of the widget

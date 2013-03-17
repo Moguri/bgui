@@ -147,7 +147,7 @@ class Widget:
 	theme_section = 'Widget'
 	theme_options = {}
 
-	def __init__(self, parent, name, aspect=None, size=[0, 0], pos=[0, 0], sub_theme='',
+	def __init__(self, parent, name=None, aspect=None, size=[0, 0], pos=[0, 0], sub_theme='',
 			options=BGUI_DEFAULT):
 		"""
 		:param parent: the widget's parent
@@ -159,6 +159,10 @@ class Widget:
 		:param options: various other options
 		"""
 
+		if name is None:
+			name = "1"
+			while name in parent.children:
+				name = str(int(name) + 1)
 		self._name = name
 		self.options = options
 
@@ -530,7 +534,7 @@ class Widget:
 		if not isinstance(widget, Widget):
 			raise TypeError("Expected a Widget object")
 
-		if widget in self.children:
+		if widget in self.children.values():
 			raise ValueError("%s is already attached to this widget" % (widget.name))
 
 		self.children[widget.name] = widget

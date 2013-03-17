@@ -15,7 +15,7 @@ class FrameButton(Widget):
 				'LabelSubTheme': '',
 				}
 
-	def __init__(self, parent, name, base_color=None, text="", font=None,
+	def __init__(self, parent, name=None, base_color=None, text="", font=None,
 					pt_size=None, aspect=None, size=[1, 1], pos=[0, 0], sub_theme='', options=BGUI_DEFAULT):
 		"""
 		:param parent: the widget's parent

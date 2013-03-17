@@ -42,7 +42,7 @@ class TextInput(Widget):
 				'LabelSubTheme': '',
 				}
 
-	def __init__(self, parent, name, text="", prefix="", font=None, pt_size=None, color=None,
+	def __init__(self, parent, name=None, text="", prefix="", font=None, pt_size=None, color=None,
 					aspect=None, size=[0, 0], pos=[0, 0], sub_theme='', input_options=BGUI_INPUT_DEFAULT, options=BGUI_DEFAULT):
 		"""
 		:param parent: the widget's parent
@@ -334,7 +334,7 @@ class TextInput(Widget):
 			pass
 
 		if is_shifted:
-			sh = 0 #used for slicing
+			sh = 0  #used for slicing
 		else:
 			sh = 1
 		slice_len = abs(self.slice[0] - self.slice[1])
