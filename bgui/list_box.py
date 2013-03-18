@@ -42,7 +42,7 @@ class ListBoxRenderer():
 		:param item: the item to be rendered
 		:rtype: :py:class:`bgui.label.Label`
 		"""
-		self.label.text = item.__repr__()
+		self.label.text = str(item)
 
 		return self.label
 
