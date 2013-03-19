@@ -18,19 +18,19 @@ class MySys(bgui.System):
 		self.clear_time = time.time()
 		self.note_visible = False
 
-		self.frame = bgui.Frame(self, 'frame', aspect=(4/3),
+		self.frame = bgui.Frame(self, aspect=(4/3),
 					options=bgui.BGUI_DEFAULT|bgui.BGUI_CENTERED)
 		self.frame.visible = False
 		# Create the note
-		self.note = bgui.Frame(self, 'note', border=1, size=[.25, .25], pos=[0.7, -0.3],
+		self.note = bgui.Frame(self, border=1, size=[.25, .25], pos=[0.7, -0.3],
 				options=bgui.BGUI_DEFAULT)
 		self.note.colors = [[0, 0, 1, 0.5]] * 4
-		self.note_hdr = bgui.Label(self.note, 'hdr', text="Notification:", pt_size=42, pos=[0.05, 0.8])
-		self.note_msg = bgui.Label(self.note, 'msg', text="The button was clicked!", pos=[0.1, 0],
+		self.note_hdr = bgui.Label(self.note, text="Notification:", pt_size=42, pos=[0.05, 0.8])
+		self.note_msg = bgui.Label(self.note, text="The button was clicked!", pos=[0.1, 0],
 				options=bgui.BGUI_DEFAULT|bgui.BGUI_CENTERY)
 		
 		# Create the button
-		self.button = bgui.FrameButton(self, 'btn', text='Click Me!', size=[0.4, 0.2],
+		self.button = bgui.FrameButton(self, text='Click Me!', size=[0.4, 0.2],
 				pos=[0.3, 0.4])
 		self.button.on_click = self.display_note
 		

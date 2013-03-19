@@ -15,43 +15,43 @@ class MySys(bgui.System):
 		bgui.System.__init__(self, '../../themes/default')
 		
 		# Use a frame to store all of our widgets
-		self.frame = bgui.Frame(self, 'window', border=0)
+		self.frame = bgui.Frame(self, border=0)
 		self.frame.colors = [(0, 0, 0, 0) for i in range(4)]
 
 		# A themed frame
-		self.win = bgui.Frame(self, 'win', size=[0.6, 0.8],
+		self.win = bgui.Frame(self, size=[0.6, 0.8],
 			options=bgui.BGUI_DEFAULT|bgui.BGUI_CENTERED)
 			
 		# Create an image to display
-		self.win.img = bgui.Image(self.win, 'image', 'img.jpg', size=[.92, .7], pos=[.01, .24],
+		self.win.img = bgui.Image(self.win, 'img.jpg', size=[.92, .7], pos=[.01, .24],
 			options = bgui.BGUI_DEFAULT|bgui.BGUI_CENTERX|bgui.BGUI_CACHE)
 		
 		# A button
-		self.button = bgui.FrameButton(self.win, 'button', text='Click Me!', size=[.14, .09], pos=[.815, .03],
+		self.button = bgui.FrameButton(self.win, text='Click Me!', size=[.14, .09], pos=[.815, .03],
 			options = bgui.BGUI_DEFAULT)
-		self.audio_button = bgui.ImageButton(self.win, 'ab', sub_theme='Audio',
+		self.audio_button = bgui.ImageButton(self.win, sub_theme='Audio',
 										size=[0.05, 0.05], pos=[0.75, 0.05])
 		# Setup an on_click callback for the image
 		self.button.on_click = self.on_img_click
 
 		# Add a label
-		self.lbl = bgui.Label(self, 'label', text="I'm a label!", pos=[0, 0.9],
+		self.lbl = bgui.Label(self, text="I'm a label!", pos=[0, 0.9],
 			sub_theme='Large', options = bgui.BGUI_DEFAULT | bgui.BGUI_CENTERX)
 		
 		# A couple of progress bars to demonstrate sub themes
-		self.progress = bgui.ProgressBar(self.win, "progess", percent=0.0, size=[0.92, 0.06], pos=[.2, 0.17],
+		self.progress = bgui.ProgressBar(self.win, percent=0.0, size=[0.92, 0.06], pos=[.2, 0.17],
 											sub_theme="Progress", options=bgui.BGUI_DEFAULT | bgui.BGUI_CENTERX)
 											
-		self.health = bgui.ProgressBar(self.win, "health", percent=0.5, size=[0.92, 0.02], pos=[0, 0.14],
+		self.health = bgui.ProgressBar(self.win, percent=0.5, size=[0.92, 0.02], pos=[0, 0.14],
 											sub_theme="Health",	options=bgui.BGUI_DEFAULT|bgui.BGUI_CENTERX)
 			
 		# A few TextInput widgets
-		self.input = bgui.TextInput(self.win, 'input', "I'm active.", font="myfont.otf", size=[.4, .04], pos=[.04, 0.02],
+		self.input = bgui.TextInput(self.win, text="I'm active.", font="myfont.otf", size=[.4, .04], pos=[.04, 0.02],
 			input_options = bgui.BGUI_INPUT_NONE, options = bgui.BGUI_DEFAULT)
 		self.input.activate()
 		self.input.on_enter_key = self.on_input_enter
 		
-		self.input2 = bgui.TextInput(self.win, 'input2', "I select all when activated.", size=[.4, .04], pos=[.04, 0.08],
+		self.input2 = bgui.TextInput(self.win, text="I select all when activated.", size=[.4, .04], pos=[.04, 0.08],
 			input_options = bgui.BGUI_INPUT_SELECT_ALL, options = bgui.BGUI_DEFAULT)
 		
 		# A counter property used for the on_img_click() method
