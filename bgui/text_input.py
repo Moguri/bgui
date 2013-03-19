@@ -68,10 +68,10 @@ class TextInput(Widget):
 		self.colors = {}
 
 		#create widgets
-		self.frame = Frame(self, name + "_frame", size=[1, 1], options=BGUI_NO_FOCUS | BGUI_DEFAULT | BGUI_CENTERY)
-		self.highlight = Frame(self, name + "_highlight", size=self.frame.size, options=BGUI_NO_FOCUS | BGUI_CENTERY)
-		self.cursor = Frame(self, name + "_cursor", size=[1, 1], border=0, options=BGUI_NO_FOCUS | BGUI_CENTERY)
-		self.label = Label(self, name + "_label", text, font, pt_size, sub_theme=self.theme['LabelSubTheme'], options=BGUI_NO_FOCUS | BGUI_DEFAULT)
+		self.frame = Frame(self, size=[1, 1], options=BGUI_NO_FOCUS | BGUI_DEFAULT | BGUI_CENTERY)
+		self.highlight = Frame(self, size=self.frame.size, options=BGUI_NO_FOCUS | BGUI_CENTERY)
+		self.cursor = Frame(self, size=[1, 1], border=0, options=BGUI_NO_FOCUS | BGUI_CENTERY)
+		self.label = Label(self, text=text, font=font, pt_size=pt_size, sub_theme=self.theme['LabelSubTheme'], options=BGUI_NO_FOCUS | BGUI_DEFAULT)
 
 		#Color and setting initialization
 		self.colormode = 0
