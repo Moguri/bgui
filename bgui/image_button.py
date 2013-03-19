@@ -55,10 +55,10 @@ class ImageButton(Widget):
 
 		if self.default_image[0]:
 			coords = self._get_coords(self.default_image)
-			self.image = Image(self, name + '_img', self.default_image[0],
+			self.image = Image(self, self.default_image[0],
 								texco=coords, size=[1, 1], pos=[0, 0])
 		else:
-			self.image = Frame(self, name + '_img', size=[1, 1], pos=[0, 0])
+			self.image = Frame(self, size=[1, 1], pos=[0, 0])
 
 		self.state = 0
 

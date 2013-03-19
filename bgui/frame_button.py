@@ -33,8 +33,8 @@ class FrameButton(Widget):
 
 		Widget.__init__(self, parent, name, aspect, size, pos, sub_theme, options)
 
-		self.frame = Frame(self, name + '_frame', size=[1, 1], pos=[0, 0], options=BGUI_DEFAULT & ~BGUI_THEMED)
-		self.label = Label(self, name + '_label', text, font, pt_size, pos=[0, 0], sub_theme=self.theme['LabelSubTheme'], options=BGUI_DEFAULT | BGUI_CENTERED)
+		self.frame = Frame(self, size=[1, 1], pos=[0, 0], options=BGUI_DEFAULT & ~BGUI_THEMED)
+		self.label = Label(self, text=text, font=font, pt_size=pt_size, pos=[0, 0], sub_theme=self.theme['LabelSubTheme'], options=BGUI_DEFAULT | BGUI_CENTERED)
 
 		if not base_color:
 			base_color = self.theme['Color']
