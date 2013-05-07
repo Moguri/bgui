@@ -49,7 +49,7 @@ class Label(Widget):
 			self.color = self.theme['Color']
 
 		if outline_color:
-			self.outline_color = color
+			self.outline_color = outline_color
 		else:
 			self.outline_color = self.theme['OutlineColor']
 
