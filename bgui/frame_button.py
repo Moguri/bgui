@@ -1,6 +1,6 @@
 from bgl import *
 
-from .widget import Widget, BGUI_DEFAULT, BGUI_THEMED, BGUI_CENTERED
+from .widget import Widget, BGUI_DEFAULT, BGUI_NO_THEME, BGUI_CENTERED
 from .frame import Frame
 from .label import Label
 
@@ -33,7 +33,7 @@ class FrameButton(Widget):
 
 		Widget.__init__(self, parent, name, aspect, size, pos, sub_theme, options)
 
-		self.frame = Frame(self, size=[1, 1], pos=[0, 0], options=BGUI_DEFAULT & ~BGUI_THEMED)
+		self.frame = Frame(self, size=[1, 1], pos=[0, 0], options=BGUI_NO_THEME)
 		self.label = Label(self, text=text, font=font, pt_size=pt_size, pos=[0, 0], sub_theme=self.theme['LabelSubTheme'], options=BGUI_DEFAULT | BGUI_CENTERED)
 
 		if not base_color:

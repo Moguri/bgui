@@ -1,7 +1,7 @@
 from bgl import *
 import blf
 
-from .widget import Widget, BGUI_DEFAULT, BGUI_NORMALIZED
+from .widget import Widget, BGUI_DEFAULT, BGUI_NO_NORMALIZE
 
 
 class Label(Widget):
@@ -76,7 +76,7 @@ class Label(Widget):
 		blf.size(self.fontid, self.pt_size, 72)
 		size = [blf.dimensions(self.fontid, value)[0], blf.dimensions(self.fontid, 'Mj')[0]]
 
-		if self.options & BGUI_NORMALIZED:
+		if not (self.options & BGUI_NO_NORMALIZE):
 			size[0] /= self.parent.size[0]
 			size[1] /= self.parent.size[1]
 

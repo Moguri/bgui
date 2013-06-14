@@ -3,15 +3,14 @@
 This module defines the following constants:
 
 *Widget options*
-	* BGUI_NONE = 0
+	* BGUI_DEFAULT = 0
 	* BGUI_CENTERX = 1
 	* BGUI_CENTERY = 2
-	* BGUI_NORMALIZED = 4
-	* BGUI_THEMED = 8
+	* BGUI_NO_NORMALIZE = 4
+	* BGUI_NO_THEME = 8
 	* BGUI_NO_FOCUS = 16
 	* BGUI_CACHE = 32
 
-	* BGUI_DEFAULT = BGUI_NORMALIZED | BGUI_THEMED
 	* BGUI_CENTERED = BGUI_CENTERX | BGUI_CENTERY
 
 *Widget overflow*
@@ -37,15 +36,14 @@ import weakref
 import time
 
 # Widget options
-BGUI_NONE = 0
+BGUI_DEFAULT = 0
 BGUI_CENTERX = 1
 BGUI_CENTERY = 2
-BGUI_NORMALIZED = 4
-BGUI_THEMED = 8
+BGUI_NO_NORMALIZE = 4
+BGUI_NO_THEME = 8
 BGUI_NO_FOCUS = 16
 BGUI_CACHE = 32
 
-BGUI_DEFAULT = BGUI_NORMALIZED | BGUI_THEMED
 BGUI_CENTERED = BGUI_CENTERX | BGUI_CENTERY
 
 # Widget overflow
@@ -112,7 +110,7 @@ class ArrayAnimation(Animation):
 		super().__init__(widget, attrib, value, time_, callback)
 		self.prev_value = getattr(widget, attrib)[:]
 
-		if attrib == "position" and widget.options & BGUI_NORMALIZED:
+		if attrib == "position" and not (widget.options & BGUI_NO_NORMALIZE):
 			self.prev_value[0] /= widget.parent.size[0]
 			self.prev_value[1] /= widget.parent.size[1]
 
@@ -128,7 +126,7 @@ class ArrayAnimation(Animation):
 		self.last_update = time.time()
 
 		new_value = getattr(self.widget, self.attrib)[:]
-		if self.attrib == "position" and self.widget.options & BGUI_NORMALIZED:
+		if self.attrib == "position" and not (self.widget.options & BGUI_NO_NORMALIZE):
 			new_value[0] /= self.widget.parent.size[0]
 			new_value[1] /= self.widget.parent.size[1]
 
@@ -204,7 +202,7 @@ class Widget:
 
 		if aspect:
 			size = [self.size[1] * aspect, self.size[1]]
-			if self.options & BGUI_NORMALIZED:
+			if not (self.options & BGUI_NO_NORMALIZE):
 				size = [size[0] / self.parent.size[0], size[1] / self.parent.size[1]]
 			self._update_position(size, self._base_pos)
 
@@ -221,7 +219,7 @@ class Widget:
 			if self.system.theme:
 				self.system.theme.warn_legacy(self.theme_section)
 			# Legacy theming
-			if self.system.theme and self.options & BGUI_THEMED and self.theme_section != Widget.theme_section:
+			if self.system.theme and not (self.options & BGUI_NO_THEME) and self.theme_section != Widget.theme_section:
 				if self.system.theme.supports(self):
 					self.theme = self.system.theme
 				else:
@@ -233,7 +231,7 @@ class Widget:
 			theme = self.system.theme
 			theme = theme[self.theme_section] if theme.has_section(self.theme_section) else None
 
-			if theme and self.options & BGUI_THEMED:
+			if theme and not (self.options & BGUI_NO_THEME):
 				self.theme = {}
 
 				for k, v in self.theme_options.items():
@@ -260,7 +258,7 @@ class Widget:
 		else:
 			pos = self._base_pos[:]
 
-		if self.options & BGUI_NORMALIZED:
+		if not (self.options & BGUI_NO_NORMALIZE):
 			pos[0] *= self.parent.size[0]
 			pos[1] *= self.parent.size[1]
 

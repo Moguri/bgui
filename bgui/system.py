@@ -1,5 +1,5 @@
 from bgl import *
-from .widget import Widget, BGUI_MOUSE_NONE
+from .widget import Widget, BGUI_MOUSE_NONE, BGUI_NO_NORMALIZE, BGUI_NO_THEME
 from .theme import Theme
 import weakref
 
@@ -32,7 +32,7 @@ class System(Widget):
 		self.theme = Theme(theme)
 
 		Widget.__init__(self, self, "<System>", size=[view[2], view[3]],
-					pos=[0, 0], options=0)
+					pos=[0, 0], options=BGUI_NO_NORMALIZE|BGUI_NO_THEME)
 
 		self._focused_widget = weakref.ref(self)
 		self.lock_focus = False
