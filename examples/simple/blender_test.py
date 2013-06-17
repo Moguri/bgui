@@ -4,15 +4,15 @@ import sys
 sys.path.append('../..')
 
 import bgui
+import bgui.bge
 import bge
 
-class MySys(bgui.System):
-	"""
-	A subclass to handle our game specific gui
-	"""
-	def __init__(self):
-		# Initialize the system
-		bgui.System.__init__(self, '../../themes/default')
+
+class SimpleLayout(bgui.bge.Layout):
+	"""A layout showcasing various Bgui features"""
+
+	def __init__(self, sys, data):
+		super().__init__(sys, data)
 		
 		# Use a frame to store all of our widgets
 		self.frame = bgui.Frame(self, border=0)
@@ -56,9 +56,6 @@ class MySys(bgui.System):
 		
 		# A counter property used for the on_img_click() method
 		self.counter = 0
-		
-		# Create a keymap for keyboard input
-		self.keymap = {getattr(bge.events, val): getattr(bgui, val) for val in dir(bge.events) if val.endswith('KEY') or val.startswith('PAD')}
 
 	def on_input_enter(self, widget):
 		self.lbl.text = "You've entered: " + widget.text
@@ -74,42 +71,7 @@ class MySys(bgui.System):
 			self.win.img.texco = [(1,0), (0,0), (0,1), (1,1)]
 		else:
 			self.win.img.texco = [(0,0), (1,0), (1,1), (0,1)]
-	
-	def main(self):
-		"""A high-level method to be run every frame"""
-		
-		# Handle the mouse
-		mouse = bge.logic.mouse
-		
-		pos = list(mouse.position)
-		pos[0] *= bge.render.getWindowWidth()
-		pos[1] = bge.render.getWindowHeight() - (bge.render.getWindowHeight() * pos[1])
-		
-		mouse_state = bgui.BGUI_MOUSE_NONE
-		mouse_events = mouse.events
-				
-		if mouse_events[bge.events.LEFTMOUSE] == bge.logic.KX_INPUT_JUST_ACTIVATED:
-			mouse_state = bgui.BGUI_MOUSE_CLICK
-		elif mouse_events[bge.events.LEFTMOUSE] == bge.logic.KX_INPUT_JUST_RELEASED:
-			mouse_state = bgui.BGUI_MOUSE_RELEASE
-		elif mouse_events[bge.events.LEFTMOUSE] == bge.logic.KX_INPUT_ACTIVE:
-			mouse_state = bgui.BGUI_MOUSE_ACTIVE
-		
-		self.update_mouse(pos, mouse_state)
-		
-		# Handle the keyboard
-		keyboard = bge.logic.keyboard
-		
-		key_events = keyboard.events
-		is_shifted = key_events[bge.events.LEFTSHIFTKEY] == bge.logic.KX_INPUT_ACTIVE or \
-					key_events[bge.events.RIGHTSHIFTKEY] == bge.logic.KX_INPUT_ACTIVE
-					
-		for key, state in keyboard.events.items():
-			if state == bge.logic.KX_INPUT_JUST_ACTIVATED:
-				self.update_keyboard(self.keymap[key], is_shifted)
-		
-		# Now setup the scene callback so we can draw
-		bge.logic.getCurrentScene().post_draw = [self.render]
+
 
 def main(cont):
 	own = cont.owner
@@ -117,8 +79,9 @@ def main(cont):
 
 	if 'sys' not in own:
 		# Create our system and show the mouse
-		own['sys'] = MySys()
+		own['sys'] = bgui.bge.System('../../themes/default')
+		own['sys'].load_layout(SimpleLayout, None)
 		mouse.visible = True
 
 	else:
-		own['sys'].main()
+		own['sys'].run()
