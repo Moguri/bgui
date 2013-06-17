@@ -212,7 +212,7 @@ class Widget:
 	def __del__(self):
 		# Debug print
 		# print("Deleting", self.name)
-		self._cleanup()
+		pass
 
 	def _generate_theme(self):
 		if isinstance(self.theme_options, set):
@@ -241,12 +241,6 @@ class Widget:
 						self.theme[k] = v
 			elif not hasattr(self, "theme"):
 				self.theme = self.theme_options
-
-	def _cleanup(self):
-		"""Override this if needed"""
-		for child in self.children:
-			self.children[child]._cleanup()
-		self._children = OrderedDict()
 
 	def _update_position(self, size=None, pos=None):
 		if size is not None:

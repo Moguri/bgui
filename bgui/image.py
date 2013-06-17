@@ -50,6 +50,17 @@ class Image(Widget):
 
 		self._color = [1, 1, 1, 1]
 
+	def __del__(self):
+		super().__del__()
+
+		id_buf = Buffer(GL_INT, 1)
+		id_buf[0] = self.tex_id
+		glDeleteTextures(1, id_buf)
+
+		# Set self.image to None to force ImageFFmpeg() to be deleted and free
+		# its image data.
+		self.image = None
+
 	@property
 	def interp_mode(self):
 		"""The type of image filtering to be performed on the texture."""
@@ -67,17 +78,6 @@ class Image(Widget):
 	@color.setter
 	def color(self, value):
 		self._color = value
-
-	def _cleanup(self):
-		id_buf = Buffer(GL_INT, 1)
-		id_buf[0] = self.tex_id
-		glDeleteTextures(1, id_buf)
-
-		# Set self.image to None to force ImageFFmpeg() to be deleted and free
-		# its image data.
-		self.image = None
-
-		Widget._cleanup(self)
 
 	def update_image(self, img):
 		"""Changes the image texture

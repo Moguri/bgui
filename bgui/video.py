@@ -56,6 +56,16 @@ class Video(Image):
 		# Store the video for later
 		self.video = video
 
+	def __del__(self):
+		super().__del__()
+
+		if self.aud_handle:
+			self.aud_handle.stop()
+
+		# Set self.video to None to force VideoFFmpeg() to be deleted and free
+		# its video data.
+		self.video = None
+
 	def play(self, start, end, use_frames=True, fps=None):
 		start = float(start)
 		end = float(end)
@@ -72,15 +82,6 @@ class Video(Image):
 		self.video.stop()
 		self.video.range = [start, end]
 		self.video.play()
-
-	def _cleanup(self):
-		if self.aud_handle:
-			self.aud_handle.stop()
-
-		# Set self.video to None to force VideoFFmpeg() to be deleted and free
-		# its video data.
-		self.video = None
-		Image._cleanup(self)
 
 	def update_image(self, img):
 		"""This does nothing on a Video widget"""
