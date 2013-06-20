@@ -60,7 +60,7 @@
 <span id="label"></span><h1>label<a class="headerlink" href="#module-bgui.label" title="Permalink to this headline">¶</a></h1>
 <dl class="class">
 <dt id="bgui.label.Label">
-<em class="property">class </em><tt class="descclassname">bgui.label.</tt><tt class="descname">Label</tt><big>(</big><em>parent, name, text='', font=None, pt_size=None, color=None, outline_color=None, outline_size=None, outline_smoothing=None, pos=[0, 0], sub_theme='', options=12</em><big>)</big><a class="headerlink" href="#bgui.label.Label" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><tt class="descclassname">bgui.label.</tt><tt class="descname">Label</tt><big>(</big><em>parent, name=None, text='', font=None, pt_size=None, color=None, outline_color=None, outline_size=None, outline_smoothing=None, pos=[0, 0], sub_theme='', options=0</em><big>)</big><a class="headerlink" href="#bgui.label.Label" title="Permalink to this definition">¶</a></dt>
 <dd><p>Widget for displaying text</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
@@ -81,9 +81,9 @@
 </tr>
 </tbody>
 </table>
-<dl class="method">
+<dl class="function">
 <dt id="bgui.label.Label.add_animation">
-<tt class="descname">add_animation</tt><big>(</big><em>animation</em><big>)</big><a class="headerlink" href="#bgui.label.Label.add_animation" title="Permalink to this definition">¶</a></dt>
+<tt class="descname">add_animation</tt><big>(</big><em>self</em>, <em>animation</em><big>)</big><a class="headerlink" href="#bgui.label.Label.add_animation" title="Permalink to this definition">¶</a></dt>
 <dd><p>Add the animation to the list of currently running animations</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
@@ -107,9 +107,9 @@
 <dd><p>Whether or not the widget should accept events</p>
 </dd></dl>
 
-<dl class="method">
+<dl class="function">
 <dt id="bgui.label.Label.move">
-<tt class="descname">move</tt><big>(</big><em>position</em>, <em>time</em>, <em>callback=None</em><big>)</big><a class="headerlink" href="#bgui.label.Label.move" title="Permalink to this definition">¶</a></dt>
+<tt class="descname">move</tt><big>(</big><em>self</em>, <em>position</em>, <em>time</em>, <em>callback=None</em><big>)</big><a class="headerlink" href="#bgui.label.Label.move" title="Permalink to this definition">¶</a></dt>
 <dd><p>Move a widget to a new position over a number of frames</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />

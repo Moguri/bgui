@@ -81,7 +81,7 @@ and returns a widget to render.</p>
 </div>
 <dl class="class">
 <dt id="bgui.list_box.ListBox">
-<em class="property">class </em><tt class="descclassname">bgui.list_box.</tt><tt class="descname">ListBox</tt><big>(</big><em>parent, name, items=[], padding=0, aspect=None, size=[1, 1], pos=[0, 0], sub_theme='', options=12</em><big>)</big><a class="headerlink" href="#bgui.list_box.ListBox" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><tt class="descclassname">bgui.list_box.</tt><tt class="descname">ListBox</tt><big>(</big><em>parent, name=None, items=[], padding=0, aspect=None, size=[1, 1], pos=[0, 0], sub_theme='', options=0</em><big>)</big><a class="headerlink" href="#bgui.list_box.ListBox" title="Permalink to this definition">¶</a></dt>
 <dd><p>Widget for displaying a list of data</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
@@ -102,9 +102,9 @@ and returns a widget to render.</p>
 </tr>
 </tbody>
 </table>
-<dl class="method">
+<dl class="function">
 <dt id="bgui.list_box.ListBox.add_animation">
-<tt class="descname">add_animation</tt><big>(</big><em>animation</em><big>)</big><a class="headerlink" href="#bgui.list_box.ListBox.add_animation" title="Permalink to this definition">¶</a></dt>
+<tt class="descname">add_animation</tt><big>(</big><em>self</em>, <em>animation</em><big>)</big><a class="headerlink" href="#bgui.list_box.ListBox.add_animation" title="Permalink to this definition">¶</a></dt>
 <dd><p>Add the animation to the list of currently running animations</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
@@ -134,9 +134,9 @@ and returns a widget to render.</p>
 <dd><p>The list of items to display in the ListBox</p>
 </dd></dl>
 
-<dl class="method">
+<dl class="function">
 <dt id="bgui.list_box.ListBox.move">
-<tt class="descname">move</tt><big>(</big><em>position</em>, <em>time</em>, <em>callback=None</em><big>)</big><a class="headerlink" href="#bgui.list_box.ListBox.move" title="Permalink to this definition">¶</a></dt>
+<tt class="descname">move</tt><big>(</big><em>self</em>, <em>position</em>, <em>time</em>, <em>callback=None</em><big>)</big><a class="headerlink" href="#bgui.list_box.ListBox.move" title="Permalink to this definition">¶</a></dt>
 <dd><p>Move a widget to a new position over a number of frames</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
@@ -258,9 +258,9 @@ over those that have a lower z-index</p>
 </tr>
 </tbody>
 </table>
-<dl class="method">
+<dl class="function">
 <dt id="bgui.list_box.ListBoxRenderer.render_item">
-<tt class="descname">render_item</tt><big>(</big><em>item</em><big>)</big><a class="headerlink" href="#bgui.list_box.ListBoxRenderer.render_item" title="Permalink to this definition">¶</a></dt>
+<tt class="descname">render_item</tt><big>(</big><em>self</em>, <em>item</em><big>)</big><a class="headerlink" href="#bgui.list_box.ListBoxRenderer.render_item" title="Permalink to this definition">¶</a></dt>
 <dd><p>Creates and returns a <a class="reference internal" href="label.html#bgui.label.Label" title="bgui.label.Label"><tt class="xref py py-class docutils literal"><span class="pre">bgui.label.Label</span></tt></a> representation of the supplied item</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />

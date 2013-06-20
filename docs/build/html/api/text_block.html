@@ -60,7 +60,7 @@
 <span id="text-block"></span><h1>text_block<a class="headerlink" href="#module-bgui.text_block" title="Permalink to this headline">¶</a></h1>
 <dl class="class">
 <dt id="bgui.text_block.TextBlock">
-<em class="property">class </em><tt class="descclassname">bgui.text_block.</tt><tt class="descname">TextBlock</tt><big>(</big><em>parent, name, text='', font=None, pt_size=None, color=None, aspect=None, size=[1, 1], pos=[0, 0], sub_theme='', overflow=1, options=12</em><big>)</big><a class="headerlink" href="#bgui.text_block.TextBlock" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><tt class="descclassname">bgui.text_block.</tt><tt class="descname">TextBlock</tt><big>(</big><em>parent, name=None, text='', font=None, pt_size=None, color=None, aspect=None, size=[1, 1], pos=[0, 0], sub_theme='', overflow=1, options=0</em><big>)</big><a class="headerlink" href="#bgui.text_block.TextBlock" title="Permalink to this definition">¶</a></dt>
 <dd><p>Widget for displaying blocks of text</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
@@ -84,9 +84,9 @@
 </tr>
 </tbody>
 </table>
-<dl class="method">
+<dl class="function">
 <dt id="bgui.text_block.TextBlock.add_animation">
-<tt class="descname">add_animation</tt><big>(</big><em>animation</em><big>)</big><a class="headerlink" href="#bgui.text_block.TextBlock.add_animation" title="Permalink to this definition">¶</a></dt>
+<tt class="descname">add_animation</tt><big>(</big><em>self</em>, <em>animation</em><big>)</big><a class="headerlink" href="#bgui.text_block.TextBlock.add_animation" title="Permalink to this definition">¶</a></dt>
 <dd><p>Add the animation to the list of currently running animations</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
@@ -110,9 +110,9 @@
 <dd><p>Whether or not the widget should accept events</p>
 </dd></dl>
 
-<dl class="method">
+<dl class="function">
 <dt id="bgui.text_block.TextBlock.move">
-<tt class="descname">move</tt><big>(</big><em>position</em>, <em>time</em>, <em>callback=None</em><big>)</big><a class="headerlink" href="#bgui.text_block.TextBlock.move" title="Permalink to this definition">¶</a></dt>
+<tt class="descname">move</tt><big>(</big><em>self</em>, <em>position</em>, <em>time</em>, <em>callback=None</em><big>)</big><a class="headerlink" href="#bgui.text_block.TextBlock.move" title="Permalink to this definition">¶</a></dt>
 <dd><p>Move a widget to a new position over a number of frames</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />

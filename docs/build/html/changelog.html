@@ -52,10 +52,40 @@
             
   <div class="section" id="change-log">
 <h1>Change Log<a class="headerlink" href="#change-log" title="Permalink to this headline">¶</a></h1>
-<div class="section" id="id1">
-<h2>0.08<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="trunk">
+<h2>Trunk<a class="headerlink" href="#trunk" title="Permalink to this headline">¶</a></h2>
 <div class="section" id="new-features">
 <h3>New Features<a class="headerlink" href="#new-features" title="Permalink to this headline">¶</a></h3>
+<blockquote>
+<div><ul class="simple">
+<li>Adding a BGE System subclass (bgui.bge.System) to make it easier to get Bgui up and running in the BGE, which is the only environment it currently supports anyways. The layout code might eventually get moved into bgui.System. The simple example has been updated to make use of the new BGE system, but the other examples have not yet been updated.</li>
+</ul>
+</div></blockquote>
+</div>
+<div class="section" id="bugs-fixed">
+<h3>Bugs Fixed<a class="headerlink" href="#bugs-fixed" title="Permalink to this headline">¶</a></h3>
+<blockquote>
+<div><ul class="simple">
+<li>The outline_color for Labels was grabbing the color value instead of outline_color if outline_color was set via the constructor. (reported by SolarLune)</li>
+</ul>
+</div></blockquote>
+</div>
+<div class="section" id="other-stuff">
+<h3>Other Stuff<a class="headerlink" href="#other-stuff" title="Permalink to this headline">¶</a></h3>
+<blockquote>
+<div><ul class="simple">
+<li>Widget names are now optional, which reduces the amount of typing for creating new widgets. However, to make name an optional argument required switching the arguments for the Image and Video widget constructors. All other widgets should work without changes to users&#8217; code.</li>
+<li>The default ListBoxRenderer now tries to display the item as a string instead of using __repr__ directly. This makes the most basic case (a list of strings) display correctly without extra fuss.</li>
+<li>Switching some logic so BGUI_DEFAULT is 0. This simplifies passing options to a widget constructor. For example, no more BGUI_DEFAULT | BGUI_CENTERED mess. However, this can break existing setups. In order to make this work, BGUI_NORMALIZED is now BGUI_NO_NORMALIZE and BGUI_THEMED is now BGUI_NO_THEME. If you&#8217;re relying on these flags, you will have to update your scripts.</li>
+<li>Getting rid of Widget._cleanup() since we should have working destructors with all the WeakRefs.</li>
+</ul>
+</div></blockquote>
+</div>
+</div>
+<div class="section" id="id1">
+<h2>0.08<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="id2">
+<h3>New Features<a class="headerlink" href="#id2" title="Permalink to this headline">¶</a></h3>
 <blockquote>
 <div><ul class="simple">
 <li>FrameButton, TextBlock and TextInput now have a LabelSubTheme theme option which can be used to control the subtheme used for the underlying labels in these widgets.</li>
@@ -66,16 +96,16 @@
 </ul>
 </div></blockquote>
 </div>
-<div class="section" id="bugs-fixed">
-<h3>Bugs Fixed<a class="headerlink" href="#bugs-fixed" title="Permalink to this headline">¶</a></h3>
+<div class="section" id="id3">
+<h3>Bugs Fixed<a class="headerlink" href="#id3" title="Permalink to this headline">¶</a></h3>
 <blockquote>
 <div><ul class="simple">
 <li>Issue #25: &#8220;Image from image widget is repeated when using animated tiled textures&#8221;</li>
 </ul>
 </div></blockquote>
 </div>
-<div class="section" id="other-stuff">
-<h3>Other Stuff<a class="headerlink" href="#other-stuff" title="Permalink to this headline">¶</a></h3>
+<div class="section" id="id4">
+<h3>Other Stuff<a class="headerlink" href="#id4" title="Permalink to this headline">¶</a></h3>
 <blockquote>
 <div><ul class="simple">
 <li>Labels now have a fixed height based on the font instead of the individual characters in the string. This makes the default ListBoxRenderer have consistent spacing between elements.</li>
@@ -84,10 +114,10 @@
 </div></blockquote>
 </div>
 </div>
-<div class="section" id="id2">
-<h2>0.07<a class="headerlink" href="#id2" title="Permalink to this headline">¶</a></h2>
-<div class="section" id="id3">
-<h3>New Features<a class="headerlink" href="#id3" title="Permalink to this headline">¶</a></h3>
+<div class="section" id="id5">
+<h2>0.07<a class="headerlink" href="#id5" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="id6">
+<h3>New Features<a class="headerlink" href="#id6" title="Permalink to this headline">¶</a></h3>
 <blockquote>
 <div><ul class="simple">
 <li>An ImageButton widget has been added.</li>
@@ -100,8 +130,8 @@
 </ul>
 </div></blockquote>
 </div>
-<div class="section" id="id4">
-<h3>Bugs Fixed<a class="headerlink" href="#id4" title="Permalink to this headline">¶</a></h3>
+<div class="section" id="id7">
+<h3>Bugs Fixed<a class="headerlink" href="#id7" title="Permalink to this headline">¶</a></h3>
 <blockquote>
 <div><ul class="simple">
 <li>The system&#8217;s size now updates if the viewport size changes.</li>
@@ -109,8 +139,8 @@
 </ul>
 </div></blockquote>
 </div>
-<div class="section" id="id5">
-<h3>Other Stuff<a class="headerlink" href="#id5" title="Permalink to this headline">¶</a></h3>
+<div class="section" id="id8">
+<h3>Other Stuff<a class="headerlink" href="#id8" title="Permalink to this headline">¶</a></h3>
 <blockquote>
 <div><ul class="simple">
 <li>Widgets can now define various _handle_*() methods that match the callbacks. This allows subclasses to use callbacks without interfering with the user-defined ones.</li>
@@ -121,10 +151,10 @@
 </div></blockquote>
 </div>
 </div>
-<div class="section" id="id6">
-<h2>0.06<a class="headerlink" href="#id6" title="Permalink to this headline">¶</a></h2>
-<div class="section" id="id7">
-<h3>New Features<a class="headerlink" href="#id7" title="Permalink to this headline">¶</a></h3>
+<div class="section" id="id9">
+<h2>0.06<a class="headerlink" href="#id9" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="id10">
+<h3>New Features<a class="headerlink" href="#id10" title="Permalink to this headline">¶</a></h3>
 <blockquote>
 <div><ul class="simple">
 <li>Multiple Image widgets can reuse the same image file for efficiency (thanks to andrew-101)</li>
@@ -133,8 +163,8 @@
 </ul>
 </div></blockquote>
 </div>
-<div class="section" id="id8">
-<h3>Bugs Fixed<a class="headerlink" href="#id8" title="Permalink to this headline">¶</a></h3>
+<div class="section" id="id11">
+<h3>Bugs Fixed<a class="headerlink" href="#id11" title="Permalink to this headline">¶</a></h3>
 <blockquote>
 <div><ul class="simple">
 <li>Images would loose their &#8220;on_hover&#8221; when they were clicked on</li>
@@ -143,8 +173,8 @@
 </ul>
 </div></blockquote>
 </div>
-<div class="section" id="id9">
-<h3>Other Stuff<a class="headerlink" href="#id9" title="Permalink to this headline">¶</a></h3>
+<div class="section" id="id12">
+<h3>Other Stuff<a class="headerlink" href="#id12" title="Permalink to this headline">¶</a></h3>
 <blockquote>
 <div><ul class="simple">
 <li>Various TextInput improvements (thanks to jplur and Gomer)</li>
@@ -154,10 +184,10 @@
 </div></blockquote>
 </div>
 </div>
-<div class="section" id="id10">
-<h2>0.05<a class="headerlink" href="#id10" title="Permalink to this headline">¶</a></h2>
-<div class="section" id="id11">
-<h3>New Features<a class="headerlink" href="#id11" title="Permalink to this headline">¶</a></h3>
+<div class="section" id="id13">
+<h2>0.05<a class="headerlink" href="#id13" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="id14">
+<h3>New Features<a class="headerlink" href="#id14" title="Permalink to this headline">¶</a></h3>
 <blockquote>
 <div><ul class="simple">
 <li>ProgressBar widget (thanks to andrew-101)</li>
@@ -172,8 +202,8 @@
 </ul>
 </div></blockquote>
 </div>
-<div class="section" id="id12">
-<h3>Bugs Fixed<a class="headerlink" href="#id12" title="Permalink to this headline">¶</a></h3>
+<div class="section" id="id15">
+<h3>Bugs Fixed<a class="headerlink" href="#id15" title="Permalink to this headline">¶</a></h3>
 <blockquote>
 <div><ul class="simple">
 <li>BGUI now plays nice with &#8220;Show Physics Visualizations&#8221;</li>
@@ -182,8 +212,8 @@
 </ul>
 </div></blockquote>
 </div>
-<div class="section" id="id13">
-<h3>Other Stuff<a class="headerlink" href="#id13" title="Permalink to this headline">¶</a></h3>
+<div class="section" id="id16">
+<h3>Other Stuff<a class="headerlink" href="#id16" title="Permalink to this headline">¶</a></h3>
 <blockquote>
 <div><ul class="simple">
 <li>Mouse focus is now more &#8220;intuitive&#8221; (thanks to Gomer)</li>
@@ -192,10 +222,10 @@
 </div></blockquote>
 </div>
 </div>
-<div class="section" id="id14">
-<h2>0.04<a class="headerlink" href="#id14" title="Permalink to this headline">¶</a></h2>
-<div class="section" id="id15">
-<h3>New Features<a class="headerlink" href="#id15" title="Permalink to this headline">¶</a></h3>
+<div class="section" id="id17">
+<h2>0.04<a class="headerlink" href="#id17" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="id18">
+<h3>New Features<a class="headerlink" href="#id18" title="Permalink to this headline">¶</a></h3>
 <blockquote>
 <div><ul class="simple">
 <li>Font point sizes for Labels now scale with the screen height (1000px is the baseline). This isn&#8217;t &#8220;correct&#8221; but it makes things a lot easier. This can be disabled by setting System.normalize_text = False</li>
@@ -204,8 +234,8 @@
 </ul>
 </div></blockquote>
 </div>
-<div class="section" id="id16">
-<h3>Bugs Fixed<a class="headerlink" href="#id16" title="Permalink to this headline">¶</a></h3>
+<div class="section" id="id19">
+<h3>Bugs Fixed<a class="headerlink" href="#id19" title="Permalink to this headline">¶</a></h3>
 <blockquote>
 <div><ul class="simple">
 <li>ENTERKEY added to keydefs to better match Blender</li>
@@ -214,26 +244,26 @@
 </div></blockquote>
 </div>
 </div>
-<div class="section" id="id17">
-<h2>0.03<a class="headerlink" href="#id17" title="Permalink to this headline">¶</a></h2>
-<div class="section" id="id18">
-<h3>New Features<a class="headerlink" href="#id18" title="Permalink to this headline">¶</a></h3>
+<div class="section" id="id20">
+<h2>0.03<a class="headerlink" href="#id20" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="id21">
+<h3>New Features<a class="headerlink" href="#id21" title="Permalink to this headline">¶</a></h3>
 <blockquote>
 <div><ul class="simple">
 <li>BGUI now has themeing support (for mow info go here: <a class="reference external" href="http://stokes.dyndns.org/redmine/projects/bgui/wiki/Theming">http://stokes.dyndns.org/redmine/projects/bgui/wiki/Theming</a>)</li>
 </ul>
 </div></blockquote>
 </div>
-<div class="section" id="id19">
-<h3>Bugs Fixed<a class="headerlink" href="#id19" title="Permalink to this headline">¶</a></h3>
+<div class="section" id="id22">
+<h3>Bugs Fixed<a class="headerlink" href="#id22" title="Permalink to this headline">¶</a></h3>
 <blockquote>
 <div><ul class="simple">
 <li>BGUI widgets could sometimes clip with scene elements</li>
 </ul>
 </div></blockquote>
 </div>
-<div class="section" id="id20">
-<h3>Other Stuff<a class="headerlink" href="#id20" title="Permalink to this headline">¶</a></h3>
+<div class="section" id="id23">
+<h3>Other Stuff<a class="headerlink" href="#id23" title="Permalink to this headline">¶</a></h3>
 <blockquote>
 <div><ul class="simple">
 <li>Widgets are now stored in OrderedDicts to allow for control over z sorting</li>
@@ -242,10 +272,10 @@
 </div></blockquote>
 </div>
 </div>
-<div class="section" id="id21">
-<h2>0.02<a class="headerlink" href="#id21" title="Permalink to this headline">¶</a></h2>
-<div class="section" id="id22">
-<h3>New Features<a class="headerlink" href="#id22" title="Permalink to this headline">¶</a></h3>
+<div class="section" id="id24">
+<h2>0.02<a class="headerlink" href="#id24" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="id25">
+<h3>New Features<a class="headerlink" href="#id25" title="Permalink to this headline">¶</a></h3>
 <blockquote>
 <div><ul class="simple">
 <li>Video widget to display videos using VideoTexture (no sound support at the moment)</li>
@@ -260,8 +290,8 @@
 </ul>
 </div></blockquote>
 </div>
-<div class="section" id="id23">
-<h3>Bugs Fixed<a class="headerlink" href="#id23" title="Permalink to this headline">¶</a></h3>
+<div class="section" id="id26">
+<h3>Bugs Fixed<a class="headerlink" href="#id26" title="Permalink to this headline">¶</a></h3>
 <blockquote>
 <div><ul class="simple">
 <li>Drawing labels would disable textures for images</li>
@@ -269,8 +299,8 @@
 </ul>
 </div></blockquote>
 </div>
-<div class="section" id="id24">
-<h3>Other Stuff<a class="headerlink" href="#id24" title="Permalink to this headline">¶</a></h3>
+<div class="section" id="id27">
+<h3>Other Stuff<a class="headerlink" href="#id27" title="Permalink to this headline">¶</a></h3>
 <blockquote>
 <div><ul class="simple">
 <li>BGUI now uses the bottom left as (0, 0) to match OpenGL</li>
@@ -278,8 +308,8 @@
 </div></blockquote>
 </div>
 </div>
-<div class="section" id="id25">
-<h2>0.01<a class="headerlink" href="#id25" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="id28">
+<h2>0.01<a class="headerlink" href="#id28" title="Permalink to this headline">¶</a></h2>
 <p>Initial release</p>
 </div>
 </div>
@@ -293,48 +323,54 @@
   <h3><a href="index.html">Table Of Contents</a></h3>
   <ul>
 <li><a class="reference internal" href="#">Change Log</a><ul>
-<li><a class="reference internal" href="#id1">0.08</a><ul>
+<li><a class="reference internal" href="#trunk">Trunk</a><ul>
 <li><a class="reference internal" href="#new-features">New Features</a></li>
 <li><a class="reference internal" href="#bugs-fixed">Bugs Fixed</a></li>
 <li><a class="reference internal" href="#other-stuff">Other Stuff</a></li>
 </ul>
 </li>
-<li><a class="reference internal" href="#id2">0.07</a><ul>
-<li><a class="reference internal" href="#id3">New Features</a></li>
-<li><a class="reference internal" href="#id4">Bugs Fixed</a></li>
-<li><a class="reference internal" href="#id5">Other Stuff</a></li>
+<li><a class="reference internal" href="#id1">0.08</a><ul>
+<li><a class="reference internal" href="#id2">New Features</a></li>
+<li><a class="reference internal" href="#id3">Bugs Fixed</a></li>
+<li><a class="reference internal" href="#id4">Other Stuff</a></li>
 </ul>
 </li>
-<li><a class="reference internal" href="#id6">0.06</a><ul>
-<li><a class="reference internal" href="#id7">New Features</a></li>
-<li><a class="reference internal" href="#id8">Bugs Fixed</a></li>
-<li><a class="reference internal" href="#id9">Other Stuff</a></li>
+<li><a class="reference internal" href="#id5">0.07</a><ul>
+<li><a class="reference internal" href="#id6">New Features</a></li>
+<li><a class="reference internal" href="#id7">Bugs Fixed</a></li>
+<li><a class="reference internal" href="#id8">Other Stuff</a></li>
 </ul>
 </li>
-<li><a class="reference internal" href="#id10">0.05</a><ul>
-<li><a class="reference internal" href="#id11">New Features</a></li>
-<li><a class="reference internal" href="#id12">Bugs Fixed</a></li>
-<li><a class="reference internal" href="#id13">Other Stuff</a></li>
+<li><a class="reference internal" href="#id9">0.06</a><ul>
+<li><a class="reference internal" href="#id10">New Features</a></li>
+<li><a class="reference internal" href="#id11">Bugs Fixed</a></li>
+<li><a class="reference internal" href="#id12">Other Stuff</a></li>
 </ul>
 </li>
-<li><a class="reference internal" href="#id14">0.04</a><ul>
-<li><a class="reference internal" href="#id15">New Features</a></li>
-<li><a class="reference internal" href="#id16">Bugs Fixed</a></li>
+<li><a class="reference internal" href="#id13">0.05</a><ul>
+<li><a class="reference internal" href="#id14">New Features</a></li>
+<li><a class="reference internal" href="#id15">Bugs Fixed</a></li>
+<li><a class="reference internal" href="#id16">Other Stuff</a></li>
 </ul>
 </li>
-<li><a class="reference internal" href="#id17">0.03</a><ul>
+<li><a class="reference internal" href="#id17">0.04</a><ul>
 <li><a class="reference internal" href="#id18">New Features</a></li>
 <li><a class="reference internal" href="#id19">Bugs Fixed</a></li>
-<li><a class="reference internal" href="#id20">Other Stuff</a></li>
 </ul>
 </li>
-<li><a class="reference internal" href="#id21">0.02</a><ul>
-<li><a class="reference internal" href="#id22">New Features</a></li>
-<li><a class="reference internal" href="#id23">Bugs Fixed</a></li>
-<li><a class="reference internal" href="#id24">Other Stuff</a></li>
+<li><a class="reference internal" href="#id20">0.03</a><ul>
+<li><a class="reference internal" href="#id21">New Features</a></li>
+<li><a class="reference internal" href="#id22">Bugs Fixed</a></li>
+<li><a class="reference internal" href="#id23">Other Stuff</a></li>
 </ul>
 </li>
-<li><a class="reference internal" href="#id25">0.01</a></li>
+<li><a class="reference internal" href="#id24">0.02</a><ul>
+<li><a class="reference internal" href="#id25">New Features</a></li>
+<li><a class="reference internal" href="#id26">Bugs Fixed</a></li>
+<li><a class="reference internal" href="#id27">Other Stuff</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#id28">0.01</a></li>
 </ul>
 </li>
 </ul>
