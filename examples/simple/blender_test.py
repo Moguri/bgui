@@ -4,11 +4,11 @@ import sys
 sys.path.append('../..')
 
 import bgui
-import bgui.bge
+import bgui.bge_utils
 import bge
 
 
-class SimpleLayout(bgui.bge.Layout):
+class SimpleLayout(bgui.bge_utils.Layout):
 	"""A layout showcasing various Bgui features"""
 
 	def __init__(self, sys, data):
@@ -79,7 +79,7 @@ def main(cont):
 
 	if 'sys' not in own:
 		# Create our system and show the mouse
-		own['sys'] = bgui.bge.System('../../themes/default')
+		own['sys'] = bgui.bge_utils.System('../../themes/default')
 		own['sys'].load_layout(SimpleLayout, None)
 		mouse.visible = True
 
