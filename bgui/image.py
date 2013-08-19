@@ -7,14 +7,15 @@ This module defines the following constants:
 	* BGUI_LINEAR
 """
 
+import bgl
 from bgl import *
 from bge import texture
 
 from .widget import Widget, BGUI_DEFAULT, BGUI_CACHE
 
 # Interpolation mode constants for texture filtering
-BGUI_NEAREST = GL_NEAREST
-BGUI_LINEAR = GL_LINEAR
+BGUI_NEAREST = bgl.GL_NEAREST
+BGUI_LINEAR = bgl.GL_LINEAR
 
 
 class Image(Widget):

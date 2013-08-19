@@ -17,7 +17,6 @@ import sys, os
 # add these directories to sys.path here. If the directory is relative to the
 # documentation root, use os.path.abspath to make it absolute, like shown here.
 sys.path.insert(0, os.path.abspath('.'))
-sys.path.insert(0, os.path.abspath('./source'))
 sys.path.insert(0, os.path.abspath('../..'))
 
 # -- General configuration -----------------------------------------------------
@@ -219,6 +218,31 @@ man_pages = [
 
 autoclass_content = "both"
 
+# Way to make Sphinx happy with Blender Python modules
+class Mock(object):
+	def __init__(self, *args, **kwargs):
+		pass
+
+	def __call__(self, *args, **kwargs):
+		return Mock()
+
+	@classmethod
+	def __getattr__(cls, name):
+		if name in ('__file__', '__path__'):
+			return '/dev/null'
+		elif name == '__all__':
+			return []
+		elif name[0] == name[0].upper():
+			mockType = type(name, (), {})
+			mockType.__module__ = __name__
+			return mockType
+		else:
+			return Mock()
+
+MOCK_MODULES = ['bge', 'bgl', 'blf', 'aud']
+for mod_name in MOCK_MODULES:
+    sys.modules[mod_name] = Mock()
+
 # Generate the doc files
 import doc_parser, bgui
 d = doc_parser.DocParser(bgui, '.')
@@ -230,3 +254,4 @@ with open('changelog.rst', 'w') as cl_rst:
 	
 	with open('../../CHANGELOG.txt') as f:
 		cl_rst.write(f.read())
+
