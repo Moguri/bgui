@@ -7,7 +7,7 @@ try:
 	configparser._SectionProxy = configparser.SectionProxy
 except ImportError:
 	import ConfigParser as configparser
-	configparser._SectionProxy = None
+	configparser._SectionProxy = object
 
 
 
