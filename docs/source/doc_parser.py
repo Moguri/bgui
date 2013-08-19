@@ -30,7 +30,10 @@ class DocParser:
 	
 		# Create api folder
 		api_dir = os.path.join(dst, 'api')
-		os.makedirs(api_dir, exist_ok=True)
+		try:
+			os.makedirs(api_dir)
+		except os.error:
+			pass
 		
 		# Now create rst files for the modules
 		for i in [getattr(module, i) for i in dir(module) if inspect.ismodule(getattr(module, i))]:
