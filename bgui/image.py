@@ -45,11 +45,15 @@ class Image(Widget):
 
 		self.tex_id = id_buf.to_list()[0] if hasattr(id_buf, "to_list") else id_buf.list[0]
 		self.texco = texco
-		self._interp_mode = interp_mode
+		
+		#: The type of image filtering to be performed on the texture.
+		self.interp_mode = interp_mode
 		self.image = None
+		
 		self.update_image(img)
-
-		self._color = [1, 1, 1, 1]
+		
+		#: The color of the plane the texture is on.
+		self.color = [1, 1, 1, 1]
 
 	def __del__(self):
 		super().__del__()
@@ -61,24 +65,6 @@ class Image(Widget):
 		# Set self.image to None to force ImageFFmpeg() to be deleted and free
 		# its image data.
 		self.image = None
-
-	@property
-	def interp_mode(self):
-		"""The type of image filtering to be performed on the texture."""
-		return self._interp_mode
-
-	@interp_mode.setter
-	def interp_mode(self, value):
-		self._interp_mode = value
-
-	@property
-	def color(self):
-		"""The color of the plane the texture is on."""
-		return self._color
-
-	@color.setter
-	def color(self, value):
-		self._color = value
 
 	def update_image(self, img):
 		"""Changes the image texture

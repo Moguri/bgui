@@ -161,7 +161,9 @@ class Widget:
 			name = "1"
 			while name in parent.children:
 				name = str(int(name) + 1)
-		self._name = name
+
+		#: The widget's name
+		self.name = name
 		self.options = options
 
 		# Store the system so children can access theming data
@@ -173,10 +175,12 @@ class Widget:
 		self._generate_theme()
 
 		self._hover = False
-		self._frozen = False
+		
+		#: Whether or not the widget should accept events
+		self.frozen = False
 
-		# The widget is visible by default
-		self._visible = True
+		#: Whether or not the widget is visible
+		self.visible = True
 
 		# Event callbacks
 		self._on_click = None
@@ -193,8 +197,9 @@ class Widget:
 		# A dictionary to store children widgets
 		self._children = OrderedDict()
 
-		# The z-index of the widget, determines drawing order
-		self._z_index = 0
+		#: The widget's z-index. Widget's with a higher z-index are drawn
+		#: over those that have a lower z-index
+		self.z_index = 0
 
 		# Setup the widget's position
 		self._position = [None] * 4
@@ -291,45 +296,6 @@ class Widget:
 			widget._update_position(widget._base_size, widget._base_pos)
 
 	@property
-	def name(self):
-		"""The widget's name"""
-		return self._name
-
-	@name.setter
-	def name(self, value):
-		self._name = value
-
-	@property
-	def z_index(self):
-		"""The widget's z-index. Widget's with a higher z-index are drawn
-		over those that have a lower z-index"""
-		return self._z_index
-
-	@z_index.setter
-	def z_index(self, value):
-		self._z_index = value
-		self.parent._children = OrderedDict(sorted(self.parent._children.items(),
-			key=lambda item: item[1].z_index))
-
-	@property
-	def frozen(self):
-		"""Whether or not the widget should accept events"""
-		return self._frozen
-
-	@frozen.setter
-	def frozen(self, value):
-		self._frozen = value
-
-	@property
-	def visible(self):
-		"""Whether or not the widget is visible"""
-		return self._visible
-
-	@visible.setter
-	def visible(self, value):
-		self._visible = value
-
-	@property
 	def on_click(self):
 		"""The widget's on_click callback"""
 		return self._on_click
@@ -388,15 +354,15 @@ class Widget:
 		"""The widget's parent"""
 		return self._parent
 
-	@property
-	def system(self):
-		"""A reference to the system object"""
-		return self._system()
-
 	@parent.setter
 	def parent(self, value):
 		self._parent = value
 		self._update_position(self._base_size, self._base_value)
+
+	@property
+	def system(self):
+		"""A reference to the system object"""
+		return self._system()
 
 	@property
 	def children(self):

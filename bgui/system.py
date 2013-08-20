@@ -39,7 +39,7 @@ class System(Widget):
 
 	@property
 	def focused_widget(self):
-		"""The widget which currently has \"focus\""""
+		'''The widget which currently has "focus"'''
 		return self._focused_widget()
 
 	@focused_widget.setter

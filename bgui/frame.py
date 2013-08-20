@@ -30,37 +30,19 @@ class Frame(Widget):
 
 		Widget.__init__(self, parent, name, aspect, size, pos, sub_theme, options)
 
-		self._colors = [
+		#: The colors for the four corners of the frame.
+		self.colors = [
 				self.theme['Color1'],
 				self.theme['Color2'],
 				self.theme['Color3'],
 				self.theme['Color4']
 				]
 
+		#: The color of the border around the frame.
 		self.border_color = self.theme['BorderColor']
-
-		if border:
-			self._border = border
-		else:
-			self._border = self.theme['BorderSize']
-
-	@property
-	def colors(self):
-		"""The colors for the four corners of the frame."""
-		return self._colors
-
-	@colors.setter
-	def colors(self, value):
-		self._colors = value
-
-	@property
-	def border(self):
-		"""The size of the border around the frame."""
-		return self._border
-
-	@border.setter
-	def border(self, value):
-		self._border = value
+		
+		#: The size of the border around the frame.
+		self.border = border if border else self.theme['BorderSize']
 
 	def _draw(self):
 		"""Draw the frame"""
