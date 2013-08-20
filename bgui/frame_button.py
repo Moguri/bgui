@@ -1,5 +1,3 @@
-from bgl import *
-
 from .widget import Widget, BGUI_DEFAULT, BGUI_NO_THEME, BGUI_CENTERED
 from .frame import Frame
 from .label import Label

@@ -1,4 +1,4 @@
-from bgl import *
+from .gl_utils import *
 from .widget import Widget, BGUI_DEFAULT
 
 

@@ -7,15 +7,15 @@ This module defines the following constants:
 	* BGUI_LINEAR
 """
 
-import bgl
-from bgl import *
+from . import gl_utils
+from .gl_utils import *
 from bge import texture
 
 from .widget import Widget, BGUI_DEFAULT, BGUI_CACHE
 
 # Interpolation mode constants for texture filtering
-BGUI_NEAREST = bgl.GL_NEAREST
-BGUI_LINEAR = bgl.GL_LINEAR
+BGUI_NEAREST = gl_utils.GL_NEAREST
+BGUI_LINEAR = gl_utils.GL_LINEAR
 
 
 class Image(Widget):
@@ -40,10 +40,8 @@ class Image(Widget):
 		Widget.__init__(self, parent, name, aspect, size, pos, sub_theme, options)
 
 		# Generate a texture
-		id_buf = Buffer(GL_INT, 1)
-		glGenTextures(1, id_buf)
-
-		self.tex_id = id_buf.to_list()[0] if hasattr(id_buf, "to_list") else id_buf.list[0]
+		self.tex_id = glGenTextures(1)
+		
 		self.texco = texco
 		
 		#: The type of image filtering to be performed on the texture.
@@ -61,9 +59,7 @@ class Image(Widget):
 	def __del__(self):
 		super().__del__()
 
-		id_buf = Buffer(GL_INT, 1)
-		id_buf[0] = self.tex_id
-		glDeleteTextures(1, id_buf)
+		glDeleteTextures([self.tex_id])
 
 		# Set self.image to None to force ImageFFmpeg() to be deleted and free
 		# its image data.
