@@ -50,6 +50,9 @@ class Image(Widget):
 		self.interp_mode = interp_mode
 		self.image = None
 		
+		#: The size (in pixels) of the currently loaded image, or [0, 0] if an image is not loaded
+		self.image_size = [0, 0]
+		
 		self.update_image(img)
 		
 		#: The color of the plane the texture is on.
@@ -108,6 +111,9 @@ class Image(Widget):
 		# Upload the texture data
 		glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, image.size[0], image.size[1], 0,
 						GL_RGBA, GL_UNSIGNED_BYTE, im_buf)
+		
+		# Save the image size
+		self.image_size = image.size[:]
 
 	def _draw(self):
 		"""Draws the image"""
