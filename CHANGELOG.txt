@@ -8,6 +8,7 @@ New Features
 Bugs Fixed
 ^^^^^^^^^^
   * The outline_color for Labels was grabbing the color value instead of outline_color if outline_color was set via the constructor. (reported by SolarLune)
+  * position and size attributes and properties should now accept tuple values without crashing. (reported by SolorLune)
 
 Other Stuff
 ^^^^^^^^^^^

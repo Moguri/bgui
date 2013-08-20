@@ -249,10 +249,12 @@ class Widget:
 
 	def _update_position(self, size=None, pos=None):
 		if size is not None:
+			size = list(size)
 			self._base_size = size[:]
 		else:
 			size = self._base_size[:]
 		if pos is not None:
+			pos = list(pos)
 			self._base_pos = pos[:]
 		else:
 			pos = self._base_pos[:]
