@@ -3,27 +3,24 @@
 from .gl_utils import *
 try:
 	from bge import texture
+	import aud
 	USING_BGE_TEXTURE = True
 except ImportError:
 	USING_BGE_TEXTURE = False
 
-class ImageTexture:
-
-	_cache = {}
-
-	def __init__(self, image, interp_mode, caching):
+class Texture:
+	def __init__(self, path, interp_mode):
 		self._tex_id = glGenTextures(1)
 		self.size = [0, 0]
-		self.image_name = None
 		self._interp_mode = None
-		self._caching = caching
+		self.path = None
 
 		# Setup some parameters
 		self.bind()
 		glTexEnvf(GL_TEXTURE_ENV, GL_TEXTURE_ENV_MODE, GL_MODULATE)
 		self.interp_mode = interp_mode
 
-		self.reload(image)
+		self.reload(path)
 
 	def __del__(self):
 		glDeleteTextures([self._tex_id])
@@ -40,11 +37,21 @@ class ImageTexture:
 			glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, value)
 			self._interp_mode = value
 
-	def reload(self, image):
-		if image == self.image_name:
-			return
+	def bind(self):
+		glBindTexture(GL_TEXTURE_2D, self._tex_id)
 
-		self.bind()
+
+class ImageTexture(Texture):
+
+	_cache = {}
+
+	def __init__(self, image, interp_mode, caching):
+		self._caching = caching
+		super().__init__(image, interp_mode);
+
+	def reload(self, image):
+		if image == self.path:
+			return
 
 		if image in ImageTexture._cache:
 			# Image has already been loaded from disk, recall it from the cache
@@ -67,14 +74,88 @@ class ImageTexture:
 			return
 
 		# Upload the texture data
+		self.bind()
 		glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, img.size[0], img.size[1], 0,
 						GL_RGBA, GL_UNSIGNED_BYTE, data)
 
 		# Save the image size and name
 		self.image_size = img.size[:]
-		self.image_name = image
+		self.path = image
 
 		img = None
 
-	def bind(self):
-		glBindTexture(GL_TEXTURE_2D, self._tex_id)
+
+class VideoTexture(Texture):
+	def __init__(self, video, interp_mode, repeat, play_audio):
+		self.repeat = repeat
+		self.play_audio = play_audio
+		self.video = None
+		self.audio = None
+
+		super().__init__(video, interp_mode)
+
+	def __del__(self):
+		super().__del__()
+
+		if self.audio:
+			self.audio.stop()
+
+		self.video = None
+
+	def reload(self, video):
+		if video == self.path:
+			return
+
+		if USING_BGE_TEXTURE:
+			vid = texture.VideoFFmpeg(video)
+			vid.repeat = self.repeat
+			vid.play()
+			self.video = vid
+			data = vid.image
+
+			if self.play_audio:
+				self.audio = aud.device().play(aud.Factory(video))
+		else:
+			data = None
+
+		if data == None:
+			print("Unable to load the video", video)
+			return
+
+		self.bind()
+		glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, vid.size[0], vid.size[1],
+				0, GL_RGBA, GL_UNSIGNED_BYTE, data)
+
+		self.image_size = vid.size[:]
+		self.path = video
+
+	def update(self):
+		if not self.video:
+			return
+
+		self.video.refresh()
+		data = self.video.image
+		if data:
+			self.bind()
+			glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, self.video.size[0], self.video.size[1],
+					0, GL_RGBA, GL_UNSIGNED_BYTE, data)
+
+	def play(self, start, end, use_frames=True, fps=None):
+		if not self.video:
+			return
+
+		start = float(start)
+		end = float(end)
+
+		if use_frames:
+			if not fps:
+				fps = self.video.framerate
+				print("Using fps:", fps)
+			start /= fps
+			end /= fps
+
+		if start == end:
+			end += 0.1
+		self.video.stop()
+		self.video.range = [start, end]
+		self.video.play()

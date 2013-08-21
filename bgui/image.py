@@ -37,7 +37,10 @@ class Image(Widget):
 
 		Widget.__init__(self, parent, name, aspect, size, pos, sub_theme, options)
 
-		self._texture = ImageTexture(img, interp_mode, options & BGUI_CACHE)
+		if img != None:
+			self._texture = ImageTexture(img, interp_mode, options & BGUI_CACHE)
+		else:
+			self._texture = None
 
 		#: The UV texture coordinates to use for the image.
 		self.texco = texco
