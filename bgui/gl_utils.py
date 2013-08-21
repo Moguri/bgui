@@ -2,13 +2,12 @@
 # utility functions for OpenGL
 
 try:
+	from bgl import *
+	USING_BGL = True
+except ImportError:
 	from OpenGL.GL import *
 	from OpenGL.GLU import *
 	from bgl import Buffer
-	USING_BGL = False
-except ImportError:
-	from bgl import *
-	USING_BGL = True
 
 if USING_BGL:
 	_glGenTextures = glGenTextures
