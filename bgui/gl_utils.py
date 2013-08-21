@@ -9,7 +9,11 @@ except ImportError:
 	from OpenGL.GLU import *
 	from bgl import Buffer
 
+
 if USING_BGL:
+	# The following line is to make ReadTheDocs happy
+	from bgl import glGenTextures, glDeleteTextures, glGetIntegerv, GL_NEAREST, GL_LINEAR
+
 	_glGenTextures = glGenTextures
 	def glGenTextures(n, textures=None):
 		id_buf = Buffer(GL_INT, n)
@@ -36,6 +40,9 @@ if USING_BGL:
 		return buf.to_list()
 
 else:
+	# The following line is to make ReadTheDocs happy
+	from OpenGL.GL import glTexImage2D, GL_NEAREST, GL_LINEAR
+
 	_glTexImage2D = glTexImage2D
 	def glTexImage2D(target, level, internalFormat, width, height, border, format, type, data):
 		_glTexImage2D(target, level, internalFormat, width, height,
