@@ -6,6 +6,7 @@ try:
 	import aud
 	USING_BGE_TEXTURE = True
 except ImportError:
+	import Image
 	USING_BGE_TEXTURE = False
 
 class Texture:
@@ -63,11 +64,16 @@ class ImageTexture(Texture):
 				img.scale = False
 				if self._caching:
 					ImageTexture._cache[image] = img
+			else:
+				img = Image.open(image)
 
 		if USING_BGE_TEXTURE:
 			data = img.image
 		else:
-			data = None
+			try:
+				data = img.tostring("raw", "RGBA", 0, -1)
+			except SystemError:
+				data = img.tostring("raw", "RGBX", 0, -1)
 
 		if data == None:
 			print("Unabled to load the image", image)

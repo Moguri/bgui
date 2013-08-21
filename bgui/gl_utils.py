@@ -7,7 +7,8 @@ try:
 except ImportError:
 	from OpenGL.GL import *
 	from OpenGL.GLU import *
-	from bgl import Buffer
+	import PIL  # Make sure we have PIL available, otherwise PyOpenGL is too slow
+	USING_BGL = False
 
 
 if USING_BGL:
@@ -43,7 +44,3 @@ else:
 	# The following line is to make ReadTheDocs happy
 	from OpenGL.GL import glTexImage2D, GL_NEAREST, GL_LINEAR
 
-	_glTexImage2D = glTexImage2D
-	def glTexImage2D(target, level, internalFormat, width, height, border, format, type, data):
-		_glTexImage2D(target, level, internalFormat, width, height,
-			border, format, type, data.to_list())
