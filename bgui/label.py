@@ -1,6 +1,5 @@
 from .gl_utils import *
-import blf
-
+from . import fonts as blf
 from .widget import Widget, BGUI_DEFAULT, BGUI_NO_NORMALIZE
 
 

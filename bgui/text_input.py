@@ -15,7 +15,7 @@ from .key_defs import *
 from .label import Label
 from .frame import Frame
 
-import blf
+from . import fonts as blf
 import time
 
 # InputText options
