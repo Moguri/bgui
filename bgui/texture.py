@@ -6,7 +6,7 @@ try:
 	import aud
 	USING_BGE_TEXTURE = True
 except ImportError:
-	import Image
+	from PyQt4 import QtOpenGL, QtGui
 	USING_BGE_TEXTURE = False
 
 class Texture:
@@ -65,27 +65,31 @@ class ImageTexture(Texture):
 				if self._caching:
 					ImageTexture._cache[image] = img
 			else:
-				img = Image.open(image)
+				img = QtGui.QImage(image)
 
 		if USING_BGE_TEXTURE:
 			data = img.image
+			if data == None:
+				print("Unabled to load the image", image)
+				return
+
+			# Upload the texture data
+			self.bind()
+			glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, img.size[0], img.size[1], 0,
+							GL_RGBA, GL_UNSIGNED_BYTE, data)
+
+			self.image_size = img.size[:]
 		else:
-			try:
-				data = img.tostring("raw", "RGBA", 0, -1)
-			except SystemError:
-				data = img.tostring("raw", "RGBX", 0, -1)
+			if img.isNull():
+				print("Unable to load the image", image)
+				return
+			glDeleteTextures([self._tex_id])
+			self._tex_id = QtOpenGL.QGLContext.currentContext().bindTexture(img)
+			self.interp_mode = self.interp_mode
+			self.image_size = [img.width(), img.height()]
 
-		if data == None:
-			print("Unabled to load the image", image)
-			return
 
-		# Upload the texture data
-		self.bind()
-		glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, img.size[0], img.size[1], 0,
-						GL_RGBA, GL_UNSIGNED_BYTE, data)
-
-		# Save the image size and name
-		self.image_size = img.size[:]
+		# Save the image name
 		self.path = image
 
 		img = None

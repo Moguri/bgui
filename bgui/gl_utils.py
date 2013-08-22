@@ -7,7 +7,7 @@ try:
 except ImportError:
 	from OpenGL.GL import *
 	from OpenGL.GLU import *
-	import PIL  # Make sure we have PIL available, otherwise PyOpenGL is too slow
+	from PyQt4 import QtOpenGL  # Make sure we have PyQt4 available, otherwise PyOpenGL is too slow
 	USING_BGL = False
 
 
