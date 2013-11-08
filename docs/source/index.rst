@@ -6,7 +6,10 @@
 Bgui Documentation
 ==================
 
-Contents:
+.. toctree::
+   :maxdepth: 2
+
+   tutorials
 
 .. toctree::
    :maxdepth: 1
