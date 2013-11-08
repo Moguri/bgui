@@ -216,7 +216,13 @@ man_pages = [
      [u'Mitchell Stokes (Moguri)'], 1)
 ]
 
+# -- Options for autodoc ------------------------------------------------------
+
 autoclass_content = "both"
+autodoc_default_flags = ['members', 'undoc-members', 'show-inheritance']
+autodoc_member_order = 'bysource'
+
+# -- Other build stuff --------------------------------------------------------
 
 # Way to make Sphinx happy with Blender Python modules
 class Mock(object):
@@ -244,8 +250,10 @@ for mod_name in MOCK_MODULES:
     sys.modules[mod_name] = Mock()
 
 # Generate the doc files
-import doc_parser, bgui
-d = doc_parser.DocParser(bgui, '.')
+from doc_parser import doc_parser
+import bgui
+import bgui.bge_utils
+doc_parser([bgui, bgui.bge_utils], '.')
 
 # Add the changelog
 with open('changelog.rst', 'w') as cl_rst:
