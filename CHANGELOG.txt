@@ -1,5 +1,5 @@
-Trunk
--------
+Dev
+---
 New Features
 ^^^^^^^^^^^^
   * Adding a BGE System subclass (bgui.bge.System) to make it easier to get Bgui up and running in the BGE, which is the only environment it currently supports anyways. The layout code might eventually get moved into bgui.System. The simple example has been updated to make use of the new BGE system, but the other examples have not yet been updated.
