@@ -42,7 +42,10 @@ class Frame(Widget):
 		self.border_color = self.theme['BorderColor']
 		
 		#: The size of the border around the frame.
-		self.border = border if border else self.theme['BorderSize']
+		if border is not None:
+			self.border = border
+		else:
+			self.border = self.theme['BorderSize']
 
 	def _draw(self):
 		"""Draw the frame"""
