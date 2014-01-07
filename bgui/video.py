@@ -1,7 +1,7 @@
 from .gl_utils import *
 from .texture import VideoTexture
 
-from .widget import Widget, BGUI_DEFAULT
+from .widget import Widget, BGUI_DEFAULT, WeakMethod
 from .image import Image
 
 
