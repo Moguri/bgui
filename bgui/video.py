@@ -1,7 +1,7 @@
 from .gl_utils import *
 from .texture import VideoTexture
 
-from .widget import Widget, BGUI_DEFAULT
+from .widget import Widget, BGUI_DEFAULT, WeakMethod
 from .image import Image
 
 
@@ -28,9 +28,23 @@ class Video(Image):
 
 		self._texture = VideoTexture(vid, GL_LINEAR, repeat, play_audio)
 
+		self._on_finish = None
+		self._on_finish_called = False
 
 	def play(self, start, end, use_frames=True, fps=None):
 		self._texture.play(start, end, use_frames, fps)
+
+		# Reset the on_finish callback after every play
+		self._on_finish_called = False
+
+	@property
+	def on_finish(self):
+		"""The widget's on_finish callback"""
+		return self._on_finish
+
+	@on_finish.setter
+	def on_finish(self, value):
+		self._on_finish = WeakMethod(value)
 
 	def _draw(self):
 		"""Draws the video frame"""
@@ -39,3 +53,9 @@ class Video(Image):
 
 		# Draw the textured quad
 		Image._draw(self)
+
+		# Check if the video has finished playing through
+		if self._texture.video.status == 3:
+			if self._on_finish and not self._on_finish_called:
+				self.on_finish(self)
+				self._on_finish_called = True
