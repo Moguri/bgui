@@ -12,7 +12,7 @@ class System(Widget):
 
 	normalize_text = True
 
-	def __init__(self, theme=None):
+	def __init__(self, textlib, theme=None):
 		"""
 		:param theme: the path to a theme directory
 
@@ -24,6 +24,8 @@ class System(Widget):
 
 		# Get some viewport info
 		view = glGetIntegerv(GL_VIEWPORT)
+
+		self.textlib = textlib
 
 		# Theming
 		self._system = weakref.ref(self)
