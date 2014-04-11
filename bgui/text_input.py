@@ -10,7 +10,8 @@ This module defines the following constants:
 """
 
 from .widget import Widget, WeakMethod, BGUI_DEFAULT, BGUI_CENTERY, \
-	BGUI_NO_FOCUS, BGUI_MOUSE_ACTIVE, BGUI_MOUSE_CLICK, BGUI_MOUSE_RELEASE
+	BGUI_NO_FOCUS, BGUI_MOUSE_ACTIVE, BGUI_MOUSE_CLICK, BGUI_MOUSE_RELEASE, \
+	BGUI_NO_NORMALIZE
 from .key_defs import *
 from .label import Label
 from .frame import Frame
@@ -68,8 +69,8 @@ class TextInput(Widget):
 
 		#create widgets
 		self.frame = Frame(self, size=[1, 1], options=BGUI_NO_FOCUS | BGUI_DEFAULT | BGUI_CENTERY)
-		self.highlight = Frame(self, size=self.frame.size, options=BGUI_NO_FOCUS | BGUI_CENTERY)
-		self.cursor = Frame(self, size=[1, 1], border=0, options=BGUI_NO_FOCUS | BGUI_CENTERY)
+		self.highlight = Frame(self, size=self.frame.size, border=0, options=BGUI_NO_FOCUS | BGUI_CENTERY | BGUI_NO_NORMALIZE)
+		self.cursor = Frame(self, size=[1, 1], border=0, options=BGUI_NO_FOCUS | BGUI_CENTERY | BGUI_NO_NORMALIZE)
 		self.label = Label(self, text=text, font=font, pt_size=pt_size, sub_theme=self.theme['LabelSubTheme'], options=BGUI_NO_FOCUS | BGUI_DEFAULT)
 
 		#Color and setting initialization
