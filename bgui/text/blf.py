@@ -14,7 +14,6 @@ class BlfTextLibrary(TextLibrary):
 		blf.position(fontid, x, y, z)
 
 	def dimensions(self, fontid, text):
-		print(fontid, text)
 		return blf.dimensions(fontid, text)
 
 	def load(self, filename):
