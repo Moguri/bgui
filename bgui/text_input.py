@@ -141,7 +141,7 @@ class TextInput(Widget):
 	@text.setter
 	def text(self, value):
 		#setter intended for external access, internal changes can just change self.label.text
-		self.label.text = self.text_prefix + value
+		self.label.text = value
 		self._update_char_widths()
 		self.slice = [0, 0]
 		self.update_selection()
@@ -477,6 +477,7 @@ class TextInput(Widget):
 
 	def _draw(self):
 		temp = self.text
+		self.label.text = self.text_prefix + temp
 
 		if self == self.system.focused_widget and self._active == 0:
 			self.activate()
