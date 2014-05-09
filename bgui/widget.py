@@ -145,7 +145,7 @@ class Widget:
 	theme_section = 'Widget'
 	theme_options = {}
 
-	def __init__(self, parent, name=None, aspect=None, size=[0, 0], pos=[0, 0], sub_theme='',
+	def __init__(self, parent, name=None, aspect=None, size=[1, 1], pos=[0, 0], sub_theme='',
 			options=BGUI_DEFAULT):
 		"""
 		:param parent: the widget's parent

@@ -43,7 +43,7 @@ class TextInput(Widget):
 				}
 
 	def __init__(self, parent, name=None, text="", prefix="", font=None, pt_size=None, color=None,
-					aspect=None, size=[0, 0], pos=[0, 0], sub_theme='', input_options=BGUI_INPUT_DEFAULT, options=BGUI_DEFAULT):
+					aspect=None, size=[1, 1], pos=[0, 0], sub_theme='', input_options=BGUI_INPUT_DEFAULT, options=BGUI_DEFAULT):
 		"""
 		:param parent: the widget's parent
 		:param name: the name of the widget

@@ -20,7 +20,7 @@ BGUI_LINEAR = GL_LINEAR
 class Image(Widget):
 	"""Widget for displaying images"""
 
-	def __init__(self, parent, img, name=None, aspect=None, size=[0, 0], pos=[0, 0],
+	def __init__(self, parent, img, name=None, aspect=None, size=[1, 1], pos=[0, 0],
 				texco=[(0, 0), (1, 0), (1, 1), (0, 1)], interp_mode=BGUI_LINEAR, sub_theme='', options=BGUI_DEFAULT):
 		""":param parent: the widget's parent
 		:param name: the name of the widget
