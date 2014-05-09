@@ -62,17 +62,19 @@ class System(BguiSystem):
 		else:
 			self.layout = None
 
-	def add_overlay(self, layout, data=None):
+	def add_overlay(self, overlay, data=None):
 		"""Add an overlay layout, which sits on top of the currently loaded layout
 
-		:param layout: The layout to add as an overlay
+		:param overlay: The layout to add as an overlay
 		:param data: User data to send to the layout's constructor"""
 
-		if layout in self.overlays:
-			print("Overlay: %s, is already added" % layout)
+		name = overlay.__class__.__name__
+
+		if name in self.overlays:
+			print("Overlay: %s, is already added" % name)
 			return
 
-		self.overlays[layout.__class__.__name__] = layout(self, data)
+		self.overlays[overlay.__class__.__name__] = overlay(self, data)
 
 	def remove_overlay(self, overlay):
 		"""Remove an overlay layout by name
@@ -80,22 +82,25 @@ class System(BguiSystem):
 		:param overlay: the class name of the overlay to remove (this is the same name as the layout used to add the overlay)
 		"""
 
-		if overlay in self.overlays:
-			self._remove_widget(self.overlays[overlay])
-			del self.overlays[overlay]
-		else:
-			print("WARNING: Overlay: %s was not found, nothing was removed" % overlay)
+		name = overlay.__class__.__name__
 
-	def toggle_overlay(self, overlay):
+		if name in self.overlays:
+			self._remove_widget(self.overlays[name])
+			del self.overlays[name]
+		else:
+			print("WARNING: Overlay: %s was not found, nothing was removed" % name)
+
+	def toggle_overlay(self, overlay, data=None):
 		"""Toggle an overlay (if the overlay is active, remove it, otherwise add it)
 
 		:param overlay: The class name of the layout to toggle
+		:param data: User data to send to the layout's constructor
 		"""
 
-		if overlay in self.overlays:
+		if overlay.__class__.__name__ in self.overlays:
 			self.remove_overlay(overlay)
 		else:
-			self.add_overlay(overlay)
+			self.add_overlay(overlay, data)
 
 	def _render(self):
 		try:
