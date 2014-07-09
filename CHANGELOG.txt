@@ -1,5 +1,5 @@
-Dev
----
+0.09
+----
 New Features
 ^^^^^^^^^^^^
   * Adding a BGE System subclass (bgui.bge_utils.System) to make it easier to get Bgui up and running in the BGE, which is the only environment it currently supports anyways. The layout code might eventually get moved into bgui.System. The simple example has been updated to make use of the new BGE system, but the other examples have not yet been updated.
@@ -16,6 +16,7 @@ Other Stuff
   * The default ListBoxRenderer now tries to display the item as a string instead of using __repr__ directly. This makes the most basic case (a list of strings) display correctly without extra fuss.
   * Switching some logic so BGUI_DEFAULT is 0. This simplifies passing options to a widget constructor. For example, no more BGUI_DEFAULT | BGUI_CENTERED mess. However, this can break existing setups. In order to make this work, BGUI_NORMALIZED is now BGUI_NO_NORMALIZE and BGUI_THEMED is now BGUI_NO_THEME. If you're relying on these flags, you will have to update your scripts.
   * Getting rid of Widget._cleanup() since we should have working destructors with all the WeakRefs.
+  * Image, TextInput, and Widget have had their default size parameter changed from [0, 0] to [1, 1]. This may break some scripts.
 
 0.08
 -------
